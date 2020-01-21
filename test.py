@@ -1,2 +1,2 @@
-for i in range(1,35):
+for i in range(1,45):
 	print i
