@@ -1,5 +1,7 @@
 #!/bin/bash
 
+arguments="$@"
+
 input() {
     functionlist="\n1. fixme\n2. filecount\n3. filesizelist"
 
@@ -79,4 +81,18 @@ filesizelist(){
     ls -shS $(find -type f)                                                        #Finds all files in the directory and all subdirectories then, lists them all in human understood
 }                                                                                  #sizing and sorts this list from greatest to smallest
 
-input
+if [ $# -gt 0 ] ; then
+    for ans in $arguments ; do
+        if [ $ans = "fixme" ] ; then
+            fixme
+        elif [ $ans = "filecount" ] ; then
+            filecount
+        elif [ $ans = "filesizelist" ]  ; then
+            filesizelist
+        else
+            echo "$ans"" is not a function"
+        fi
+    done
+else
+    input
+fi
