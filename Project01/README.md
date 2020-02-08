@@ -1,4 +1,15 @@
 # CS 1XA3 Project01 - calarcoj
+
+## Index:
+
+- [Features](#features)
+  - [Script Input](#script-input)
+  - [FIXME Log](#fixme-log)
+  - [File Type Count](#file-type-count)
+  - [File Size List](#file-size-list)
+- [Custom Features](#custom-features)
+  - [abcd](#abcd)
+  - [abcd](#abcd)
 ___ 
 ## Usage
 Execute this script from project root with:
