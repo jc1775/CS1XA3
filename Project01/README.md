@@ -1,4 +1,5 @@
-# CS 1XA3 Project01 - calarcoj 
+# CS 1XA3 Project01 - calarcoj
+___ 
 ## Usage
 Execute this script from project root with:
 
@@ -15,12 +16,127 @@ With possible arguments:
     input
 
 ___If no arguments are given the 'input' feature is executed by default___
-## Feature 01
-Description: this feature does ....
-Execution: execute this feature by ...
-Reference: some code was taken from [[https://someurl.com]]
-## Feature 02
-...
-## Custom Feature SomeFeature
-...
+___
+___
 
+## Features
+___
+### 1. Script Input
+#### Description:
+
+<font color="green">This feature does ....</font>
+
+#### Execution:
+
+Input:
+
+    some code
+
+Example Output:
+
+>some output
+
+#### Reference:
+
+some code was taken from 
+___
+### 2. FIXME Log
+#### Description:
+
+<font color="green">This feature does ....</font>
+
+#### Execution:
+
+Input:
+
+    some code
+
+Example Output:
+
+>some output
+
+#### Reference:
+ 
+some code was taken from 
+___
+### 3. File Type Count
+#### Description:
+
+<font color="green">This feature does ....</font>
+
+#### Execution:
+
+Input:
+
+    some code
+
+Example Output:
+
+>some output
+
+#### Reference:
+ 
+some code was taken from 
+___
+### 4. File Size List
+#### Description:
+
+<font color="green">This feature does ....</font>
+
+#### Execution:
+
+Input:
+
+    some code
+
+Example Output:
+
+>some output
+
+#### Reference:
+ 
+some code was taken from 
+
+___
+___
+## Custom Features
+
+___
+### 1. abcd
+#### Description:
+
+<font color="green">This feature does ....</font>
+
+#### Execution:
+
+Input:
+
+    some code
+
+Example Output:
+
+>some output
+
+#### Reference:
+ 
+some code was taken from 
+___
+### 2. abcd
+#### Description:
+
+<font color="green">This feature does ....</font>
+
+#### Execution:
+
+Input:
+
+    some code
+
+Example Output:
+
+>some output
+
+#### Reference:
+ 
+some code was taken from 
+___
