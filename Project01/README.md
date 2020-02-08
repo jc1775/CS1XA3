@@ -35,7 +35,7 @@ ___
 ### 1. Script Input
 #### Description:
 
-<font color="green">This is an interactive script for selecting and running all other features. It prompts the user to input the name of the desired feature, and accepts multiple arguments at once executing them in the order listed. This script also contains a 'help' menu which lists the name of all features and provides basic information on each one. </font>
+This is an interactive script for selecting and running all other features. It prompts the user to input the name of the desired feature, and accepts multiple arguments at once executing them in the order listed. This script also contains a 'help' menu which lists the name of all features and provides basic information on each one.
 
 #### Execution:
 
@@ -63,7 +63,7 @@ ___
 ### 2. FIXME Log
 #### Description:
 
-<font color="green">This feature does ....</font>
+<fixme> This feature searches through every file within the working directory and its subdirectories for files where the last line contains '#FIXME'. It creates or overwrites a file 'fixme.log' containing the names and relative directories of all matching files, each to its own line.
 
 #### Execution:
 
@@ -87,7 +87,7 @@ ___
 ### 3. File Type Count
 #### Description:
 
-<font color="green">This feature does ....</font>
+<filecount> This feature prompts the user to input the intended file extention (i.e txt, pdf, py, .sh, etc...) and proceeds to count the number of files within the working directory and all subdirectoies with said extention and outputs the result. Note that extentions can be entered either as '.extentionname' or 'extentionname', the feature works in either case.
 
 #### Execution:
 
@@ -110,7 +110,7 @@ ___
 ### 4. File Size List
 #### Description:
 
-<font color="green">This feature does ....</font>
+<filesizelist> This feature lists all of the files within the working directory and subdirectories, it lists the sizes of the files in a human understood format and sorts them by said size from largest to smallest.
 
 #### Execution:
 
@@ -172,3 +172,4 @@ Example Output:
  
 some code was taken from 
 ___
+<readme0>

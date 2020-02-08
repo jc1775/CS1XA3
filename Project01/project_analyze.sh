@@ -16,11 +16,11 @@ input() {
                     echo -e "\e[1mEnter 'return' to return to command selection, or type the name of a function you would like further information on:\e[0m "
                     read answer
                     if [ $answer = "filesizelist" ] ; then
-                        echo "filesizelist: "
+                        echo -e "\e[1m\e[100m$(grep '<filesizelist>' "$(rgrep -l '<readme0>' | grep README.md)")\e[0m"
                     elif [ $answer = "fixme" ] ; then
-                        echo "fixme: "
+                        echo -e "\e[1m\e[100m$(grep '<fixme>' "$(rgrep -l '<readme0>' | grep README.md)")\e[0m"
                     elif [ $answer = "filecount" ] ; then
-                        echo "filecount: "
+                        echo -e "\e[1m\e[100m$(grep '<filecount>' "$(rgrep -l '<readme0>' | grep README.md)")\e[0m"
                     elif [ $answer = "return" ] ; then
                         echo " "
                     else
