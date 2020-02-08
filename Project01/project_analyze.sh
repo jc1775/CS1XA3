@@ -83,13 +83,15 @@ filesizelist(){
 
 main() {
     if [ $# -gt 0 ] ; then
-        for ans in $arguments ; do
+        for ans in "$arguments" ; do
             if [ $ans = "fixme" ] ; then
                 fixme
             elif [ $ans = "filecount" ] ; then
                 filecount
             elif [ $ans = "filesizelist" ]  ; then
                 filesizelist
+            elif [ $ans = "input" ]  ; then
+                input
             else
                 echo "$ans"" is not a function"
             fi
