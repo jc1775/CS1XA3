@@ -67,7 +67,7 @@ fixme(){
 
 filecount(){
 
-    echo "What extention would you like to search for?: "
+    echo "What file type would you like to count?: "
     read search
     searchterm='.'$(echo "$search" | cut -d "." -f 2)                               #Takes the inputted string, removes a period if one is present, then adds a period,
     echo 'Counting '$searchterm'...'                                                #this ensures that the filetype is always in the form '.extention'
