@@ -8,6 +8,7 @@
   - [File Type Count](#3-file-type-count)
   - [File Size List](#4-file-size-list)
   - [Backup and Delete/Restore](#5-backup-and-delete/restore)
+  - [Switch To Executable](#6-switch-to-executable)
 - [Custom Features](#custom-features)
   - [abcd](#1-abcd)
   - [abcd](#2-abcd)
@@ -137,6 +138,27 @@ ___
 #### Description:
 
 <backupDelRest> abc
+
+#### Execution:
+
+Input:
+
+    abc
+
+Example Output:
+
+    abc
+
+#### Reference:
+ 
+some code was taken from 
+___
+
+### 6. Switch to Executable
+
+#### Description:
+
+<switchEx> abc
 
 #### Execution:
 

@@ -1,9 +1,10 @@
 #!/bin/bash
 
+heirarchy="$( echo "$0" | rev | cut -d "/" -f 2- | rev)" #This just gets the location of the bashscript in relation to the working directory
 arguments="$@"
 
 input() {
-    functionlist="\n1. fixme\n2. filecount\n3. filesizelist"
+    functionlist="\n1. fixme\n2. filecount\n3. filesizelist\n4. backupDelRest\n5. switchEx"
 
     echo -e "\e[1mWhich feature(s) would you like to execute? (Type 'help' for a list of commands, 'exit' to exit):\e[0m "
     read answer
@@ -16,11 +17,15 @@ input() {
                     echo -e "\e[1mEnter 'return' to return to command selection, or type the name of a function you would like further information on:\e[0m "
                     read answer
                     if [ $answer = "filesizelist" ] ; then
-                        echo -e "\e[1m\e[100m$(grep '<filesizelist>' "$(rgrep -l '<readme0>' | grep README.md)")\e[0m"
+                        echo -e "\e[1m\e[100m$(grep '<filesizelist>' "$heirarchy/README.md")\e[0m"
                     elif [ $answer = "fixme" ] ; then
-                        echo -e "\e[1m\e[100m$(grep '<fixme>' "$(rgrep -l '<readme0>' | grep README.md)")\e[0m"
+                        echo -e "\e[1m\e[100m$(grep '<fixme>' "$heirarchy/README.md")\e[0m"
                     elif [ $answer = "filecount" ] ; then
-                        echo -e "\e[1m\e[100m$(grep '<filecount>' "$(rgrep -l '<readme0>' | grep README.md)")\e[0m"
+                        echo -e "\e[1m\e[100m$(grep '<filecount>' "$heirarchy/README.md")\e[0m"
+                    elif [ $answer = "backupDelRest" ] ; then
+                        echo -e "\e[1m\e[100m$(grep '<backupDelRest>' "$heirarchy/README.md")\e[0m"
+                    elif [ $answer = "switchEx" ] ; then
+                        echo -e "\e[1m\e[100m$(grep '<switchEx>' "$heirarchy/README.md")\e[0m"
                     elif [ $answer = "return" ] ; then
                         echo " "
                     else
@@ -34,6 +39,10 @@ input() {
                 filecount
             elif [ $ans = "filesizelist" ]  ; then
                 filesizelist
+            elif [ $ans = "backupDelRest" ] ; then
+                backupDelRest
+            elif [ $ans = "switchEx" ] ; then
+                switchEx
             else
                 echo "$ans"" is not a function"
             fi
@@ -47,10 +56,10 @@ input() {
 fixme(){
 
     searchterm='#FIXME'
-    outputfolder="fixme.log"   
+    outputfolder="$heirarchy/fixme.log"   
     files=$(rgrep -l "$searchterm")   
     newstring=""   
-
+    IFS=$'\n'
     for file in $files ; do
 
         if tail -1 "$file" | grep -q "$searchterm" && [ -z "$newstring" ] ; then    #If the last line of the file contains searchterm and the new string is empty
@@ -59,7 +68,7 @@ fixme(){
 	    newstring=$(printf "$newstring \n$file")      
         fi    
     done
-
+    unset IFS
     echo "$newstring" > "$outputfolder"   
     cat "$outputfolder"
 
@@ -67,7 +76,7 @@ fixme(){
 
 filecount(){
 
-    echo "What file type would you like to count?: "
+    echo -e "\e[1mWhat file type would you like to count?:\e[0m "
     read search
     searchterm='.'$(echo "$search" | cut -d "." -f 2)                               #Takes the inputted string, removes a period if one is present, then adds a period,
     echo 'Counting '$searchterm'...'                                                #this ensures that the filetype is always in the form '.extention'
@@ -77,39 +86,83 @@ filecount(){
 
 
 filesizelist(){
-
+    IFS=$'\n'
     ls -shS $(find -type f)                                                        #Finds all files in the directory and all subdirectories then, lists them all in human understood
-}                                                                                  #sizing and sorts this list from greatest to smallest
+    unset IFS                                                                      #sizing and sorts this list from greatest to smallest
+}
 
-#########In Progress
-backupDelRest(){
+switchEx() {
 
-    echo "Enter 'backup' to create a backup log and directory, or 'restore' to reinstate files from the previous backup"
+    executables="$(find -type f | grep -E ".sh$")"
+
+    if ! [ -f "$heirarchy/permissions.log" ] ; then
+        touch "$heirarchy/permissions.log"
+    fi
+
+    echo -e "\e[1mEnter 'change' to allow users with write permissions to execute files, or 'restore' to revert back to original permissions.\e[0m" 
     read response
-    if [ $response = "backup" ] || [ $response = "Backup" ] ; then
-        if ! [ -d "backup" ] ; then
-            mkdir "backup"
-        else
-            rm -r "backup"
-            mkdir "backup"
-        fi
-        ls -aRp $(find -type f) | grep -E ".tmp$" | tr " " "\n" > "backup/restore.log"
-        cp $(ls -aRp $(find -type f) | grep -E ".tmp$") "backup"
-        rm $(cat "backup/restore.log")
-    elif [ $response = "restore" ] || [ $response = "Restore" ] ; then
-        for filepath in $(cat "backup/restore.log") ; do
-            fileName="$(echo "$filepath" | rev | cut -d "/" -f 1 | rev)"
-            origPath="$(echo "$filepath" | rev | cut -d "/" -f 2- | rev)"
-            if ! [ -e "backup/$fileName" ] ; then
-                echo "ERROR! Your file does not exist"
-            else
-                cp "backup/$fileName" "$origPath"
+
+    if [ $response = "change" ] || [ $response = "Change" ] ; then
+        IFS=$'\n'
+        ls -l $executables > "$heirarchy/permissions.log"
+        for exec in $executables ; do
+            if [ "$(ls -l "$exec" | cut -c 3)" = "w" ] ; then
+                chmod u+x "$exec"
+                echo "Permission for "$exec" changed!"
             fi
         done
-    fi  
-
+        unset IFS
+        echo "Complete"
+    elif [ $response = "restore" ] || [ $response = "Restore" ] ; then
+        IFS=$'\n'
+        for file in $executables ; do
+            permissions="$(grep -E "$file$" "$heirarchy/permissions.log" | cut -c 2-4)"
+            chmod +"$permissons" "$file"
+            echo "Permissions for $file restored!"
+        done
+        unset IFS
+        echo "Complete"
+    else
+        echo "$response is not a command in this feature"
+    fi
 }
-##########
+
+backupDelRest(){
+
+    backupType=".tmp"
+    echo -e "\e[1mEnter 'backup' to create a backup log and directory, or 'restore' to reinstate files from the previous backup. Enter both to perform them in sequence.\e[0m"
+    read response
+
+    for res in $response ; do
+        if [ $res = "backup" ] || [ $res = "Backup" ] ; then
+            if ! [ -d "$heirarchy/backup" ] ; then
+                mkdir "$heirarchy/backup"
+            else
+                rm -r "$heirarchy/backup"
+                mkdir "$heirarchy/backup"
+            fi
+            find -type f | grep -E "$backupType$" > "$heirarchy/backup/restore.log"
+            IFS=$'\n'
+            cp $(ls -aRp $(find -type f) | grep -E "$backupType$") "$heirarchy/backup"
+            rm $(cat "$heirarchy/backup/restore.log")
+            unset IFS
+        elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
+        IFS=$'\n'
+            for filepath in $(cat "$heirarchy/backup/restore.log") ; do
+                fileName="$(echo "$filepath" | rev | cut -d "/" -f 1 | rev)"
+                origPath="$(echo "$filepath" | rev | cut -d "/" -f 2- | rev)"
+                if ! [ -e "$heirarchy/backup/$fileName" ] ; then
+                    echo "ERROR! $fileName does not exist in backup."
+                else
+                    cp "$heirarchy/backup/$fileName" "$origPath"
+                fi
+            done
+        unset IFS
+        else
+            echo "$res is not a command in this feature."
+        fi 
+    done
+}
 
 main(){
     if [ $# -gt 0 ] ; then
@@ -122,6 +175,10 @@ main(){
                 filesizelist
             elif [ $ans = "input" ]  ; then
                 input
+            elif [ $ans = "backupDelRest" ] ; then
+                backupDelRest
+            elif [ $ans = "switchEx" ] ; then
+                switchEx
             else
                 echo "$ans"" is not a function"
             fi
