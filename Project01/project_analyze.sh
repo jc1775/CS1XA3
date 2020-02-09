@@ -10,7 +10,7 @@ input() {
 
     while [ "$answer" != "exit" ] ; do
         for ans in $answer ; do
-            if [ $ans = "help" ] ; then
+            if [ "$ans" = "help" ] ; then
                 echo -e "\e[100m\e[33m\e[4mList of Commands\e[1m\e[24m$functionlist\e[0m"
                 while [ $answer != "return" ] ; do
                     echo -e "\e[1mEnter 'return' to return to command selection, or type the name of a function you would like further information on:\e[0m "
@@ -80,6 +80,36 @@ filesizelist(){
 
     ls -shS $(find -type f)                                                        #Finds all files in the directory and all subdirectories then, lists them all in human understood
 }                                                                                  #sizing and sorts this list from greatest to smallest
+
+#########In Progress
+backupDelRest(){
+
+    echo "Enter 'backup' to create a backup log and directory, or 'restore' to reinstate files from the previous backup"
+    read response
+    if [ $response = "backup" ] || [ $response = "Backup" ] ; then
+        if ! [ -d "backup" ] ; then
+            mkdir "backup"
+        else
+            rm -r "backup"
+            mkdir "backup"
+        fi
+        ls -aRp $(find -type f) | grep -E ".tmp$" | tr " " "\n" > "backup/restore.log"
+        cp $(ls -aRp $(find -type f) | grep -E ".tmp$") "backup"
+        rm $(cat "backup/restore.log")
+    elif [ $response = "restore" ] || [ $response = "Restore" ] ; then
+        for filepath in $(cat "backup/restore.log") ; do
+            fileName="$(echo "$filepath" | rev | cut -d "/" -f 1 | rev)"
+            origPath="$(echo "$filepath" | rev | cut -d "/" -f 2- | rev)"
+            if ! [ -e "backup/$fileName" ] ; then
+                echo "ERROR! Your file does not exist"
+            else
+                cp "backup/$fileName" "$origPath"
+            fi
+        done
+    fi  
+
+}
+##########
 
 main(){
     if [ $# -gt 0 ] ; then
