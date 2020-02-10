@@ -10,7 +10,7 @@
   - [Backup and Delete / Restore](#5-backup-and-delete-%2F-restore)
   - [Switch To Executable](#6-switch-to-executable)
 - [Custom Features](#custom-features)
-  - [abcd](#1-abcd)
+  - [File Type Sort](#1-file-type-sort)
   - [abcd](#2-abcd)
 ___ 
 ## Usage
@@ -27,6 +27,8 @@ With possible arguments:
     filecount
     filesizelist
     input
+    switchEx
+    backupDelRest
 
 ___If no arguments are given the 'input' feature is executed by default___
 ___
@@ -58,6 +60,12 @@ Example Output:
 >> Which feature(s) would you like to execute? (Type 'help' for a list of commands, 'exit' to exit):
 'some command(s)'
 ```
+
+#### Unique Arguments:
+
+    help    -   Pulls up an interactive help menu with information on each feature
+    exit    -   Ends the script
+
 #### Reference:
 
 some code was taken from 
@@ -178,10 +186,10 @@ ___
 ## Custom Features
 
 ___
-### 1. abcd
-#### Description:
+### 1. File Type Sort
+#### Description: 
 
-<font color="green">This feature does ....</font>
+<fileSort> This feature will promt the user for a specific filetype and directory, and search within the specified directory and its subdirectories for all matching files and sort them into a directory named after its contained filetype. If 'all' is specified it will proceed to sort all files of which there are at least two occurrences of that filetype. A log of all previous locations will be kept. This feature will be interactive and guide the user through the process.
 
 #### Execution:
 

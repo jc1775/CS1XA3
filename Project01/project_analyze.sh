@@ -1,6 +1,6 @@
 #!/bin/bash
 
-heirarchy="$( echo "$0" | rev | cut -d "/" -f 2- | rev)" #This just gets the location of the bashscript in relation to the working directory
+heirarchy="$( echo "$0" | rev | cut -d "/" -f 2- | rev)"
 arguments="$@"
 
 input() {
@@ -84,7 +84,6 @@ filecount(){
     echo "$count"                                                                   #then uses grep to remove everything with '/' proceeds to search for the extention at the end  
 }                                                                                   #of all remaining files, then counts them
 
-
 filesizelist(){
     IFS=$'\n'
     ls -shS $(find -type f)                                                        #Finds all files in the directory and all subdirectories then, lists them all in human understood
@@ -108,7 +107,11 @@ switchEx() {
         for exec in $executables ; do
             if [ "$(ls -l "$exec" | cut -c 3)" = "w" ] ; then
                 chmod u+x "$exec"
-                echo "Permission for "$exec" changed!"
+                if [ $? -eq 0 ] ; then
+                    echo "Permission for "$exec" changed!"
+                else
+                    echo "There was an error changing permissions for $exec!"
+                fi
             fi
         done
         unset IFS
@@ -118,7 +121,11 @@ switchEx() {
         for file in $executables ; do
             permissions="$(grep -E "$file$" "$heirarchy/permissions.log" | cut -c 2-4)"
             chmod +"$permissons" "$file"
-            echo "Permissions for $file restored!"
+            if [ $? -eq 0 ] ; then
+                    echo "Permissions for $file restored!"
+            else
+                echo "There was an error restoring permissions for $exec!"
+            fi    
         done
         unset IFS
         echo "Complete"
@@ -130,7 +137,7 @@ switchEx() {
 backupDelRest(){
 
     backupType=".tmp"
-    echo -e "\e[1mEnter 'backup' to create a backup log and directory, or 'restore' to reinstate files from the previous backup. Enter both to perform them in sequence.\e[0m"
+    echo -e "\e[1mEnter 'backup' to create a backup log and directory, and/or 'restore' to reinstate files from the previous backup.\e[0m"
     read response
 
     for res in $response ; do
@@ -144,10 +151,14 @@ backupDelRest(){
             find -type f | grep -E "$backupType$" > "$heirarchy/backup/restore.log"
             IFS=$'\n'
             cp $(ls -aRp $(find -type f) | grep -E "$backupType$") "$heirarchy/backup"
-            rm $(cat "$heirarchy/backup/restore.log")
+            if [ $? -eq 0 ] ; then
+                rm $(cat "$heirarchy/backup/restore.log")
+            else
+                echo "An error occurred during backup so file deletion did not occur"
+            fi
             unset IFS
         elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
-        IFS=$'\n'
+            IFS=$'\n'
             for filepath in $(cat "$heirarchy/backup/restore.log") ; do
                 fileName="$(echo "$filepath" | rev | cut -d "/" -f 1 | rev)"
                 origPath="$(echo "$filepath" | rev | cut -d "/" -f 2- | rev)"
@@ -157,7 +168,7 @@ backupDelRest(){
                     cp "$heirarchy/backup/$fileName" "$origPath"
                 fi
             done
-        unset IFS
+            unset IFS
         else
             echo "$res is not a command in this feature."
         fi 
@@ -180,7 +191,7 @@ main(){
             elif [ $ans = "switchEx" ] ; then
                 switchEx
             else
-                echo "$ans"" is not a function"
+                echo "$ans is not a function"
             fi
         done
     else
