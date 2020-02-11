@@ -90,6 +90,7 @@ filesizelist(){
     unset IFS                                                                      #sizing and sorts this list from greatest to smallest
 }
 
+
 switchEx() {
 
     executables="$(find -type f | grep -E ".sh$")"
@@ -136,27 +137,32 @@ switchEx() {
 
 backupDelRest(){
 
-    backupType=".tmp"
-    echo -e "\e[1mEnter 'backup' to create a backup log and directory, and/or 'restore' to reinstate files from the previous backup.\e[0m"
+    backupType=".pdf"
+    echo -e "\e[1mEnter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.\e[0m"
     read response
 
     for res in $response ; do
         if [ $res = "backup" ] || [ $res = "Backup" ] ; then
-            if ! [ -d "$heirarchy/backup" ] ; then
-                mkdir "$heirarchy/backup"
+            if find -path "$heirarchy/backup" -prune -o -type f | grep -qE "$backupType$" ; then
+                if ! [ -d "$heirarchy/backup" ] ; then
+                    mkdir "$heirarchy/backup"
+                else
+                    rm -r "$heirarchy/backup"
+                    mkdir "$heirarchy/backup"
+                fi
+                find -type f | grep -E "$backupType$" > "$heirarchy/backup/restore.log"
+                IFS=$'\n'
+                cp $(ls -aRp $(find -type f) | grep -E "$backupType$") "$heirarchy/backup"
+                if [ $? -eq 0 ] ; then
+                    rm $(cat "$heirarchy/backup/restore.log")
+                    echo "Backup succesful"
+                else
+                    echo "An error occurred during backup so file deletion did not occur"
+                fi
             else
-                rm -r "$heirarchy/backup"
-                mkdir "$heirarchy/backup"
+                echo "No new files to backup! Backup ended."
             fi
-            find -type f | grep -E "$backupType$" > "$heirarchy/backup/restore.log"
-            IFS=$'\n'
-            cp $(ls -aRp $(find -type f) | grep -E "$backupType$") "$heirarchy/backup"
-            if [ $? -eq 0 ] ; then
-                rm $(cat "$heirarchy/backup/restore.log")
-            else
-                echo "An error occurred during backup so file deletion did not occur"
-            fi
-            unset IFS
+                unset IFS
         elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
             IFS=$'\n'
             for filepath in $(cat "$heirarchy/backup/restore.log") ; do
@@ -166,6 +172,7 @@ backupDelRest(){
                     echo "ERROR! $fileName does not exist in backup."
                 else
                     cp "$heirarchy/backup/$fileName" "$origPath"
+                    echo "$fileName restored succesfully!"
                 fi
             done
             unset IFS

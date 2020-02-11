@@ -43,7 +43,7 @@ This is an interactive script for selecting and running all other features. It p
 
 #### Execution:
 
-Input:
+###### Input:
 
 This feature executes by default when no arguments are given:
 
@@ -53,7 +53,7 @@ However it can also be executed directly:
 
     ./CS1XA3/Project01/project_analyze.sh input
 
-Example Output:
+###### Example Output:
 
 ```
 ./CS1XA3/Project01/project_analyze.sh
@@ -77,11 +77,11 @@ ___
 
 #### Execution:
 
-Input:
+###### Input:
 
     ./CS1XA3/Project01/project_analyze.sh fixme
 
-Example Output:
+###### Example Output:
 
     ./CS1XA3/Project01/project_analyze.sh fixme
     >>  file-to-fix-1
@@ -101,11 +101,11 @@ ___
 
 #### Execution:
 
-Input:
+###### Input:
 
     ./CS1XA3/Project01/project_analyze.sh filecount
 
-Example Output:
+###### Example Output:
 
     ./CS1XA3/Project01/project_analyze.sh filecount
     >> What file type would you like to count?:
@@ -124,11 +124,11 @@ ___
 
 #### Execution:
 
-Input:
+###### Input:
 
     ./CS1XA3/Project01/project_analyze.sh filesizelist
 
-Example Output:
+###### Example Output:
 
     ./CS1XA3/Project01/project_analyze.sh filesizelist
     >> 100K 'file-1'    70K 'file-4'
@@ -145,17 +145,38 @@ ___
 
 #### Description:
 
-<backupDelRest> abc
+<backupDelRest> This feature prompts the user to either enter 'backup' or 'restore'.<br><br>'Backup': If this is chosen the script proceeds to find all files in a directory and its subdirectories of type '.tmp', copies them to a directory named '/backup', saves a log of the original location to 'backup/backup.log', and deletes the originals.<br><br>'Restore': If this is chosen the script will return all files in the '/backup' directory to their original location using the 'backup.log' file.
 
 #### Execution:
 
-Input:
+###### Input:
 
-    abc
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
 
-Example Output:
+###### Example Output:
+Backup:
 
-    abc
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    >>Enter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.
+    backup
+    >>Backup succesful
+Restore:
+
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    >>Enter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.
+    restore
+    >>  file1 restored succesfully!
+        file2 restored succesfully!
+        etc...
+        
+###### Alternate outcomes:
+
+"No new files to backup! Backup ended."  - This occurs when there is nothing to backup
+
+"An error occurred during backup so file deletion did not occur" - This occurs if there is an error in copying to the backup folder, original files will not be deleted.
+
+"ERROR! 'filename' does not exist in backup." - This occurs when a file in the backup log is no longer in the backup folder
+
 
 #### Reference:
  
@@ -189,7 +210,7 @@ ___
 ### 1. File Type Sort
 #### Description: 
 
-<fileSort> This feature will promt the user for a specific filetype and directory, and search within the specified directory and its subdirectories for all matching files and sort them into a directory named after its contained filetype. If 'all' is specified it will proceed to sort all files of which there are at least two occurrences of that filetype. A log of all previous locations will be kept. This feature will be interactive and guide the user through the process.
+<fileSort> This feature will prompt the user for a specific filetype and directory, and search within the specified directory and its subdirectories for all matching files and sort them into a directory named after its contained filetype. If 'all' is specified it will proceed to sort all files of which there are at least two occurrences of that filetype. A log of all previous locations will be kept. This feature will be interactive and guide the user through the process.
 
 #### Execution:
 
@@ -224,4 +245,3 @@ Example Output:
  
 some code was taken from 
 ___
-<readme0>
