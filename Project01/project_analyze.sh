@@ -93,7 +93,7 @@ filesizelist(){
 
 switchEx() {
 
-    executables="$(find -type f | grep -E ".sh$")"
+    executables="$(find -type f | grep -v "project_analyze.sh" | grep -E ".sh$")"
 
     if ! [ -f "$heirarchy/permissions.log" ] ; then
         touch "$heirarchy/permissions.log"
