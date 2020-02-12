@@ -57,7 +57,7 @@ fixme(){
 
     searchterm='#FIXME'
     outputfolder="$heirarchy/fixme.log"   
-    files=$(rgrep -l "$searchterm")   
+    files=$(rgrep -l "$searchterm" | grep -vE "^\.")  
     newstring=""   
     IFS=$'\n'
     for file in $files ; do
@@ -78,15 +78,15 @@ filecount(){
 
     echo -e "\e[1mWhat file type would you like to count?:\e[0m "
     read search
-    searchterm='.'$(echo "$search" | cut -d "." -f 2)                               #Takes the inputted string, removes a period if one is present, then adds a period,
-    echo 'Counting '$searchterm'...'                                                #this ensures that the filetype is always in the form '.extention'
-    count=$(ls -aRp | grep -v / | grep -E "$searchterm$" | wc -l)                   #Recurses through the directories listing everything, adds a / to the end of directories 
-    echo "$count"                                                                   #then uses grep to remove everything with '/' proceeds to search for the extention at the end  
-}                                                                                   #of all remaining files, then counts them
+    searchterm='.'$(echo "$search" | cut -d "." -f 2)                                           #Takes the inputted string, removes a period if one is present, then adds a period,
+    echo 'Counting '$searchterm'...'                                                            #this ensures that the filetype is always in the form '.extention'
+    count=$(find -path "$heirarchy/.*" -prune -o -type f | grep -E "$searchterm$" | wc -l)      #Finds all files in folders that are not hidden 
+    echo "$count"                                                                               #then uses grep to remove everything with '/' proceeds to search for the extention at the end  
+}                                                                                               #of all remaining files, then counts them
 
 filesizelist(){
     IFS=$'\n'
-    ls -shS $(find -type f)                                                        #Finds all files in the directory and all subdirectories then, lists them all in human understood
+    ls -ashS $(find -type f)                                                        #Finds all files in the directory and all subdirectories then, lists them all in human understood
     unset IFS                                                                      #sizing and sorts this list from greatest to smallest
 }
 
