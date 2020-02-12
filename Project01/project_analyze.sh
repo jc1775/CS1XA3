@@ -86,8 +86,8 @@ filecount(){
 
 filesizelist(){
     IFS=$'\n'
-    ls -ashS $(find -type f)                                                        #Finds all files in the directory and all subdirectories then, lists them all in human understood
-    unset IFS                                                                      #sizing and sorts this list from greatest to smallest
+    ls -ashS $(find -type f | grep -v "/.git")                                                   #Finds all files in the directory and all subdirectories then, lists them all in human understood
+    unset IFS                                                                                   #sizing and sorts this list from greatest to smallest
 }
 
 
