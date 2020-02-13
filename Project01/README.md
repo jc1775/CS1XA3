@@ -30,7 +30,13 @@ With possible arguments:
     switchEx
     backupDelRest
 
-___If no arguments are given the 'input' feature is executed by default___
+***-If no arguments are given the 'input' feature is executed by default***
+
+***-All features that prompt for user input accept 'return' as an argument to return to feature selection***
+
+***-All features that prompt for user input accept multiple arguments seperated by a space***
+
+
 ___
 ___
 
@@ -43,7 +49,7 @@ This is an interactive script for selecting and running all other features. It p
 
 #### Execution:
 
-###### Input:
+#### Input:
 
 This feature executes by default when no arguments are given:
 
@@ -53,7 +59,7 @@ However it can also be executed directly:
 
     ./CS1XA3/Project01/project_analyze.sh input
 
-###### Example Output:
+#### Example Output:
 
 ```
 ./CS1XA3/Project01/project_analyze.sh
@@ -66,9 +72,8 @@ However it can also be executed directly:
     help    -   Pulls up an interactive help menu with information on each feature
     exit    -   Ends the script
 
-#### Reference:
-
-some code was taken from 
+#### Note:
+ 
 ___
 ### 2. FIXME Log
 #### Description:
@@ -77,11 +82,11 @@ ___
 
 #### Execution:
 
-###### Input:
+#### Input:
 
     ./CS1XA3/Project01/project_analyze.sh fixme
 
-###### Example Output:
+#### Example Output:
 
     ./CS1XA3/Project01/project_analyze.sh fixme
     >>  file-to-fix-1
@@ -90,9 +95,9 @@ ___
         file-to-fix-4
         etc...
 
-#### Reference:
+#### Note:
  
-some code was taken from 
+***-This feature ignores hidden files***
 ___
 ### 3. File Type Count
 #### Description:
@@ -101,11 +106,11 @@ ___
 
 #### Execution:
 
-###### Input:
+#### Input:
 
     ./CS1XA3/Project01/project_analyze.sh filecount
 
-###### Example Output:
+#### Example Output:
 
     ./CS1XA3/Project01/project_analyze.sh filecount
     >> What file type would you like to count?:
@@ -113,9 +118,13 @@ ___
     >> Counting '.some-extention'...
     'amount'
 
-#### Reference:
+#### Note:
+
+***-If no arguments are given, this feature will count ALL files***
+
+***-This feature ignores hidden directories and their contents***
  
-some code was taken from 
+ 
 ___
 ### 4. File Size List
 #### Description:
@@ -124,20 +133,20 @@ ___
 
 #### Execution:
 
-###### Input:
+#### Input:
 
     ./CS1XA3/Project01/project_analyze.sh filesizelist
 
-###### Example Output:
+#### Example Output:
 
     ./CS1XA3/Project01/project_analyze.sh filesizelist
     >> 100K 'file-1'    70K 'file-4'
         90K 'file-2'    60K 'file-5'
         80K 'file-3'    etc...
 
-#### Reference:
+#### Note:
  
-some code was taken from 
+***This feature ignores the "/.git" directory***
 
 ___
 
@@ -149,11 +158,11 @@ ___
 
 #### Execution:
 
-###### Input:
+#### Input:
 
     ./CS1XA3/Project01/project_analyze.sh backupDelRest
 
-###### Example Output:
+#### Example Output:
 Backup:
 
     ./CS1XA3/Project01/project_analyze.sh backupDelRest
@@ -169,7 +178,7 @@ Restore:
         file2 restored succesfully!
         etc...
         
-###### Alternate outcomes:
+#### Alternate outcomes:
 
 "No new files to backup! Backup ended."  - This occurs when there is nothing to backup
 
@@ -178,9 +187,6 @@ Restore:
 "ERROR! 'filename' does not exist in backup." - This occurs when a file in the backup log is no longer in the backup folder
 
 
-#### Reference:
- 
-some code was taken from 
 ___
 
 ### 6. Switch to Executable

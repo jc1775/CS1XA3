@@ -13,24 +13,26 @@ input() {
         for ans in $answer ; do
             if [ "$ans" = "help" ] ; then
                 echo -e "\e[100m\e[33m\e[4mList of Commands\e[1m\e[24m$functionlist\e[0m"
-                while [ $answer != "return" ] ; do
+                while [ "$answer" != "return" ] ; do
                     echo -e "\e[1mEnter 'return' to return to command selection, or type the name of a function you would like further information on:\e[0m "
                     read answer
-                    if [ $answer = "filesizelist" ] ; then
-                        echo -e "\e[1m\e[100m$(grep '<filesizelist>' "$heirarchy/README.md")\e[0m"
-                    elif [ $answer = "fixme" ] ; then
-                        echo -e "\e[1m\e[100m$(grep '<fixme>' "$heirarchy/README.md")\e[0m"
-                    elif [ $answer = "filecount" ] ; then
-                        echo -e "\e[1m\e[100m$(grep '<filecount>' "$heirarchy/README.md")\e[0m"
-                    elif [ $answer = "backupDelRest" ] ; then
-                        echo -e "\e[1m\e[100m$(grep '<backupDelRest>' "$heirarchy/README.md")\e[0m"
-                    elif [ $answer = "switchEx" ] ; then
-                        echo -e "\e[1m\e[100m$(grep '<switchEx>' "$heirarchy/README.md")\e[0m"
-                    elif [ $answer = "return" ] ; then
-                        echo " "
-                    else
-                        echo "$answer is not a function"
-                    fi
+                    for ans in $answer ; do
+                        if [ $ans = "filesizelist" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<filesizelist>' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "fixme" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<fixme>' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "filecount" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<filecount>' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "backupDelRest" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<backupDelRest>' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "switchEx" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<switchEx>' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "return" ] ; then
+                            answer="return"
+                        else
+                            echo "$ans is not a function"
+                        fi
+                    done
                 done
 
             elif [ $ans = "fixme" ] ; then
@@ -57,7 +59,7 @@ fixme(){
 
     searchterm='#FIXME'
     outputfolder="$heirarchy/fixme.log"   
-    files=$(rgrep -l "$searchterm" | grep -vE "^\.")  
+    files=$(rgrep -l "$searchterm" | grep -vE "^\.")   
     newstring=""   
     IFS=$'\n'
     for file in $files ; do
@@ -78,22 +80,27 @@ filecount(){
 
     echo -e "\e[1mWhat file type would you like to count?:\e[0m "
     read search
-    searchterm='.'$(echo "$search" | cut -d "." -f 2)                                           #Takes the inputted string, removes a period if one is present, then adds a period,
-    echo 'Counting '$searchterm'...'                                                            #this ensures that the filetype is always in the form '.extention'
-    count=$(find -path "$heirarchy/.*" -prune -o -type f | grep -E "$searchterm$" | wc -l)      #Finds all files in folders that are not hidden 
-    echo "$count"                                                                               #then uses grep to remove everything with '/' proceeds to search for the extention at the end  
-}                                                                                               #of all remaining files, then counts them
+    for sea in $search ; do
+        if [ $sea = "return" ] ; then
+            break
+        else
+            searchterm='.'$(echo "$sea" | cut -d "." -f 2)                                              #Takes the inputted string, removes a period if one is present, then adds a period,
+            echo 'Counting '$searchterm'...'                                                            #this ensures that the filetype is always in the form '.extention'
+            count=$(find -path "$heirarchy/.*" -prune -o -type f | grep -E "$searchterm$" | wc -l)      #Finds all files in folders that are not hidden 
+            echo "$count"                                                                               #and uses wc -l to count each new line with one file per line 
+        fi 
+    done                                                                                             
+}                                                                                                   
 
 filesizelist(){
     IFS=$'\n'
-    ls -ashS $(find -type f | grep -v "/.git")                                                   #Finds all files in the directory and all subdirectories then, lists them all in human understood
+    ls -ashS $(find -type f | grep -v .git)                                                     #Finds all files in the directory and all subdirectories then, lists them all in human understood
     unset IFS                                                                                   #sizing and sorts this list from greatest to smallest
 }
 
-
 switchEx() {
 
-    executables="$(find -type f | grep -v "project_analyze.sh" | grep -E ".sh$")"
+    executables="$(find -type f | grep -E ".sh$")"
 
     if ! [ -f "$heirarchy/permissions.log" ] ; then
         touch "$heirarchy/permissions.log"
@@ -101,38 +108,41 @@ switchEx() {
 
     echo -e "\e[1mEnter 'change' to allow users with write permissions to execute files, or 'restore' to revert back to original permissions.\e[0m" 
     read response
-
-    if [ $response = "change" ] || [ $response = "Change" ] ; then
-        IFS=$'\n'
-        ls -l $executables > "$heirarchy/permissions.log"
-        for exec in $executables ; do
-            if [ "$(ls -l "$exec" | cut -c 3)" = "w" ] ; then
-                chmod u+x "$exec"
-                if [ $? -eq 0 ] ; then
-                    echo "Permission for "$exec" changed!"
-                else
-                    echo "There was an error changing permissions for $exec!"
+    for res in $response ; do
+        if [ $res = "change" ] || [ $res = "Change" ] ; then
+            IFS=$'\n'
+            ls -l $executables > "$heirarchy/permissions.log"
+            for exec in $executables ; do
+                if [ "$(ls -l "$exec" | cut -c 3)" = "w" ] ; then
+                    chmod u+x "$exec"
+                    if [ $? -eq 0 ] ; then
+                        echo "Permission for "$exec" changed!"
+                    else
+                        echo "There was an error changing permissions for $exec!"
+                    fi
                 fi
-            fi
-        done
-        unset IFS
-        echo "Complete"
-    elif [ $response = "restore" ] || [ $response = "Restore" ] ; then
-        IFS=$'\n'
-        for file in $executables ; do
-            permissions="$(grep -E "$file$" "$heirarchy/permissions.log" | cut -c 2-4)"
-            chmod +"$permissons" "$file"
-            if [ $? -eq 0 ] ; then
-                    echo "Permissions for $file restored!"
-            else
-                echo "There was an error restoring permissions for $exec!"
-            fi    
-        done
-        unset IFS
-        echo "Complete"
-    else
-        echo "$response is not a command in this feature"
-    fi
+            done
+            unset IFS
+            echo "Complete"
+        elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
+            IFS=$'\n'
+            for file in $executables ; do
+                permissions="$(grep -E "$file$" "$heirarchy/permissions.log" | cut -c 2-4)"
+                chmod +"$permissons" "$file"
+                if [ $? -eq 0 ] ; then
+                        echo "Permissions for $file restored!"
+                else
+                    echo "There was an error restoring permissions for $exec!"
+                fi    
+            done
+            unset IFS
+            echo "Complete"
+        elif [ $res = "return" ] ; then
+            break
+        else
+            echo "$res is not a command in this feature"
+        fi
+    done
 }
 
 backupDelRest(){
@@ -176,6 +186,8 @@ backupDelRest(){
                 fi
             done
             unset IFS
+        elif [ $res = "return" ] ; then
+            break
         else
             echo "$res is not a command in this feature."
         fi 
