@@ -9,7 +9,7 @@
   - [File Size List](#3-file-size-list)
 - [Custom Features](#custom-features)
   - [File Type Sort](#1-file-type-sort)
-  - [abcd](#2-abcd)
+  - [Script Finder](#2-script-finder)
 ___ 
 ## Usage
 Execute this script from project root with:
