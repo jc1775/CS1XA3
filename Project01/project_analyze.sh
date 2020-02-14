@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 heirarchy="$( echo "$0" | rev | cut -d "/" -f 2- | rev)"
 arguments="$@"
 
