@@ -1,14 +1,12 @@
 # CS 1XA3 Project01 - calarcoj
 
 ## Index:
-
+- [Usage](#usage)
+  - [Script Input](#script-input)
 - [Features](#features)
-  - [Script Input](#1-script-input)
-  - [FIXME Log](#2-fixme-log)
-  - [File Type Count](#3-file-type-count)
-  - [File Size List](#4-file-size-list)
-  - [Backup and Delete / Restore](#5-backup-and-delete-%2F-restore)
-  - [Switch To Executable](#6-switch-to-executable)
+  - [FIXME Log](#1-fixme-log)
+  - [File Type Count](#2-file-type-count)
+  - [File Size List](#3-file-size-list)
 - [Custom Features](#custom-features)
   - [File Type Sort](#1-file-type-sort)
   - [abcd](#2-abcd)
@@ -27,37 +25,12 @@ With possible arguments:
     filecount
     filesizelist
     input
-    switchEx
-    backupDelRest
 
 ***-If no arguments are given the 'input' feature is executed by default***
 
-***-All features that prompt for user input accept 'return' as an argument to return to feature selection***
-
-***-All features that prompt for user input accept multiple arguments seperated by a space***
-
-
-___
-___
-
-## Features
-___
-### 1. Script Input
-#### Description:
+### Script Input:
 
 This is an interactive script for selecting and running all other features. It prompts the user to input the name of the desired feature, and accepts multiple arguments at once executing them in the order listed. This script also contains a 'help' menu which lists the name of all features and provides basic information on each one.
-
-#### Execution:
-
-#### Input:
-
-This feature executes by default when no arguments are given:
-
-    ./CS1XA3/Project01/project_analyze.sh
-
-However it can also be executed directly:
-
-    ./CS1XA3/Project01/project_analyze.sh input
 
 #### Example Output:
 
@@ -72,10 +45,16 @@ However it can also be executed directly:
     help    -   Pulls up an interactive help menu with information on each feature
     exit    -   Ends the script
 
-#### Note:
- 
+***-All features that prompt for user input accept 'return' as an argument to return to feature selection***
+
+***-All features that prompt for user input accept multiple arguments seperated by a space***
+
 ___
-### 2. FIXME Log
+___
+
+## Features
+
+### 1. FIXME Log
 #### Description:
 
 <fixme> This feature searches through every file within the working directory and its subdirectories for files where the last line contains '#FIXME'. It creates or overwrites a file 'fixme.log' containing the names and relative directories of all matching files, each to its own line.
@@ -97,9 +76,9 @@ ___
 
 #### Note:
  
-***-This feature ignores hidden files***
+***-This feature ignores the '/.git' directory***
 ___
-### 3. File Type Count
+### 2. File Type Count
 #### Description:
 
 <filecount> This feature prompts the user to input the intended file extention (i.e txt, pdf, py, .sh, etc...) and proceeds to count the number of files within the working directory and all subdirectoies with said extention and outputs the result. Note that extentions can be entered either as '.extentionname' or 'extentionname', the feature works in either case.
@@ -126,7 +105,7 @@ ___
  
  
 ___
-### 4. File Size List
+### 3. File Size List
 #### Description:
 
 <filesizelist> This feature lists all of the files within the working directory and subdirectories, it lists the sizes of the files in a human understood format and sorts them by said size from largest to smallest.
@@ -147,76 +126,16 @@ ___
 #### Note:
  
 ***This feature ignores the "/.git" directory***
-
-___
-
-### 5. Backup and Delete / Restore
-
-#### Description:
-
-<backupDelRest> This feature prompts the user to either enter 'backup' or 'restore'.<br><br>'Backup': If this is chosen the script proceeds to find all files in a directory and its subdirectories of type '.tmp', copies them to a directory named '/backup', saves a log of the original location to 'backup/backup.log', and deletes the originals.<br><br>'Restore': If this is chosen the script will return all files in the '/backup' directory to their original location using the 'backup.log' file.
-
-#### Execution:
-
-#### Input:
-
-    ./CS1XA3/Project01/project_analyze.sh backupDelRest
-
-#### Example Output:
-Backup:
-
-    ./CS1XA3/Project01/project_analyze.sh backupDelRest
-    >>Enter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.
-    backup
-    >>Backup succesful
-Restore:
-
-    ./CS1XA3/Project01/project_analyze.sh backupDelRest
-    >>Enter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.
-    restore
-    >>  file1 restored succesfully!
-        file2 restored succesfully!
-        etc...
-        
-#### Alternate outcomes:
-
-"No new files to backup! Backup ended."  - This occurs when there is nothing to backup
-
-"An error occurred during backup so file deletion did not occur" - This occurs if there is an error in copying to the backup folder, original files will not be deleted.
-
-"ERROR! 'filename' does not exist in backup." - This occurs when a file in the backup log is no longer in the backup folder
-
-
-___
-
-### 6. Switch to Executable
-
-#### Description:
-
-<switchEx> abc
-
-#### Execution:
-
-Input:
-
-    abc
-
-Example Output:
-
-    abc
-
-#### Reference:
  
-some code was taken from 
 ___
 ___
 ## Custom Features
 
 ___
-### 1. File Type Sort
+### 1. File Sort
 #### Description: 
 
-<fileSort> This feature will prompt the user for a specific filetype and directory, and search within the specified directory and its subdirectories for all matching files and sort them into a directory named after its contained filetype. If 'all' is specified it will proceed to sort all files of which there are at least two occurrences of that filetype. A log of all previous locations will be kept. This feature will be interactive and guide the user through the process.
+<fileSort> This feature will prompt the user for a specific filetype and directory, and search within the specified directory and its subdirectories for all matching files and sort them into a directory named after its contained filetype. If 'tag' is selected it will sort a file into a subdirectory based on a 'tag' within the file name. If 'all' is specified it will proceed to sort all files of which there are at least two occurrences of that filetype, and sort all tags into their respected folders. A log of all previous locations will be kept. This feature will be interactive and guide the user through the process.
 
 #### Execution:
 
@@ -228,14 +147,11 @@ Example Output:
 
 >some output
 
-#### Reference:
- 
-some code was taken from 
 ___
-### 2. abcd
+### 2. Script Finder
 #### Description:
 
-<font color="green">This feature does ....</font>
+<scriptFind> This feature will recurse through a directory and all subdirectories, finding all script files based on their shebangs, it will copy all scripts into a 'Script' folder sorted into subdirectories based on the interpreter required to run each script. This feature will also give an option to mass change the permissions of each file type in the '/Script' directory.
 
 #### Execution:
 
