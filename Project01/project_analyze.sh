@@ -4,7 +4,7 @@ heirarchy="$( echo "$0" | rev | cut -d "/" -f 2- | rev)"
 arguments="$@"
 
 input() {
-    functionlist="\n1. fixme\n2. filecount\n3. filesizelist"
+    functionlist="\n1. fixme\n2. filecount\n3. filesizelist\n4. backupDelRest\n5. switchEx\n6. filesort\n7. scriptfind"
 
     echo -e "\e[1mWhich feature(s) would you like to execute? (Type 'help' for a list of commands, 'exit' to exit):\e[0m "
     read answer
@@ -23,6 +23,14 @@ input() {
                             echo -e "\e[1m\e[100m$(grep '<fixme>' "$heirarchy/README.md")\e[0m"
                         elif [ $ans = "filecount" ] ; then
                             echo -e "\e[1m\e[100m$(grep '<filecount>' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "backupDelRest" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<backupDelRest>' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "switchEx" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<switchEx>' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "filesort" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<filesort>' "$heirarchy/README.md")\e[0m"
+                         elif [ $ans = "scriptfind" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '<scriptfind>' "$heirarchy/README.md")\e[0m"
                         elif [ $ans = "return" ] ; then
                             answer="return"
                         else
@@ -41,6 +49,10 @@ input() {
                 backupDelRest
             elif [ $ans = "switchEx" ] ; then
                 switchEx
+            elif [ $ans = "filesort" ] ; then
+                filesort
+            elif [ $ans = "scriptfind" ] ; then
+                scriptfind
             else
                 echo "$ans"" is not a function"
             fi
@@ -80,7 +92,7 @@ filecount(){
         else
             searchterm='.'$(echo "$sea" | cut -d "." -f 2)                                              #Takes the inputted string, removes a period if one is present, then adds a period,
             echo 'Counting '$searchterm'...'                                                            #this ensures that the filetype is always in the form '.extention'
-            count=$(find -path "*/.*" -prune -o -type f | grep -E "$searchterm$" | wc -l)               #Finds all files in folders that are not hidden 
+            count=$(find -path "$heirarchy/.*" -prune -o -type f | grep -E "$searchterm$" | wc -l)      #Finds all files in folders that are not hidden 
             echo "$count"                                                                               #and uses wc -l to count each new line with one file per line 
         fi 
     done                                                                                             
@@ -92,19 +104,448 @@ filesizelist(){
     unset IFS                                                                                   #sizing and sorts this list from greatest to smallest
 }
 
+switchEx() {
+
+    executables="$(find -type f | grep -E ".sh$")"
+
+    if ! [ -f "$heirarchy/permissions.log" ] ; then
+        touch "$heirarchy/permissions.log"
+    fi
+
+    echo -e "\e[1mEnter 'change' to allow users with write permissions to execute files, or 'restore' to revert back to original permissions.\e[0m" 
+    read response
+    for res in $response ; do
+        if [ $res = "change" ] || [ $res = "Change" ] ; then
+            IFS=$'\n'
+            ls -l $executables > "$heirarchy/permissions.log"
+            for exec in $executables ; do
+                if [ "$(ls -l "$exec" | cut -c 3)" = "w" ] ; then
+                    chmod u+x "$exec"
+                    if [ $? -eq 0 ] ; then
+                        echo "Permission for "$exec" changed!"
+                    else
+                        echo "There was an error changing permissions for $exec!"
+                    fi
+                fi
+            done
+            unset IFS
+            echo "Complete"
+        elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
+            IFS=$'\n'
+            for file in $executables ; do
+                permissions="$(grep -E "$file$" "$heirarchy/permissions.log" | cut -c 2-4)"
+                chmod +"$permissons" "$file"
+                if [ $? -eq 0 ] ; then
+                        echo "Permissions for $file restored!"
+                else
+                    echo "There was an error restoring permissions for $exec!"
+                fi    
+            done
+            unset IFS
+            echo "Complete"
+        elif [ $res = "return" ] ; then
+            break
+        else
+            echo "$res is not a command in this feature"
+        fi
+    done
+}
+
+backupDelRest(){
+
+    backupType=".tmp"
+    echo -e "\e[1mEnter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.\e[0m"
+    read response
+
+    for res in $response ; do
+        if [ $res = "backup" ] || [ $res = "Backup" ] ; then
+            if find -path "$heirarchy/backup" -prune -o -type f | grep -qE "$backupType$" ; then
+                if [ -d "$heirarchy/backup" ] ; then
+                    rm -r "$heirarchy/backup"
+                fi
+                mkdir "$heirarchy/backup"
+                touch "$heirarchy/backup/restore.log"
+                # find -type f | grep -E "$backupType$" > "$heirarchy/backup/restore.log"
+                files="$(find -type f | grep -E "$backupType$")"
+                IFS=$'\n'
+                
+                for file in $files; do
+                    nameProp="$(echo $file | rev | cut -d "/" -f 1 | rev)"
+                    parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                    if ! [ -f "$heirarchy/backup/$nameProp" ] ; then
+                        cp "$file" "$heirarchy/backup"
+                        if [ $? -eq 0 ] ; then
+                            rm "$file"
+                            echo "$file backedup succesfully"
+                            echo "ORIGINAL>$file>ORIGINAL NEW>$heirarchy/backup/$nameProp>NEW" >> "$heirarchy/backup/restore.log"
+                        else
+                            echo "An error occurred during backup, file was not deleted"
+                        fi
+                    else
+                        echo "$file already exists within $heirarchy/backup! Processing duplicate..."
+                        cp "$file" "$heirarchy/backup/$parentFolder-$nameProp"
+                        if [ $? -eq "0" ] ; then
+                            rm "$file"
+                            echo "$file backedup succesfully"
+                            echo "ORIGINAL>$file>ORIGINAL NEW>$heirarchy/backup/$parentFolder-$nameProp>NEW" >> "$heirarchy/backup/restore.log"
+                        else
+                            echo "An error occurred during backup, file was not deleted"
+                        fi
+                    fi
+                done
+            else
+                echo "No new files to backup! Backup did not occur."
+            fi
+                unset IFS
+        elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
+            IFS=$'\n'
+            if [ -f "$heirarchy/backup/restore.log" ] ; then
+                for fileInfo in $(cat "$heirarchy/backup/restore.log") ; do
+                    currentName="$(echo $fileInfo | rev | cut -d ">" -f 2 | rev)"
+                    origName="$(echo $fileInfo | cut -d ">" -f 2)"
+                    properName="$(echo $currentName | rev | cut -d "/" -f 1 | rev)"
+                    if ! [ -f "$heirarchy/backup/$properName" ] ; then
+                        echo "ERROR! $currentName does not exist in backup."
+                    else
+                        cp "$currentName" "$origName"
+                        echo "$origName restored succesfully"
+                    fi
+                done
+            else
+                echo "ERROR! restore.log does not exist!"
+            fi
+            unset IFS
+        elif [ $res = "return" ] ; then
+            break
+        else
+            echo "$res is not a command in this feature."
+        fi 
+    done
+}
+
+filesort() {
+
+    echo "How would you like to sort?"
+    read sorttype
+    echo "Which directories would you like to sort? Seperate directories with a ';'"
+    read directory
+    directory="$(sed 's/;/\n/g' <<< $directory )"
+
+    IFS=$'\n'
+    for type in $sorttype ; do
+        for dir in $directory ; do
+            if ! [ -d "$dir" ] ; then
+                echo "$dir is not a directory!"
+                continue
+            fi
+
+            if ! [ -d "$dir/SORTEDlogs" ] ; then
+                mkdir "$dir/SORTEDlogs"
+            fi
+
+            echo "How far would you like to decend into the directory: $dir?"
+            read depth
+            
+            ###
+            intChk='^[0-9]+$'
+            while ! [[ "$depth" =~ $intChk ]] ; do
+                echo "error: $depth is not a number. Please enter an integer."
+                echo "How far would you like to decend into the directory: $dir?"
+                read depth
+            done
+            ###
+            
+            echo "Sorting inside $heirarch/$dir ..."
+            
+            autoExtSort() {
+                extentions="$(find "$dir" -maxdepth $depth -type f | rev | cut -d "/" -f 1 | rev | grep "\. *"| rev | cut -d "." -f 1 | rev | grep -vE "log$" )"
+                while [ ${#extentions} -gt 0 ] ; do
+                    for ext in $extentions ; do
+                        searchterm='.'$(echo "$ext" | cut -d "." -f 2) 
+                        nameProp="$( echo "$searchterm" | cut -d "." -f 2- )"
+                        if [ $(find "$dir" -maxdepth "$depth" -not -path "$nameProp" -type f | grep -E "$searchterm$" | wc -l) -gt "1" ] ; then
+                            echo "Sorting: $searchterm ..."
+                            if [ -d "$dir/$nameProp" ] ; then
+                                rm -r "$dir/$nameProp"
+                            fi
+                            if [ -f "$dir/SORTEDlogs/$nameProp.log" ] ; then
+                                rm "$dir/SORTEDlogs/$nameProp.log"
+                            fi
+
+                            mkdir "$dir/$nameProp"
+                            touch "$dir/SORTEDlogs/$nameProp.log"
+                            files="$(find "$dir" -maxdepth "$depth" -type f | grep -E "$searchterm$")"
+                            for file in $files; do
+                                origName="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                if ! [ -f "$dir/$nameProp/$origName" ] ; then
+                                    cp "$file" "$dir/$nameProp"
+                                    if [ $? -eq "0" ] ; then
+                                    echo "$file was sorted succesfully into $dir/$nameProp"
+                                        echo "$file" >> "$dir/SORTEDlogs/$nameProp.log"
+                                    else
+                                        echo "There was an error sorting $file"
+                                    fi
+                                else
+                                    echo "Processing file duplication for $file ..."
+                                    parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                                    cp "$file" "$dir/$nameProp/<$parentFolder>$origName"
+                                    if [ $? -eq "0" ] ; then
+                                        echo "$file:$dir/$nameProp/<$parentFolder>$origName" >> "$dir/SORTEDlogs/$nameProp.log"
+                                    else
+                                        echo "There was an error sorting $file"   
+                                    fi
+                                fi
+                            done
+                            extentions="$(grep -vE "$ext$" <<< "$extentions")"
+                            break
+                        else
+                            extentions="$(grep -vE "$ext$" <<< "$extentions")"
+                            break
+                        fi
+                    done
+                done
+            }
+            tagSort() {
+                folderList="$(find "$dir" -not -path '*/\.*' -type d)"
+                if [ -f "$dir/SORTEDlogs/SORTEDtag.log" ] ; then
+                    rm "$dir/SORTEDlogs/SORTEDtag.log"
+                fi
+                
+                yesono=""
+                while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] ; do                         
+                    echo "Would you like to delete files from their original location? [y/n]"
+                    read yesono
+                    if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] ; then
+                        break
+                    else
+                        echo "ERROR: Please respond with 'y'(Yes) or 'n'(No)!"
+                    fi
+                done
+            
+                if [ "$yesono" = "y" ] ; then
+                    for folder in $folderList ; do
+                        fileList="$(find "$dir" -maxdepth "$depth" -type f | grep -vE "$folder/" | grep -vE ".log$" | grep $( echo "$folder" | rev | cut -d "/" -f 1 | rev))"
+                        folderName="$( echo "$folder" | rev | cut -d "/" -f 1 | rev)"
+                        for file in $fileList ; do
+                            if echo "$file" | rev | cut -d "/" -f 1 | rev | grep -qE "^$(echo $folder | rev | cut -d "/" -f 1 | rev)" ; then
+                                nameProp="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                if ! [ -f "$folder/$nameProp" ] ; then
+                                    cp "$file" "$folder"
+                                    if [ $? -eq 0 ] ; then
+                                        rm "$file"
+                                        echo "$file has been moved into $folder" >> "$dir/SORTEDlogs/SORTEDtag.log"
+                                        echo "File: $file succesfully sorted into: $folder !"
+                                    else
+                                        echo "There was an error copying $file into $folder , your file was not deleted"
+                                    fi
+                                else
+                                    echo "$file already exists in $folder"
+                                    
+                                    yesono=""
+                                    while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] || ! [ "$yesono" = "d" ] ; do                               
+                                        echo "Would you like to replace $folder/$nameProp with $file ?[y/n] Or would you like to add a duplicate of $file ?[d]"       
+                                        read yesono     
+                                        if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] || [ "$yesono" = "d" ] ; then        
+                                            break       
+                                        else        
+                                            echo "ERROR: Please respond with 'y'(Yes) or 'n'(No) or 'd'(Duplicate)!"      
+                                        fi      
+                                    done
+
+                                    if [ "$yesono" = "y" ] ; then
+                                        rm "$folder/$nameProp"
+                                        cp "$file" "$folder"
+                                        if [ $? -eq "0" ] ; then
+                                            echo "$file succesfully copied into $folder"
+                                            echo "$file has been moved into $folder" >> "$dir/SORTEDlogs/SORTEDtag.log"
+                                            rm "$file"
+                                        else
+                                            echo "There was an error copying $file into $folder , your file was not deleted"
+                                        fi
+                                    elif [ "$yesono" = "d" ] ; then
+                                        echo "Processing file duplication for $file ..."
+                                        origName="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                        parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                                        cp "$file" "$folder/<$parentFolder>$origName"
+                                        if [ $? -eq "0" ] ; then
+                                            echo "$file moved into $folder as: $folder/<$parentFolder>$origName" >> "$dir/SORTEDlogs/SORTEDtag.log"
+                                        else
+                                            echo "There was an error sorting $file"
+                                        fi   
+                                    fi        
+                                fi
+                            fi
+                        done
+                    done
+                elif [ "$yesono" = "n" ] ; then
+                    for folder in $folderList ; do
+                        fileList="$(find "$dir" -maxdepth "$depth" -type f | grep -vE "$folder/" | grep -vE ".log$" | grep $( echo "$folder" | rev | cut -d "/" -f 1 | rev))"
+                        for file in $fileList ; do
+                            if echo "$file" | rev | cut -d "/" -f 1 | rev | grep -qE "^$(echo $folder | rev | cut -d "/" -f 1 | rev)" ; then
+                                nameProp="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                if ! [ -f "$folder/$nameProp" ] ; then
+                                    cp "$file" "$folder"
+                                    if [ $? -eq 0 ] ; then
+                                        echo "$file has been moved into $folder" >> "$dir/SORTEDlogs/SORTEDtag.log"
+                                        echo "File: $file succesfully sorted into: $folder !"
+                                    else
+                                        echo "There was an error copying $file into $folder , your file was not deleted"
+                                    fi
+                                else
+                                    echo "$file already exists in $folder"
+                                    
+                                    yesono=""
+                                    while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] || ! [ "$yesono" = "d" ] ; do                               
+                                        echo "Would you like to replace $folder/$nameProp with $file ?[y/n] Or would you like to add a duplicate of $file ?[d]"       
+                                        read yesono     
+                                        if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] || [ "$yesono" = "d" ] ; then        
+                                            break       
+                                        else        
+                                            echo "ERROR: Please respond with 'y'(Yes) or 'n'(No) or 'd'(Duplicate)!"      
+                                        fi      
+                                    done
+
+                                    if [ "$yesono" = "y" ] ; then
+                                        rm "$folder/$nameProp"
+                                        cp "$file" "$folder"
+                                        if [ $? -eq "0" ] ; then
+                                            echo "$file succesfully copied into $folder"
+                                            echo "$file has been copied into $folder" >> "$dir/SORTEDlogs/SORTEDtag.log"
+                                        else
+                                            echo "There was an error copying $file into $folder , your file was not deleted"
+                                        fi
+                                    elif [ "$yesono" = "d" ] ; then
+                                        echo "Processing file duplication for $file ..."
+                                        origName="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                        parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                                        cp "$file" "$folder/<$parentFolder>$origName"
+                                        if [ $? -eq "0" ] ; then
+                                            echo "$file copied into $folder as: $folder/<$parentFolder>$origName" >> "$dir/SORTEDlogs/SORTEDtag.log"
+                                        else
+                                            echo "There was an error sorting $file"
+                                        fi 
+                                    fi        
+                                fi
+                            fi
+                        done
+                    done
+                fi
+            }
+            extSort() {
+                echo "What extention/s would you like to sort? Seperate with ';'"
+                read extention
+                extention="$(sed 's/;/\n/g' <<< $extention )"
+                for ext in $extention ; do
+                    searchterm='.'$(echo "$ext" | cut -d "." -f 2) 
+                    echo "Sorting: $searchterm ..."
+                    if find "$dir" -maxdepth "$depth" -type f | grep -qE "$searchterm$" ; then
+                        nameProp="$( echo "$searchterm" | cut -d "." -f 2- )"
+                        if [ -d "$dir/$nameProp" ] ; then
+                            rm -r "$dir/$nameProp"
+                        fi
+                        if [ -f "$dir/SORTEDlogs/$nameProp.log" ] ; then
+                            rm "$dir/SORTEDlogs/$nameProp.log"
+                        fi
+
+                        mkdir "$dir/$nameProp"
+                        touch "$dir/SORTEDlogs/$nameProp.log"
+                        files="$(find "$dir" -maxdepth "$depth" -type f | grep -E "$searchterm$")"
+                        for file in $files; do
+                            origName="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                            if ! [ -f "$dir/$nameProp/$origName" ] ; then
+                                cp "$file" "$dir/$nameProp"
+                                if [ $? -eq "0" ] ; then
+                                    echo "$file" >> "$dir/SORTEDlogs/$nameProp.log"
+                                    echo "$file succesfully coppied into $nameProp"
+                                else
+                                    echo "There was an error sorting $file"
+                                fi
+                            else
+                                echo "$file already exists in $folder"
+                                    
+                                yesono=""
+                                while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] || ! [ "$yesono" = "d" ] ; do                               
+                                    echo "Would you like to replace $folder/$nameProp with $file ?[y/n] Or would you like to add a duplicate of $file ?[d]"       
+                                    read yesono     
+                                    if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] || [ "$yesono" = "d" ] ; then        
+                                        break       
+                                    else        
+                                        echo "ERROR: Please respond with 'y'(Yes) or 'n'(No)!"      
+                                    fi     
+                                done
+                                if [ "$yesono" = "y" ] ; then
+                                    rm "$folder/$nameProp"
+                                    cp "$file" "$folder"
+                                    if [ $? -eq "0" ] ; then
+                                        echo "$file succesfully copied into $folder"
+                                    else
+                                        echo "There was an error copying $file into $folder , your file was not deleted"
+                                    fi
+                                elif [ "$yesono" = "d" ] ; then
+                                    echo "Processing file duplication for $file ..."
+                                    parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                                    cp "$file" "$dir/$nameProp/<$parentFolder>$origName"
+                                    if [ $? -eq "0" ] ; then
+                                        echo "$file:$dir/$nameProp/<$parentFolder>$origName" >> "$dir/SORTEDlogs/$nameProp.log"
+                                    else
+                                        echo "There was an error sorting $file"   
+                                    fi
+                                fi
+                            fi
+                        done
+                    else
+                        echo "No files of type $ext found!"
+                    fi
+                done
+                echo "Extention sort complete!"        
+            }
+            if [ $type = "all" ] || [ $type = "All" ] ; then
+                echo "Extention sorting..."
+                autoExtSort
+                echo "Extention sorting complete!"
+                echo "Tag sorting..."
+                tagSort
+                echo "Tag sorting complete!"
+            elif [ $type = "tag" ] || [ $type = "Tag" ] ; then
+                tagSort
+            elif [ $type = "ext" ] || [ $type = "Ext" ] ; then
+                extSort
+            elif [ $type = "return" ] || [ $type = "Return" ] ; then
+                break
+            else
+                echo "$type is not an option"             
+            fi
+        done
+    done
+
+    unset IFS
+}
+
+scriptfind() {
+    #somecode
+    echo "Hello World"
+}
 main(){
     if [ $# -gt 0 ] ; then
-        for ans in $arguments ; do
-            if [ $ans = "fixme" ] ; then
+        for arg in $arguments ; do
+            if [ $arg = "fixme" ] ; then
                 fixme
-            elif [ $ans = "filecount" ] ; then
+            elif [ $arg = "filecount" ] ; then
                 filecount
-            elif [ $ans = "filesizelist" ]  ; then
+            elif [ $arg = "filesizelist" ]  ; then
                 filesizelist
-            elif [ $ans = "input" ]  ; then
+            elif [ $arg = "input" ]  ; then
                 input
+            elif [ $arg = "backupDelRest" ] ; then
+                backupDelRest
+            elif [ $arg = "switchEx" ] ; then
+                switchEx
+            elif [ $arg = "filesort" ] ; then
+                filesort
+            elif [ $arg = "scriptfind" ] ; then
+                scriptfind
             else
-                echo "$ans is not a function"
+                echo "$arg is not a function"
             fi
         done
     else
