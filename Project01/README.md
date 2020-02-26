@@ -7,9 +7,11 @@
   - [FIXME Log](#1-fixme-log)
   - [File Type Count](#2-file-type-count)
   - [File Size List](#3-file-size-list)
+  - [Backup and Delete / Restore](#4-backup-and-delete-/-restore)
+  - [Switch To Executable](#5-switch-to-executable)
 - [Custom Features](#custom-features)
   - [File Type Sort](#1-file-type-sort)
-  - [abcd](#2-abcd)
+  - [Script Finder](#2-script-finder)
 ___ 
 ## Usage
 Execute this script from project root with:
@@ -128,11 +130,71 @@ ___
 ***This feature ignores the "/.git" directory***
  
 ___
+
+### 4. Backup and Delete / Restore
+
+#### Description:
+
+<backupDelRest> This feature prompts the user to either enter 'backup' or 'restore'.<br><br>'Backup': If this is chosen the script proceeds to find all files in a directory and its subdirectories of type '.tmp', copies them to a directory named '/backup', saves a log of the original location to 'backup/backup.log', and deletes the originals.<br><br>'Restore': If this is chosen the script will return all files in the '/backup' directory to their original location using the 'backup.log' file.
+
+#### Execution:
+
+#### Input:
+
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+
+#### Example Output:
+Backup:
+
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    >>Enter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.
+    backup
+    >>Backup succesful
+Restore:
+
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    >>Enter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.
+    restore
+    >>  file1 restored succesfully!
+        file2 restored succesfully!
+        etc...
+        
+#### Alternate outcomes:
+
+"No new files to backup! Backup ended."  - This occurs when there is nothing to backup
+
+"An error occurred during backup so file deletion did not occur" - This occurs if there is an error in copying to the backup folder, original files will not be deleted.
+
+"ERROR! 'filename' does not exist in backup." - This occurs when a file in the backup log is no longer in the backup folder
+
+
+___
+
+### 5. Switch to Executable
+
+#### Description:
+
+<switchEx> abc
+
+#### Execution:
+
+Input:
+
+    abc
+
+Example Output:
+
+    abc
+
+#### Reference:
+ 
+some code was taken from 
+___
 ___
 ## Custom Features
 
 ___
-### 1. File Sort
+### 1. File Type Sort
 #### Description: 
 
 <fileSort> This feature will prompt the user for a specific filetype and directory, and search within the specified directory and its subdirectories for all matching files and sort them into a directory named after its contained filetype. If 'tag' is selected it will sort a file into a subdirectory based on a 'tag' within the file name. If 'all' is specified it will proceed to sort all files of which there are at least two occurrences of that filetype, and sort all tags into their respected folders. A log of all previous locations will be kept. This feature will be interactive and guide the user through the process.
@@ -147,11 +209,14 @@ Example Output:
 
 >some output
 
+#### Reference:
+ 
+some code was taken from 
 ___
 ### 2. Script Finder
 #### Description:
 
-<scriptFind> This feature will recurse through a directory and all subdirectories, finding all script files based on their shebangs, it will copy all scripts into a 'Script' folder sorted into subdirectories based on the interpreter required to run each script. This feature will also give an option to mass change the permissions of each file type in the '/Script' directory.
+<scriptfind> This feature will recurse through a directory and all subdirectories, finding all script files based on their shebangs, it will copy all scripts into a 'Script' folder sorted into subdirectories based on the interpreter required to run each script. This feature will also give an option to mass change the permissions of each file type in the '/Script' directory.
 
 #### Execution:
 
