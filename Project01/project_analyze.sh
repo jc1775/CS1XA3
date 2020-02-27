@@ -124,7 +124,7 @@ switchEx() {
                     if [ $? -eq 0 ] ; then
                         echo "Permission for "$exec" changed!"
                     else
-                        echo "There was an error changing permissions for $exec!"
+                        echo "There was an ERROR changing permissions for $exec!"
                     fi
                 fi
             done
@@ -138,7 +138,7 @@ switchEx() {
                 if [ $? -eq 0 ] ; then
                         echo "Permissions for $file restored!"
                 else
-                    echo "There was an error restoring permissions for $exec!"
+                    echo "There was an ERROR restoring permissions for $exec!"
                 fi    
             done
             unset IFS
@@ -179,7 +179,7 @@ backupDelRest(){
                             echo "$file backedup succesfully"
                             echo "ORIGINAL>$file>ORIGINAL NEW>$heirarchy/backup/$nameProp>NEW" >> "$heirarchy/backup/restore.log"
                         else
-                            echo "An error occurred during backup, file was not deleted"
+                            echo "An ERROR occurred during backup, file was not deleted"
                         fi
                     else
                         echo "$file already exists within $heirarchy/backup! Processing duplicate..."
@@ -189,7 +189,7 @@ backupDelRest(){
                             echo "$file backedup succesfully"
                             echo "ORIGINAL>$file>ORIGINAL NEW>$heirarchy/backup/$parentFolder-$nameProp>NEW" >> "$heirarchy/backup/restore.log"
                         else
-                            echo "An error occurred during backup, file was not deleted"
+                            echo "An ERROR occurred during backup, file was not deleted"
                         fi
                     fi
                 done
@@ -227,6 +227,9 @@ filesort() {
 
     echo "How would you like to sort?"
     read sorttype
+    if [ $sorttype = "return" ] || [ $sorttype = "Return" ] ; then
+        return
+    fi
     echo "Which directories would you like to sort? Seperate directories with a ';'"
     read directory
     directory="$(sed 's/;/\n/g' <<< $directory )"
@@ -249,7 +252,7 @@ filesort() {
             ###
             intChk='^[0-9]+$'
             while ! [[ "$depth" =~ $intChk ]] ; do
-                echo "error: $depth is not a number. Please enter an integer."
+                echo "ERROR: $depth is not a number. Please enter an integer."
                 echo "How far would you like to decend into the directory: $dir?"
                 read depth
             done
@@ -283,7 +286,7 @@ filesort() {
                                     echo "$file was sorted succesfully into $dir/$nameProp"
                                         echo "$file" >> "$dir/SORTEDlogs/$nameProp.log"
                                     else
-                                        echo "There was an error sorting $file"
+                                        echo "There was an ERROR sorting $file"
                                     fi
                                 else
                                     echo "Processing file duplication for $file ..."
@@ -292,7 +295,7 @@ filesort() {
                                     if [ $? -eq "0" ] ; then
                                         echo "$file:$dir/$nameProp/<$parentFolder>$origName" >> "$dir/SORTEDlogs/$nameProp.log"
                                     else
-                                        echo "There was an error sorting $file"   
+                                        echo "There was an ERROR sorting $file"   
                                     fi
                                 fi
                             done
@@ -336,7 +339,7 @@ filesort() {
                                         echo "$file has been moved into $folder" >> "$dir/SORTEDlogs/SORTEDtag.log"
                                         echo "File: $file succesfully sorted into: $folder !"
                                     else
-                                        echo "There was an error copying $file into $folder , your file was not deleted"
+                                        echo "There was an ERROR copying $file into $folder , your file was not deleted"
                                     fi
                                 else
                                     echo "$file already exists in $folder"
@@ -360,7 +363,7 @@ filesort() {
                                             echo "$file has been moved into $folder" >> "$dir/SORTEDlogs/SORTEDtag.log"
                                             rm "$file"
                                         else
-                                            echo "There was an error copying $file into $folder , your file was not deleted"
+                                            echo "There was an ERROR copying $file into $folder , your file was not deleted"
                                         fi
                                     elif [ "$yesono" = "d" ] ; then
                                         echo "Processing file duplication for $file ..."
@@ -370,7 +373,7 @@ filesort() {
                                         if [ $? -eq "0" ] ; then
                                             echo "$file moved into $folder as: $folder/<$parentFolder>$origName" >> "$dir/SORTEDlogs/SORTEDtag.log"
                                         else
-                                            echo "There was an error sorting $file"
+                                            echo "There was an ERROR sorting $file"
                                         fi   
                                     fi        
                                 fi
@@ -389,7 +392,7 @@ filesort() {
                                         echo "$file has been moved into $folder" >> "$dir/SORTEDlogs/SORTEDtag.log"
                                         echo "File: $file succesfully sorted into: $folder !"
                                     else
-                                        echo "There was an error copying $file into $folder , your file was not deleted"
+                                        echo "There was an ERROR copying $file into $folder , your file was not deleted"
                                     fi
                                 else
                                     echo "$file already exists in $folder"
@@ -412,7 +415,7 @@ filesort() {
                                             echo "$file succesfully copied into $folder"
                                             echo "$file has been copied into $folder" >> "$dir/SORTEDlogs/SORTEDtag.log"
                                         else
-                                            echo "There was an error copying $file into $folder , your file was not deleted"
+                                            echo "There was an ERROR copying $file into $folder , your file was not deleted"
                                         fi
                                     elif [ "$yesono" = "d" ] ; then
                                         echo "Processing file duplication for $file ..."
@@ -422,7 +425,7 @@ filesort() {
                                         if [ $? -eq "0" ] ; then
                                             echo "$file copied into $folder as: $folder/<$parentFolder>$origName" >> "$dir/SORTEDlogs/SORTEDtag.log"
                                         else
-                                            echo "There was an error sorting $file"
+                                            echo "There was an ERROR sorting $file"
                                         fi 
                                     fi        
                                 fi
@@ -458,7 +461,7 @@ filesort() {
                                     echo "$file" >> "$dir/SORTEDlogs/$nameProp.log"
                                     echo "$file succesfully coppied into $nameProp"
                                 else
-                                    echo "There was an error sorting $file"
+                                    echo "There was an ERROR sorting $file"
                                 fi
                             else
                                 echo "$file already exists in $folder"
@@ -479,7 +482,7 @@ filesort() {
                                     if [ $? -eq "0" ] ; then
                                         echo "$file succesfully copied into $folder"
                                     else
-                                        echo "There was an error copying $file into $folder , your file was not deleted"
+                                        echo "There was an ERROR copying $file into $folder , your file was not deleted"
                                     fi
                                 elif [ "$yesono" = "d" ] ; then
                                     echo "Processing file duplication for $file ..."
@@ -488,7 +491,7 @@ filesort() {
                                     if [ $? -eq "0" ] ; then
                                         echo "$file:$dir/$nameProp/<$parentFolder>$origName" >> "$dir/SORTEDlogs/$nameProp.log"
                                     else
-                                        echo "There was an error sorting $file"   
+                                        echo "There was an ERROR sorting $file"   
                                     fi
                                 fi
                             fi
@@ -510,8 +513,6 @@ filesort() {
                 tagSort
             elif [ $type = "ext" ] || [ $type = "Ext" ] ; then
                 extSort
-            elif [ $type = "return" ] || [ $type = "Return" ] ; then
-                break
             else
                 echo "$type is not an option"             
             fi
@@ -522,8 +523,82 @@ filesort() {
 }
 
 scriptfind() {
-    #somecode
-    echo "Hello World"
+    echo "Please enter 'find' to find scripts and/or 'change' to change permissions"
+    read response
+    
+    for res in $response ; do
+        if [ "$res" = "find" ] || [ "$res" = "Find" ] ; then
+            if [ -d "$heirarchy/Scripts" ] ; then
+                rm -r "$heirarchy/Scripts"
+            fi
+            mkdir "$heirarchy/Scripts"
+            IFS=$'\n'
+            fileList="$( grep -l "#!" $(find -path "$heirarchy/Scripts" -prune -o -type f | grep -v "/Scripts" ))"
+            for file in $fileList ; do
+                interpreter="$( head -1 $file | rev | cut -d "/" -f 1 | rev )"
+                interpreter="$(sed 's/\r$//' <<< "$interpreter")" #Removes DOS character
+                fileName="$(echo $file | rev | cut -d "/" -f 1 | rev)"
+                if ! [ -d "$heirarchy/Scripts/$interpreter" ] ; then
+                    mkdir "$heirarchy/Scripts/$interpreter"
+                fi
+                if ! [ -f "$heirarchy/Scripts/$interpreter/$fileName" ] ; then
+                    cp "$file" "$heirarchy/Scripts/$interpreter"
+                    if [ $? -eq "0" ] ; then
+                    echo "Script: $fileName found and coppied into $heirarchy/Scripts/$interpreter"
+                    fi
+                else
+                    echo "$fileName already exists in $heirarchy/Scripts/$interpreter"
+                    yesono=""
+                    while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] || ! [ "$yesono" = "d" ] ; do                         
+                        echo "Would you like to replace the file in: $heirarchy/Scripts/$interpreter ?[y/n] Or would you like create a duplicate?[d]"
+                        read yesono
+                        if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] || [ "$yesono" = "d" ] ; then
+                            break
+                        else
+                            echo "ERROR: Please respond with 'y'(Yes) or 'n'(No) or 'd'(Duplicate)!"
+                        fi
+                    done
+
+                    if [ "$yesono" = "y" ] ; then
+                        rm "$heirarchy/Scripts/$interpreter/$fileName"
+                        cp "$file" "$heirarchy/Scripts/$interpreter"
+                        if [ $? -eq "0" ] ; then
+                        echo "Script: $fileName succesfully copied into $heirarchy/Scripts/$interpreter"
+                        fi
+                    elif [ "$yesono" = "d" ] ; then
+                        echo "Processing file duplication for $file ..."
+                        parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                        cp "$file" "$heirarchy/Scripts/$interpreter/<$parentFolder>$fileName"
+                        if [ $? -eq "0" ] ; then
+                            echo "Script: $fileName succesfully copied into $heirarchy/Scripts/$interpreter as <$parentFolder>$fileName "
+                        else
+                            echo "There was an ERROR copying $file"   
+                        fi
+                    fi
+                fi
+            done
+        elif [ "$res" = "change" ] || [ "$res" = "Change" ] ; then
+            echo "Which scripts would you like to change the permissions of? *Case sensitive"
+            read directories
+            for dir in $directories ; do
+                if ! [ -d "$heirarchy/Scripts/$dir" ] ; then
+                    echo "ERROR: There are no $dir scripts to change!"
+                else
+                    files=$(find "$heirarchy/Scripts/$dir" -type f)
+                    echo "How would you like to change the permissions of ALL $dir files?"
+                    read permChange
+                    for file in $files ; do
+                        chmod "$permChange" $file
+                        if [ $? -eq "0" ] ; then
+                            echo "Permissions for $file change succesfully. New permissions: $(ls -l $file | cut -c -10 | grep -v total)"
+                        else
+                            echo "There was an error changing permissions for $file"
+                        fi
+                    done
+                fi
+            done
+        fi
+    done
 }
 main(){
     if [ $# -gt 0 ] ; then

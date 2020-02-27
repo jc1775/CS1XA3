@@ -149,7 +149,11 @@ Backup:
     ./CS1XA3/Project01/project_analyze.sh backupDelRest
     >>Enter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.
     backup
-    >>Backup succesful
+    >>  file1 backedup succesfully
+        file2 backedup succesfully
+        file3 already exists within backup! Processing duplicate...
+        file3 backedup succesfully
+        
 Restore:
 
     ./CS1XA3/Project01/project_analyze.sh backupDelRest
@@ -167,7 +171,11 @@ Restore:
 
 "ERROR! 'filename' does not exist in backup." - This occurs when a file in the backup log is no longer in the backup folder
 
+"ERROR! restore.log does not exist!" - This occurs when a restore is attempted with no restore.log file to pull information from
 
+#### Note:
+
+***-This feature does not ignore hidden files or hidden folders***
 ___
 
 ### 5. Switch to Executable
@@ -197,17 +205,71 @@ ___
 ### 1. File Type Sort
 #### Description: 
 
-<fileSort> This feature will prompt the user for a specific filetype and directory, and search within the specified directory and its subdirectories for all matching files and sort them into a directory named after its contained filetype. If 'tag' is selected it will sort a file into a subdirectory based on a 'tag' within the file name. If 'all' is specified it will proceed to sort all files of which there are at least two occurrences of that filetype, and sort all tags into their respected folders. A log of all previous locations will be kept. This feature will be interactive and guide the user through the process.
+<filesort> This feature allows the user to sort through files within directories in various ways. The user can sort by extention, which will sort all files of a particular type into a directory named after the type. The user can sort by 'tag' which will match each file with a name beginning with a name matching a current existing directory and copy them in. The user can sort 'all' files which will subsequently get every type of extention which occurs at least twice and group them into directories based on the extention type, and then proceed to run a tag sort. The feature keeps a log of original locations in a directory named 'SORTEDlogs', each file type has its own .log file, as well as tag sort having its own file. 
 
 #### Execution:
 
 Input:
 
-    some code
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
 
 Example Output:
 
->some output
+Tag Sort:
+
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    >> How would you like to sort?
+    tag
+    >> What directories would you like to sort? Seperate directories with a ';'
+    directoryA;directoryB;directoryC/anotherDirectoryC
+    >> How far would you like to decend into directory: directoryA ?
+    "someInteger"
+    >>Sorting inside directoryA ...
+    >> Would you like to delete files from their original location?[y/n]
+    n
+    >>  TAG1file1 succesfully sorted into: TAG1
+        TAG1file2 succesfully sorted into: TAG1
+        TAG2file3 succesfully sorted into: TAG2
+
+Extention Sort:
+
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    >> How would you like to sort?
+    ext
+    >> What directories would you like to sort? Seperate directories with a ';'
+    directoryA;directoryB;directoryC/anotherDirectoryC
+    >> How far would you like to decend into directory: directoryA ?
+    "someInteger"
+    >> What extention/s would you like to sort? Seperate with ':'
+    .someExtentionA;someExtentionB;.someExtentionC
+    >>  Sorting .someExtentionA ...
+        file1.someExtentionA sucessfully sorted into someExtentionA
+        file2.someExtentionA succesfully sorted into someExtentionA
+
+Sort All:
+
+    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    >> How would you like to sort?
+    all
+    >> What directories would you like to sort? Seperate directories with a ';'
+    directoryA;directoryB;directoryC/anotherDirectoryC
+    >> How far would you like to decend into directory: directoryA ?
+    "someInteger"
+    >>  Sorting: .someExtentionA ...
+        file1.someExtentionA succesfully copied into someExtentionA
+        file2.someExtentionA succesfully copied into someExtentionA
+        Sorting: .someExtentionB ...
+        file1.someExtentionB succesfully copied into someExtentionB
+        file2.someExtentionB succesfully copied into someExtentionB
+        Tag sorting...
+
+#### Alternate outcomes:
+
+"ERROR: $depth is not a number. Please enter an integer." - This occurs when the user inputs a non-integer when asked to input an integer for depth
+
+"Processing file duplication for $file ..." - When the same file already exists in a directory during an 'All' sort the script proceeds to rename the copied file using the parent folder of the file
+
+"Would you like to replace folder/nameProp with file ?\[y/n] Or would you like to add a duplicate of file ?\[d]" - This occurs when a file already exists during tag sort or ext sort allowing the user to choose between replacing the file, adding a duplicate, or keeping the file
 
 #### Reference:
  
