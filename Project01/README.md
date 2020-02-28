@@ -49,7 +49,7 @@ This is an interactive script for selecting and running all other features. It p
 
 ***-All features that prompt for user input accept 'return' as an argument to return to feature selection***
 
-***-All features that prompt for user input accept multiple arguments seperated by a space***
+***-All features that prompt for user input accept multiple arguments***
 
 ___
 ___
