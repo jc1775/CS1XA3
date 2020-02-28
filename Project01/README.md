@@ -26,6 +26,10 @@ With possible arguments:
     fixme
     filecount
     filesizelist
+    backupDelRest
+    switchEx
+    filesort
+    scriptfind
     input
 
 ***-If no arguments are given the 'input' feature is executed by default***
