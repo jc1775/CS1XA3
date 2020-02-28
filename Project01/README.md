@@ -186,7 +186,7 @@ ___
 
 #### Description:
 
-<switchEx> This feature finds all files of type '/sh' and creates a 'permission.log' file. It then prompts the user to either 'change' or 'restore' file permissions. If 'change' is chosen then all current permissions are saved into 'permission.log' and then gives any user who currently has write permissions executable permissions. If restore is chosen, all files are restored to their original permissions.
+<switchEx> This feature finds all files of type '.sh' and creates a 'permission.log' file. It then prompts the user to either 'change' or 'restore' file permissions. If 'change' is chosen then all current permissions are saved into 'permission.log' and then gives any user who currently has write permissions executable permissions. If restore is chosen, all files are restored to their original permissions.
 
 #### Execution:
 
