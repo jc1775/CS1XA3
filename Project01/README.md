@@ -290,7 +290,7 @@ ___
 ### 2. Script Finder
 #### Description:
 
-<scriptfind> This feature will recurse through a directory and all subdirectories, finding all script files based on their shebangs, it will copy all scripts into a 'Script' folder sorted into subdirectories based on the interpreter required to run each script. This feature will also give an option to mass change the permissions of each file type in the '/Script' directory.
+<scriptfind> This feature will recurse through a directory and all subdirectories, finding all script files based on their shebangs, it will copy all scripts into a 'Script' folder sorted into subdirectories based on the interpreter required to run each script. This feature will also give an option to mass change the permissions of each file type in the '/Script' directory. When running 'change' the user is prompted for input as to how to change the permissions for each script, this can be inputted in the usual manner for 'chmod' with +/- w/r/x
 
 #### Execution:
 

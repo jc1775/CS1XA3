@@ -152,6 +152,7 @@ switchEx() {
             echo "$res is not a command in this feature"
         fi
     done
+    unset IFS
 }
 
 backupDelRest(){
@@ -223,6 +224,7 @@ backupDelRest(){
             echo "$res is not a command in this feature."
         fi 
     done
+    unset IFS
 }
 
 filesort() {
@@ -549,7 +551,7 @@ scriptfind() {
                 if ! [ -f "$heirarchy/Scripts/$interpreter/$fileName" ] ; then
                     cp "$file" "$heirarchy/Scripts/$interpreter"
                     if [ $? -eq "0" ] ; then
-                    echo "Script: $fileName found and coppied into $heirarchy/Scripts/$interpreter"
+                    echo "Script: $fileName found and copied into $heirarchy/Scripts/$interpreter"
                     fi
                 else
                     echo "$fileName already exists in $heirarchy/Scripts/$interpreter"
@@ -606,6 +608,7 @@ scriptfind() {
             echo "$res is not a command in this feature"
         fi
     done
+    unset IFS
 }
 main(){
     if [ $# -gt 0 ] ; then
