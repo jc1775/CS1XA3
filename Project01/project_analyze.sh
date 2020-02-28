@@ -544,7 +544,7 @@ scriptfind() {
             fileList="$( grep -l "#!" $(find -path "$heirarchy/Scripts" -prune -o -type f | grep -v "/Scripts" ))"
             for file in $fileList ; do
                 interpreter="$( head -1 $file | rev | cut -d "/" -f 1 | rev )"
-                interpreter="$(sed 's/\r$//' <<< "$interpreter")" #Removes DOS character
+                interpreter="$(sed 's/\r$//' <<< "$interpreter")" #Removes DOS characters
                 fileName="$(echo $file | rev | cut -d "/" -f 1 | rev)"
                 if ! [ -d "$heirarchy/Scripts/$interpreter" ] ; then
                     mkdir "$heirarchy/Scripts/$interpreter"

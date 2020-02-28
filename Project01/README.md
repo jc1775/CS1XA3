@@ -83,7 +83,7 @@ ___
 ### 2. File Type Count
 #### Description:
 
-<filecount> This feature prompts the user to input the intended file extention (i.e txt, pdf, py, .sh, etc...) and proceeds to count the number of files within the working directory and all subdirectoies with said extention and outputs the result. Note that extentions can be entered either as '.extentionname' or 'extentionname', the feature works in either case.
+<filecount> This feature prompts the user to input the intended file extention (i.e txt, pdf, py, .sh, etc...) and proceeds to count the number of files within the working directory and all subdirectoies with said extention and outputs the result. Note that extensions can be entered either as '.extentionname' or 'extentionname', the feature works in either case.
 
 #### Execution:
 
