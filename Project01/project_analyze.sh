@@ -131,6 +131,9 @@ switchEx() {
             unset IFS
             echo "Complete"
         elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
+            if ! [ -f "$heirarchy/permissions.log" ] ; then
+                echo "ERROR! 'permissions.log' missing!"
+            fi
             IFS=$'\n'
             for file in $executables ; do
                 permissions="$(grep -E "$file$" "$heirarchy/permissions.log" | cut -c 2-4)"
@@ -165,8 +168,7 @@ backupDelRest(){
                 fi
                 mkdir "$heirarchy/backup"
                 touch "$heirarchy/backup/restore.log"
-                # find -type f | grep -E "$backupType$" > "$heirarchy/backup/restore.log"
-                files="$(find -type f | grep -E "$backupType$")"
+                files="$(find -type f | grep -E "$backupType$" | grep -vE "*/.git/*")"
                 IFS=$'\n'
                 
                 for file in $files; do
@@ -514,7 +516,7 @@ filesort() {
             elif [ $type = "ext" ] || [ $type = "Ext" ] ; then
                 extSort
             else
-                echo "$type is not an option"             
+                echo "$type is not a command in this feature"             
             fi
         done
     done
@@ -525,6 +527,9 @@ filesort() {
 scriptfind() {
     echo "Please enter 'find' to find scripts and/or 'change' to change permissions"
     read response
+    if [ "$response" = "return" ] ; then
+        return
+    fi
     
     for res in $response ; do
         if [ "$res" = "find" ] || [ "$res" = "Find" ] ; then
@@ -597,6 +602,8 @@ scriptfind() {
                     done
                 fi
             done
+        else
+            echo "$res is not a command in this feature"
         fi
     done
 }

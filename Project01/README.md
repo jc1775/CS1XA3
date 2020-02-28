@@ -175,28 +175,40 @@ Restore:
 
 #### Note:
 
-***-This feature does not ignore hidden files or hidden folders***
+***-This feature does not ignore hidden files or hidden folders. HOWEVER it does ignore the /.git directory***
 ___
 
 ### 5. Switch to Executable
 
 #### Description:
 
-<switchEx> abc
+<switchEx> This feature finds all files of type '/sh' and creates a 'permission.log' file. It then prompts the user to either 'change' or 'restore' file permissions. If 'change' is chosen then all current permissions are saved into 'permission.log' and then gives any user who currently has write permissions executable permissions. If restore is chosen, all files are restored to their original permissions.
 
 #### Execution:
 
-Input:
+Change:
 
-    abc
+    ./CS1XA3/Project01/project_analyze.sh switchEx
+    >>  Enter 'change' to allow users with write permissions to execute files, or 'restore' to revert back to original permissions.
+    change
+    >>  Permission for 'file1.sh' changed!
+        Permission for 'file2.sh' changed!
+        ...
+        Complete
 
-Example Output:
+Restore:
 
-    abc
+    ./CS1XA3/Project01/project_analyze.sh switchEx
+    >>  Enter 'change' to allow users with write permissions to execute files, or 'restore' to revert back to original permissions.
+    restore
+    >>  Permission for 'file1.sh' restored!
+        Permission for 'file2.sh' restored!
+        ...
+        Complete
 
-#### Reference:
- 
-some code was taken from 
+#### Alternate Outcomes:
+
+"ERROR! 'permissions.log' missing!" - This occurs during a restore if the permissions.log file was removed
 ___
 ___
 ## Custom Features
@@ -211,13 +223,13 @@ ___
 
 Input:
 
-    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    ./CS1XA3/Project01/project_analyze.sh filesort
 
 Example Output:
 
 Tag Sort:
 
-    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    ./CS1XA3/Project01/project_analyze.sh filesort
     >> How would you like to sort?
     tag
     >> What directories would you like to sort? Seperate directories with a ';'
@@ -233,7 +245,7 @@ Tag Sort:
 
 Extention Sort:
 
-    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    ./CS1XA3/Project01/project_analyze.sh filesort
     >> How would you like to sort?
     ext
     >> What directories would you like to sort? Seperate directories with a ';'
@@ -248,7 +260,7 @@ Extention Sort:
 
 Sort All:
 
-    ./CS1XA3/Project01/project_analyze.sh backupDelRest
+    ./CS1XA3/Project01/project_analyze.sh filesort
     >> How would you like to sort?
     all
     >> What directories would you like to sort? Seperate directories with a ';'
@@ -271,9 +283,9 @@ Sort All:
 
 "Would you like to replace folder/nameProp with file ?\[y/n] Or would you like to add a duplicate of file ?\[d]" - This occurs when a file already exists during tag sort or ext sort allowing the user to choose between replacing the file, adding a duplicate, or keeping the file
 
-#### Reference:
+#### Note:
  
-some code was taken from 
+***When enter directories containing blank spaces DO NOT use quotations: Do- this folder has spaces/anotherfolder Don't- "this foler has spaces/anotherfolder"***
 ___
 ### 2. Script Finder
 #### Description:
@@ -282,15 +294,37 @@ ___
 
 #### Execution:
 
-Input:
+Find:
 
-    some code
+    ./CS1XA3/Project01/project_analyze.sh scriptfind
+    >>  Please enter 'find' to find scripts and/or 'change to change permissions
+    find
+    >>  Script: 'file1.sh' found and copied into ./Scripts.bash
+        Script: 'file2.sh' found and copied into ./Scripts.bash
+        'file1.sh' already exists in ./Scripts/bash
+         Would you like to replace the file in: ./Scripts/bash ?[y/n] Or would you like create a duplicate?[d]
+    d
+    >>  Processing file duplication for 'file1.sh' ...
+        Script 'file1.sh' copied into ./Scripts/bash as <parentfolder>file1.sh
 
-Example Output:
 
->some output
+    
 
-#### Reference:
+Change:
+
+    ./CS1XA3/Project01/project_analyze.sh scriptfind
+    >>  Please enter 'find' to find scripts and/or 'change to change permissions
+    change
+    >>  Which scripts would you like to change the permissions of? *Case sensitive
+    python3
+    >>  How would you like to change the permissions of ALL python3 files?
+        +wrx
+    >>  Permissions for file1.py change succesfully. New permissions: -rwxrwxrwx
+        Permissions for file2.py change succesfully. New permissions: -rwxrwxrwx
+#### Alternate Outcomes:
  
-some code was taken from 
+rm: remove write-protected regular file 'somefile1.sh'? - This occurs if the files currently in the '/Script' directory are write protected, user is asked for conformation on deletion
+
+ "ERROR: There are no 'filetype' scripts to change!" - This occurs if there is no directory for files of type 'filetype'
+
 ___
