@@ -66,7 +66,7 @@ input() {
 
 fixme(){
 
-    searchterm='FIXME'
+    searchterm='#FIXME'
     outputfile="$heirarchy/fixme.log"
     if [ -e "$outputfile" ] ; then
         rm "$outputfile"
