@@ -1,0 +1,165 @@
+body {
+    background-color: black;
+    align-items: center;
+    margin: 0%;
+}
+.header_container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 93%;
+    text-align: center;
+}
+
+.header_container p{
+    position: sticky;
+    font-size: 300%;
+    top: 70%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    color:white;
+}
+
+#title {
+    font-style: unset;
+    top: 10%;
+    position: relative;
+
+}
+
+#quote {
+    font-size: 200%;
+}
+.backgroundimg{
+    background-image: url("images/header.jfif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: black;
+    z-index: -1;
+    position: sticky;
+    top: 0;
+    height: 93%;
+}
+
+.menu_container{
+    z-index: 1;
+    position: sticky;
+    top: 5%;
+    width: 100%;
+    height: 7%;
+}
+
+.menubtn {
+    z-index: 1;
+    width: 10%;
+    height: 100%;
+    background-image: url("images/3dot.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    cursor: pointer;
+}
+
+.menu {
+    background-color: rgba(126, 124, 124, 0.342);
+    position: absolute;
+    padding-left: 10%;
+    left: 0%;
+    width: 90%;
+    height: 100%;
+    text-align: center;
+}
+
+.menu .item {
+    background-image: radial-gradient(white,grey);
+    border: 0;
+    border-radius: 10%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 0.25%;
+    height: 90%;
+    width: 20%;
+    max-width: 250px;
+    align-self: center;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-variant: small-caps;
+    font-style: oblique;
+    font-size: 150%;
+}
+
+.item:hover {
+    box-shadow: 0 5px 15px yellow;
+    transform: scale(1.01, 1.01);
+  }
+.main_container{
+    background-color: lightgrey;
+    width: 100%;
+    height: auto;
+    opacity: 95%;
+    text-align: center;
+}
+.postBox {
+    background-color: rgb(128, 119, 119);
+    margin-bottom: 5%;
+    width: 70%;
+    margin-left: 15%;
+    position: relative;
+    height: 15%;
+}
+
+.postBox:hover{
+    transition-duration: 0.5s;
+    transform: scale(1.05, 1.05);
+}
+.arrow {
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+
+}
+
+.arrow span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    border-bottom: 5px solid;
+    border-right: 5px solid;
+    border-color: white;
+    animation: arrow 2s infinite;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: -0.2;
+}
+
+.arrow span:nth-child(3) {
+    animation-delay: -0.4;
+}
+
+@keyframes arrow {
+    00% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-5%, -5%);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(120%, 120%);
+    }
+}
+
+.blackbox {
+    position: absolute;
+    background-color: black;
+    top: 25%;
+    width: 100%;
+    height: 93%;
+}
