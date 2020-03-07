@@ -4,6 +4,7 @@ $(document).ready(function () {
     $("div.scrollTop").hide();
     $("#projects").css("height", "0");
     var files = ['projects/twittersent.html', 'projects/test2.html', 'projects/test3.html','projects/test4.html','projects/bashproject1.html', 'projects/test3.html', 'projects/test3.html', 'projects/test3.html', 'projects/test3.html'];
+    function cardMaker(){
     files.forEach(function (item) {
         $.get(item, null, function (data) {
             var result = $(data);
@@ -19,6 +20,8 @@ $(document).ready(function () {
             $("#projects").css("height", $("div.postBox").height() * (($("div.postBox").length / 4) + 2));
         });
     })
+    }
+    cardMaker()
     setTimeout(function(){
         window.scrollTo(0, 0);
         loadRemove()
