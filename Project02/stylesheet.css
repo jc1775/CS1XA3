@@ -2,7 +2,11 @@ body {
     background-color: black;
     align-items: center;
     margin: 0%;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Bubbler One';
+    font-size: 24px;
 }
+
 .header_container {
     position: absolute;
     top: 0;
@@ -11,42 +15,121 @@ body {
     text-align: center;
 }
 
-.header_container p{
+.header_container p {
     position: sticky;
-    font-size: 300%;
     top: 70%;
-    font-family: Arial, Helvetica, sans-serif;
     font-style: italic;
-    color:white;
+    color: white;
 }
 
 #title {
+    z-index: 1;
     font-style: unset;
     top: 10%;
     position: relative;
 
 }
 
-#quote {
-    font-size: 200%;
+#projects{
+    min-height: 300px;
 }
-.backgroundimg{
+#quote {
+    font-family: 'Calligraffitti';
+    font-size: 130%;
+}
+
+#photoofme {
+    border-radius: 50%;
+    width: 30%;
+    max-width: 250px;
+    margin: 0;
+    float: none;
+}
+ 
+#aboutme {
+    overflow: visible;
+    background-color: transparent;
+    color: white;
+    height: auto;
+    max-height: none
+}
+
+#aboutBlock {
+    color: white;
+}
+
+
+.aboutBox {
+    position: relative;
+    background-color: darkgray;
+    opacity: 80%;
+    width: 100%;
+    height: auto;
+    color: black;
+    text-align: center;
+}
+
+.aboutBox .contentBox{
+    max-width: 800px;
+    display: inline-block
+}
+
+.aboutBox h1 {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+}
+.contentBox h3 {
+    position: relative;
+    left: -350px;
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 0;
+
+}
+
+.contentBox p {
+    margin: 0;
+    max-width: 800px;
+    text-align: justify
+}
+
+.contentBox ul{
+    text-align: justify
+}
+
+.contentBox itemBox{
+    width: 100%;
+    height: 100%;
+}
+
+.itemBox .header{
+    height: 40px
+}
+.itemBox .year{
+    position: relative;
+    text-align: end;
+    top: -40;
+}
+.backgroundimg {
     background-image: url("images/header.jfif");
     background-repeat: no-repeat;
     background-position: center;
     background-color: black;
-    z-index: -1;
+    z-index: -2;
     position: sticky;
     top: 0;
     height: 93%;
 }
 
-.menu_container{
+.menu_container {
     z-index: 1;
     position: sticky;
     top: 5%;
     width: 100%;
     height: 7%;
+    text-align: center;
 }
 
 .menubtn {
@@ -59,60 +142,142 @@ body {
     background-repeat: no-repeat;
     position: absolute;
     cursor: pointer;
+    left: 0%;
 }
 
 .menu {
     background-color: rgba(126, 124, 124, 0.342);
-    position: absolute;
+    position: relative;
     padding-left: 10%;
     left: 0%;
-    width: 90%;
     height: 100%;
+    max-height: auto;
     text-align: center;
 }
 
-.menu .item {
-    background-image: radial-gradient(white,grey);
+.item {
+    display: inline-block;
+    position: relative;
+    top: 0%;
+    background-color: transparent;
     border: 0;
     border-radius: 10%;
-    margin-left: 1%;
-    margin-right: 1%;
+    margin-left: 0px;
+    margin-right: 50px;
     margin-top: 0.25%;
-    height: 90%;
-    width: 20%;
-    max-width: 250px;
-    align-self: center;
+    height: 100%;
+    width: auto;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-variant: small-caps;
+    font-family: 'Bubbler One';
     font-style: oblique;
-    font-size: 150%;
+    font-weight: bolder;
+    font-size: 7vmin;
 }
 
 .item:hover {
-    box-shadow: 0 5px 15px yellow;
+    box-shadow: 0 5px 15px black;
     transform: scale(1.01, 1.01);
-  }
-.main_container{
-    background-color: lightgrey;
+}
+
+.main_container {
+    background-color: white;
     width: 100%;
     height: auto;
     opacity: 95%;
     text-align: center;
-}
-.postBox {
-    background-color: rgb(128, 119, 119);
-    margin-bottom: 5%;
-    width: 70%;
-    margin-left: 15%;
-    position: relative;
-    height: 15%;
+    text-align: center;
 }
 
-.postBox:hover{
-    transition-duration: 0.5s;
-    transform: scale(1.05, 1.05);
+.pageBlock {
+    background-color: rgb(56, 50, 50);
+    width: 100%;
+    min-height: 50%;
+    height: auto;
 }
+
+.blockOptions {
+    z-index: 1;
+    position: sticky;
+    top: 12%;
+    width: 90%;
+    background-color: rgba(126, 124, 124, 0.342);
+    opacity: 50%;
+    min-height: 5%;
+}
+
+.blockOptionsbtn {
+    position: relative;
+    height: 100%;
+    font-weight: bold;
+    background-color: transparent;
+    border-radius: 20%;
+    margin-left: 5%;
+    cursor: pointer;
+    font-size: 150%;
+}
+
+.blockOptionsbtn:hover {
+    box-shadow: 0 5px 15px black;
+    transform: scale(1.01, 1.01);
+}
+
+.postBox {
+    background-color: darkgray;
+    box-shadow: white;
+    border-radius: 5%;
+    opacity: 80%;
+    width: 20%;
+    max-width: 200px;
+    min-height: 200px;
+    height: 10%;
+    color: black;
+    float: left;
+    margin: 10px;
+}
+
+.postBox .title {
+    position: relative;
+    top: 0;
+    width: 100%;
+    font-size: 15px;
+    max-height: 20%;
+    font-weight: bolder;
+}
+
+.postBox .content {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.postBox:hover {
+    opacity: 100%;
+    transition-duration: 0.5s;
+    transform: scaleY(1.05);
+}
+
+.postBox .btnView {
+    position: relative;
+    background-color: lightgray;
+    top: 5%;
+    width: 100%;
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 20px;
+
+}
+
+.postBox .btnView:hover {
+    background-color: white;
+    transform: scale(1.01);
+}
+
 .arrow {
     position: absolute;
     left: 50%;
@@ -120,6 +285,7 @@ body {
     transform: translate(-50%, -50%);
 
 }
+
 
 .arrow span {
     display: block;
@@ -159,7 +325,274 @@ body {
 .blackbox {
     position: absolute;
     background-color: black;
-    top: 25%;
+    top: 0%;
     width: 100%;
     height: 93%;
+}
+
+.fakeBackground {
+    position: absolute;
+    top: 100%;
+    opacity: 5%;
+    background-image: url(images/repeater.jpg);
+    background-repeat: repeat;
+    width: 100%;
+    height: auto;
+}
+
+.headerpic {
+    width: 100%;
+    object-fit: fill;
+    margin-left: 30%;
+    overflow: hidden;
+    position: relative;
+    border-color: transparent;
+    float: left;
+
+}
+
+.headerBlock {
+    background-color: transparent;
+    position: relative;
+    width: 100%;
+    height: 15%;
+    min-height: 100px;
+
+}
+
+.hTitle {
+    color: white;
+    height: 10%;
+    font-size: 50px;
+    margin-left: 5%
+}
+
+.headerblock p {
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 5%;
+    font-weight: bold;
+}
+
+.overlay {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 25, 0.342);
+    width: 100%;
+    height: 100%;
+}
+
+.overlay .window {
+    position: absolute;
+    z-index: 10;
+    top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    border-radius: 1%;
+    background-color: lightgray;
+    width: 70%;
+    height: 90%;
+    overflow: scroll;
+    resize: horizontal;
+}
+
+.window .popHeader{
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color:darkslategray;
+    font-size: 4vw;
+    font-family: Arial;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.popHeader h1{
+    font-size: 120%;
+    margin: 0;
+}
+
+.window .popContent{
+    height: auto;
+    width: auto;
+    font-size: 50%;
+    background-color: lightgray;
+    padding: 20px;
+}
+
+.window .close {
+    position: fixed;
+    top: 2%;
+    right: 12%;
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    color: red;
+    font-family: Arial;
+    font-weight: bolder;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.close:hover {
+    font-size: 130%;
+    transform: scale(1.01, 1.01);
+}
+
+.footer {
+    z-index: 1;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    text-align: center;
+}
+
+.footer .socialIcon {
+    cursor: pointer;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: inline-block;
+    width: 50px;
+    height: 45px;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1px;
+    border-radius: 50%;
+}
+
+.footer .socialIcon:hover {
+    transform: scale(1.05)
+}
+
+
+.graphPanel {
+    width: 100%;
+    height: auto;
+    text-align: center;
+
+}
+
+.graphPanel .skillGraph {
+    background-color: white;
+    width: 60%;
+    height: 15px;
+    margin-left: 20%;
+    margin-top: 2px;
+    border-radius: 5%;
+}
+
+.graphPanel p {
+    margin-top: 5px;
+    padding: 0;
+}
+
+.skillGraph .fill {
+    height: 100%;
+    background-color: darkslategray;
+    margin: 0;
+    padding: 0;
+}
+
+.blankdiv {
+    height: 50px;
+    width: 100%;
+    background-color: transparent;
+}
+
+.pageBlock .minimizer {
+    z-index: 1;
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    right: 2%;
+    cursor: pointer;
+    background-image: url(images/arrowdown.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.minimizer:hover {
+    transform: scale(1.05);
+}
+
+.loadingScreen{
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    background-color: lightgray;
+    position: fixed;
+    top: 0;
+    text-align: center;
+}
+
+.loadingScreen .animationBox{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    background-image: url("images/loading.gif");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 200px;
+}
+
+.codeBlock{
+    background-color: black;
+    color: white;
+    overflow: scroll;
+    width: 90%;
+    height: auto;
+    max-height: 700px;
+    margin-left: 80px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.scrollTop{
+    z-index: 5;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    background-image: url(images/arrowdown.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    transform: rotate(180deg);
+    opacity: 70%;
+}
+
+.scrollTop:hover{
+    opacity: 100%;
+    transform: rotate(180deg);
+}
+
+.button {
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    color: black;
+    font-weight: bolder;
+    background-color: lightgray;
+    margin-left: -25%;
+    width: 49%;
+    padding: 5px;
+    border-radius: 5%;
+    opacity: 90%;
+}
+
+.button:hover{
+    opacity: 100%;
+    transform: scale(1.05)
 }

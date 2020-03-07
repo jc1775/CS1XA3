@@ -1,0 +1,894 @@
+<div id="1775" class="title">BASH Project 01</div>
+<div class="type">bash</div>
+<div class="pic">images/bash.webp</div>
+<div class="starthere">
+<h1 id="cs-1xa3-project01-calarcoj">CS 1XA3 Project01 - calarcoj</h1>
+<h2 id="index-">Index:</h2>
+<ul>
+<li><a href="#usage">Usage</a><ul>
+<li><a href="#script-input">Script Input</a></li>
+</ul>
+</li>
+<li><a href="#features">Features</a><ul>
+<li><a href="#1-fixme-log">FIXME Log</a></li>
+<li><a href="#2-file-type-count">File Type Count</a></li>
+<li><a href="#3-file-size-list">File Size List</a></li>
+<li><a href="#4-backup-and-delete-/-restore">Backup and Delete / Restore</a></li>
+<li><a href="#5-switch-to-executable">Switch To Executable</a></li>
+</ul>
+</li>
+<li><a href="#custom-features">Custom Features</a><ul>
+<li><a href="#1-file-type-sort">File Type Sort</a></li>
+<li><a href="#2-script-finder">Script Finder</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="usage">Usage</h2>
+<p>Execute this script from project root with:</p>
+<pre><code>chmod +x CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span>
+./CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span> arg1 arg2 ...
+</code></pre><p>With possible arguments:</p>
+<pre><code>fixme
+filecount
+filesizelist
+<span class="hljs-keyword">backupDelRest
+</span><span class="hljs-keyword">switchEx
+</span>filesort
+<span class="hljs-keyword">scriptfind
+</span>input
+</code></pre><p><strong><em>-If no arguments are given the &#39;input&#39; feature is executed by default</em></strong></p>
+<h3 id="script-input-">Script Input:</h3>
+<p>This is an interactive script for selecting and running all other features. It prompts the user to input the name of the desired feature, and accepts multiple arguments at once executing them in the order listed. This script also contains a &#39;help&#39; menu which lists the name of all features and provides basic information on each one.</p>
+<h4 id="example-output-">Example Output:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze.<span class="hljs-keyword">sh</span>
+&gt;&gt; Which feature(s) would you like <span class="hljs-keyword">to</span> <span class="hljs-keyword">execute</span>? (Type <span class="hljs-string">'help'</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">a</span> <span class="hljs-keyword">list</span> of commands, <span class="hljs-string">'exit'</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">exit</span>):
+<span class="hljs-string">'some command(s)'</span>
+</code></pre><h4 id="unique-arguments-">Unique Arguments:</h4>
+<pre><code>help    -   Pulls up an interactive help menu with information on each feature
+<span class="hljs-keyword">exit</span>    -   Ends the script
+</code></pre><p><strong><em>-All features that prompt for user input accept &#39;return&#39; as an argument to return to feature selection</em></strong></p>
+<p><strong><em>-All features that prompt for user input accept multiple arguments</em></strong></p>
+<hr>
+<hr>
+<h2 id="features">Features</h2>
+<h3 id="1-fixme-log">1. FIXME Log</h3>
+<h4 id="description-">Description:</h4>
+<p><fixme> This feature searches through every file within the working directory and its subdirectories for files where the last line contains &#39;#FIXME&#39;. It creates or overwrites a file &#39;fixme.log&#39; containing the names and relative directories of all matching files, each to its own line.</p>
+<h4 id="execution-">Execution:</h4>
+<h4 id="input-">Input:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span> fixme
+</code></pre><h4 id="example-output-">Example Output:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze.<span class="hljs-keyword">sh</span> fixme
+&gt;&gt;  <span class="hljs-keyword">file</span>-<span class="hljs-keyword">to</span>-<span class="hljs-keyword">fix</span>-<span class="hljs-number">1</span>
+    <span class="hljs-keyword">file</span>-<span class="hljs-keyword">to</span>-<span class="hljs-keyword">fix</span>-<span class="hljs-number">2</span>
+    <span class="hljs-keyword">file</span>-<span class="hljs-keyword">to</span>-<span class="hljs-keyword">fix</span>-<span class="hljs-number">3</span>
+    <span class="hljs-keyword">file</span>-<span class="hljs-keyword">to</span>-<span class="hljs-keyword">fix</span>-<span class="hljs-number">4</span>
+    etc...
+</code></pre><h4 id="note-">Note:</h4>
+<p><strong><em>-This feature ignores the &#39;/.git&#39; directory</em></strong></p>
+<hr>
+<h3 id="2-file-type-count">2. File Type Count</h3>
+<h4 id="description-">Description:</h4>
+<p><filecount> This feature prompts the user to input the intended file extention (i.e txt, pdf, py, .sh, etc...) and proceeds to count the number of files within the working directory and all subdirectoies with said extention and outputs the result. Note that extensions can be entered either as &#39;.extentionname&#39; or &#39;extentionname&#39;, the feature works in either case.</p>
+<h4 id="execution-">Execution:</h4>
+<h4 id="input-">Input:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span> filecount
+</code></pre><h4 id="example-output-">Example Output:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze.<span class="hljs-keyword">sh</span> filecount
+&gt;&gt; What <span class="hljs-keyword">file</span> <span class="hljs-built_in">type</span> would you like <span class="hljs-keyword">to</span> <span class="hljs-built_in">count</span>?:
+<span class="hljs-string">'.some-extention'</span>
+&gt;&gt; Counting <span class="hljs-string">'.some-extention'</span>...
+<span class="hljs-string">'amount'</span>
+</code></pre><h4 id="note-">Note:</h4>
+<p><strong><em>-If no arguments are given, this feature will count ALL files</em></strong></p>
+<p><strong><em>-This feature ignores hidden directories and their contents</em></strong></p>
+<hr>
+<h3 id="3-file-size-list">3. File Size List</h3>
+<h4 id="description-">Description:</h4>
+<p><filesizelist> This feature lists all of the files within the working directory and subdirectories, it lists the sizes of the files in a human understood format and sorts them by said size from largest to smallest.</p>
+<h4 id="execution-">Execution:</h4>
+<h4 id="input-">Input:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span> filesizelist
+</code></pre><h4 id="example-output-">Example Output:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze.sh filesizelist
+&gt;&gt; <span class="hljs-number">100</span>K 'file<span class="hljs-number">-1</span>'    <span class="hljs-number">70</span>K 'file<span class="hljs-number">-4</span>'
+    <span class="hljs-number">90</span>K 'file<span class="hljs-number">-2</span>'    <span class="hljs-number">60</span>K 'file<span class="hljs-number">-5</span>'
+    <span class="hljs-number">80</span>K 'file<span class="hljs-number">-3</span>'    etc...
+</code></pre><h4 id="note-">Note:</h4>
+<p><strong><em>This feature ignores the &quot;/.git&quot; directory</em></strong></p>
+<hr>
+<h3 id="4-backup-and-delete-restore">4. Backup and Delete / Restore</h3>
+<h4 id="description-">Description:</h4>
+<p><backupDelRest> This feature prompts the user to either enter &#39;backup&#39; or &#39;restore&#39;.<br><br>&#39;Backup&#39;: If this is chosen the script proceeds to find all files in a directory and its subdirectories of type &#39;.tmp&#39;, copies them to a directory named &#39;/backup&#39;, saves a log of the original location to &#39;backup/backup.log&#39;, and deletes the originals.<br><br>&#39;Restore&#39;: If this is chosen the script will return all files in the &#39;/backup&#39; directory to their original location using the &#39;backup.log&#39; file.</p>
+<h4 id="execution-">Execution:</h4>
+<h4 id="input-">Input:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span> backupDelRest
+</code></pre><h4 id="example-output-">Example Output:</h4>
+<p>Backup:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.sh backupDelRest
+&gt;&gt;Enter <span class="hljs-string">'backup'</span> <span class="hljs-built_in">to</span> <span class="hljs-built_in">create</span> <span class="hljs-keyword">a</span> backup <span class="hljs-built_in">log</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">directory</span>, moving <span class="hljs-keyword">in</span> all <span class="hljs-string">'.tmp'</span> <span class="hljs-built_in">files</span>, <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> <span class="hljs-string">'restore'</span> <span class="hljs-built_in">to</span> reinstate <span class="hljs-built_in">files</span> <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> previous backup.
+backup
+&gt;&gt;  file1 backedup succesfully
+    file2 backedup succesfully
+    file3 already exists <span class="hljs-keyword">within</span> backup! Processing duplicate...
+    file3 backedup succesfully
+</code></pre><p>Restore:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.sh backupDelRest
+&gt;&gt;Enter <span class="hljs-string">'backup'</span> <span class="hljs-built_in">to</span> <span class="hljs-built_in">create</span> <span class="hljs-keyword">a</span> backup <span class="hljs-built_in">log</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">directory</span>, moving <span class="hljs-keyword">in</span> all <span class="hljs-string">'.tmp'</span> <span class="hljs-built_in">files</span>, <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> <span class="hljs-string">'restore'</span> <span class="hljs-built_in">to</span> reinstate <span class="hljs-built_in">files</span> <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> previous backup.
+restore
+&gt;&gt;  file1 restored succesfully!
+    file2 restored succesfully!
+    etc...
+</code></pre><h4 id="alternate-outcomes-">Alternate outcomes:</h4>
+<p>&quot;No new files to backup! Backup ended.&quot;  - This occurs when there is nothing to backup</p>
+<p>&quot;An error occurred during backup so file deletion did not occur&quot; - This occurs if there is an error in copying to the backup folder, original files will not be deleted.</p>
+<p>&quot;ERROR! &#39;filename&#39; does not exist in backup.&quot; - This occurs when a file in the backup log is no longer in the backup folder</p>
+<p>&quot;ERROR! restore.log does not exist!&quot; - This occurs when a restore is attempted with no restore.log file to pull information from</p>
+<h4 id="note-">Note:</h4>
+<p><strong><em>-This feature does not ignore hidden files or hidden folders. HOWEVER it does ignore the /.git directory</em></strong></p>
+<hr>
+<h3 id="5-switch-to-executable">5. Switch to Executable</h3>
+<h4 id="description-">Description:</h4>
+<p><switchEx> This feature finds all files of type &#39;.sh&#39; and creates a &#39;permission.log&#39; file. It then prompts the user to either &#39;change&#39; or &#39;restore&#39; file permissions. If &#39;change&#39; is chosen then all current permissions are saved into &#39;permission.log&#39; and then gives any user who currently has write permissions executable permissions. If restore is chosen, all files are restored to their original permissions.</p>
+<h4 id="execution-">Execution:</h4>
+<h4 id="input-">Input:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span> switchEx
+</code></pre><h4 id="example-output-">Example Output:</h4>
+<p>Change:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.<span class="hljs-keyword">sh</span> switchEx
+&gt;&gt;  Enter <span class="hljs-string">'change'</span> <span class="hljs-keyword">to</span> allow users with <span class="hljs-keyword">write</span> permissions <span class="hljs-keyword">to</span> <span class="hljs-keyword">execute</span> <span class="hljs-keyword">files</span>, <span class="hljs-built_in">or</span> <span class="hljs-string">'restore'</span> <span class="hljs-keyword">to</span> revert back <span class="hljs-keyword">to</span> original permissions.
+<span class="hljs-keyword">change</span>
+&gt;&gt;  Permission <span class="hljs-keyword">for</span> <span class="hljs-string">'file1.sh'</span> changed!
+    Permission <span class="hljs-keyword">for</span> <span class="hljs-string">'file2.sh'</span> changed!
+    ...
+    Complete
+</code></pre><p>Restore:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.<span class="hljs-keyword">sh</span> switchEx
+&gt;&gt;  Enter <span class="hljs-string">'change'</span> <span class="hljs-keyword">to</span> allow users with <span class="hljs-keyword">write</span> permissions <span class="hljs-keyword">to</span> <span class="hljs-keyword">execute</span> <span class="hljs-keyword">files</span>, <span class="hljs-built_in">or</span> <span class="hljs-string">'restore'</span> <span class="hljs-keyword">to</span> revert back <span class="hljs-keyword">to</span> original permissions.
+restore
+&gt;&gt;  Permission <span class="hljs-keyword">for</span> <span class="hljs-string">'file1.sh'</span> restored!
+    Permission <span class="hljs-keyword">for</span> <span class="hljs-string">'file2.sh'</span> restored!
+    ...
+    Complete
+</code></pre><h4 id="alternate-outcomes-">Alternate Outcomes:</h4>
+<p>&quot;ERROR! &#39;permissions.log&#39; missing!&quot; - This occurs during a restore if the permissions.log file was removed</p>
+<hr>
+<hr>
+<h2 id="custom-features">Custom Features</h2>
+<hr>
+<h3 id="1-file-type-sort">1. File Type Sort</h3>
+<h4 id="description-">Description:</h4>
+<p><filesort> This feature allows the user to sort through files within directories in various ways. The user can sort by extention, which will sort all files of a particular type into a directory named after the type. The user can sort by &#39;tag&#39; which will match each file with a name beginning with a name matching a current existing directory and copy them in. The user can sort &#39;all&#39; files which will subsequently get every type of extention which occurs at least twice and group them into directories based on the extention type, and then proceed to run a tag sort. The feature keeps a log of original locations in a directory named &#39;SORTEDlogs&#39;, each file type has its own .log file, as well as tag sort having its own file. </p>
+<h4 id="execution-">Execution:</h4>
+<p>Input:</p>
+<pre><code>./CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span> filesort
+</code></pre><p>Example Output:</p>
+<p>Tag Sort:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.sh filesort
+&gt;&gt; How would you like <span class="hljs-built_in">to</span> <span class="hljs-built_in">sort</span>?
+tag
+&gt;&gt; What <span class="hljs-built_in">directories</span> would you like <span class="hljs-built_in">to</span> <span class="hljs-built_in">sort</span>? Seperate <span class="hljs-built_in">directories</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">a</span> <span class="hljs-string">';'</span>
+directoryA;directoryB;directoryC/anotherDirectoryC
+&gt;&gt; How far would you like <span class="hljs-built_in">to</span> decend <span class="hljs-keyword">into</span> <span class="hljs-built_in">directory</span>: directoryA ?
+<span class="hljs-string">"someInteger"</span>
+&gt;&gt;Sorting inside directoryA ...
+&gt;&gt; Would you like <span class="hljs-built_in">to</span> <span class="hljs-built_in">delete</span> <span class="hljs-built_in">files</span> <span class="hljs-built_in">from</span> their original location?[y/n]
+n
+&gt;&gt;  TAG1file1 succesfully sorted <span class="hljs-keyword">into</span>: TAG1
+    TAG1file2 succesfully sorted <span class="hljs-keyword">into</span>: TAG1
+    TAG2file3 succesfully sorted <span class="hljs-keyword">into</span>: TAG2
+</code></pre><p>Extention Sort:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.sh filesort
+&gt;&gt; How would you like <span class="hljs-built_in">to</span> <span class="hljs-built_in">sort</span>?
+ext
+&gt;&gt; What <span class="hljs-built_in">directories</span> would you like <span class="hljs-built_in">to</span> <span class="hljs-built_in">sort</span>? Seperate <span class="hljs-built_in">directories</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">a</span> <span class="hljs-string">';'</span>
+directoryA;directoryB;directoryC/anotherDirectoryC
+&gt;&gt; How far would you like <span class="hljs-built_in">to</span> decend <span class="hljs-keyword">into</span> <span class="hljs-built_in">directory</span>: directoryA ?
+<span class="hljs-string">"someInteger"</span>
+&gt;&gt; What extention/s would you like <span class="hljs-built_in">to</span> <span class="hljs-built_in">sort</span>? Seperate <span class="hljs-keyword">with</span> <span class="hljs-string">':'</span>
+.someExtentionA;someExtentionB;.someExtentionC
+&gt;&gt;  Sorting .someExtentionA ...
+    file1.someExtentionA sucessfully sorted <span class="hljs-keyword">into</span> someExtentionA
+    file2.someExtentionA succesfully sorted <span class="hljs-keyword">into</span> someExtentionA
+</code></pre><p>Sort All:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.sh filesort
+&gt;&gt; How would you like <span class="hljs-built_in">to</span> <span class="hljs-built_in">sort</span>?
+all
+&gt;&gt; What <span class="hljs-built_in">directories</span> would you like <span class="hljs-built_in">to</span> <span class="hljs-built_in">sort</span>? Seperate <span class="hljs-built_in">directories</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">a</span> <span class="hljs-string">';'</span>
+directoryA;directoryB;directoryC/anotherDirectoryC
+&gt;&gt; How far would you like <span class="hljs-built_in">to</span> decend <span class="hljs-keyword">into</span> <span class="hljs-built_in">directory</span>: directoryA ?
+<span class="hljs-string">"someInteger"</span>
+&gt;&gt;  Sorting: .someExtentionA ...
+    file1.someExtentionA succesfully copied <span class="hljs-keyword">into</span> someExtentionA
+    file2.someExtentionA succesfully copied <span class="hljs-keyword">into</span> someExtentionA
+    Sorting: .someExtentionB ...
+    file1.someExtentionB succesfully copied <span class="hljs-keyword">into</span> someExtentionB
+    file2.someExtentionB succesfully copied <span class="hljs-keyword">into</span> someExtentionB
+    Tag sorting...
+</code></pre><h4 id="alternate-outcomes-">Alternate outcomes:</h4>
+<p>&quot;ERROR: $depth is not a number. Please enter an integer.&quot; - This occurs when the user inputs a non-integer when asked to input an integer for depth</p>
+<p>&quot;Processing file duplication for $file ...&quot; - When the same file already exists in a directory during an &#39;All&#39; sort the script proceeds to rename the copied file using the parent folder of the file</p>
+<p>&quot;Would you like to replace folder/nameProp with file ?[y/n] Or would you like to add a duplicate of file ?[d]&quot; - This occurs when a file already exists during tag sort or ext sort allowing the user to choose between replacing the file, adding a duplicate, or keeping the file</p>
+<h4 id="note-">Note:</h4>
+<p><strong><em>When enter directories containing blank spaces DO NOT use quotations: Do- this folder has spaces/anotherfolder Don&#39;t- &quot;this foler has spaces/anotherfolder&quot;</em></strong></p>
+<hr>
+<h3 id="2-script-finder">2. Script Finder</h3>
+<h4 id="description-">Description:</h4>
+<p><scriptfind> This feature will recurse through a directory and all subdirectories, finding all script files based on their shebangs, it will copy all scripts into a &#39;Script&#39; folder sorted into subdirectories based on the interpreter required to run each script. This feature will also give an option to mass change the permissions of each file type in the &#39;/Script&#39; directory. When running &#39;change&#39; the user is prompted for input as to how to change the permissions for each script, this can be inputted in the usual manner for &#39;chmod&#39; with +/- w/r/x</p>
+<h4 id="execution-">Execution:</h4>
+<h4 id="input-">Input:</h4>
+<pre><code>./CS1XA3/Project01/project_analyze<span class="hljs-selector-class">.sh</span> scriptfind
+</code></pre><h4 id="example-output-">Example Output:</h4>
+<p>Find:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.sh scriptfind
+&gt;&gt;  Please enter <span class="hljs-symbol">'find</span>' <span class="hljs-keyword">to</span> find scripts <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> <span class="hljs-symbol">'change</span> <span class="hljs-keyword">to</span> change permissions
+find
+&gt;&gt;  Script: <span class="hljs-symbol">'file1</span>.sh' found <span class="hljs-keyword">and</span> copied into ./Scripts.bash
+    Script: <span class="hljs-symbol">'file2</span>.sh' found <span class="hljs-keyword">and</span> copied into ./Scripts.bash
+    <span class="hljs-symbol">'file1</span>.sh' already exists <span class="hljs-keyword">in</span> ./Scripts/bash
+     Would you like <span class="hljs-keyword">to</span> replace the <span class="hljs-keyword">file</span> <span class="hljs-keyword">in</span>: ./Scripts/bash ?[y/n] <span class="hljs-keyword">Or</span> would you like create a duplicate?[d]
+d
+&gt;&gt;  Processing <span class="hljs-keyword">file</span> duplication <span class="hljs-keyword">for</span> <span class="hljs-symbol">'file1</span>.sh' ...
+    Script <span class="hljs-symbol">'file1</span>.sh' copied into ./Scripts/bash as &lt;parentfolder&gt;file1.sh
+</code></pre><p>Change:</p>
+<pre><code>./CS1XA3/Project01/project_analyze.sh scriptfind
+&gt;&gt;  Please enter <span class="hljs-symbol">'find</span>' <span class="hljs-keyword">to</span> find scripts <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> <span class="hljs-symbol">'change</span> <span class="hljs-keyword">to</span> change permissions
+change
+&gt;&gt;  Which scripts would you like <span class="hljs-keyword">to</span> change the permissions <span class="hljs-keyword">of</span>? *<span class="hljs-keyword">Case</span> sensitive
+python3
+&gt;&gt;  How would you like <span class="hljs-keyword">to</span> change the permissions <span class="hljs-keyword">of</span> <span class="hljs-keyword">ALL</span> python3 files?
+    +wrx
+&gt;&gt;  Permissions <span class="hljs-keyword">for</span> file1.py change succesfully. <span class="hljs-keyword">New</span> permissions: -rwxrwxrwx
+    Permissions <span class="hljs-keyword">for</span> file2.py change succesfully. <span class="hljs-keyword">New</span> permissions: -rwxrwxrwx
+</code></pre><h4 id="alternate-outcomes-">Alternate Outcomes:</h4>
+<p>rm: remove write-protected regular file &#39;somefile1.sh&#39;? - This occurs if the files currently in the &#39;/Script&#39; directory are write protected, user is asked for conformation on deletion</p>
+<p> &quot;ERROR: There are no &#39;filetype&#39; scripts to change!&quot; - This occurs if there is no directory for files of type &#39;filetype&#39;</p>
+<hr>
+    
+<div class="codeBlock">
+<body><pre style="word-wrap: break-word; white-space: pre-wrap;">#!/bin/bash
+
+
+heirarchy="$( echo "$0" | rev | cut -d "/" -f 2- | rev)"
+arguments="$@"
+
+input() {
+    functionlist="\n1. fixme\n2. filecount\n3. filesizelist\n4. backupDelRest\n5. switchEx\n6. filesort\n7. scriptfind"
+
+    echo -e "\e[1mWhich feature(s) would you like to execute? (Type 'help' for a list of commands, 'exit' to exit):\e[0m "
+    read answer
+
+    while [ "$answer" != "exit" ] ; do
+        for ans in $answer ; do
+            if [ "$ans" = "help" ] ; then
+                echo -e "\e[100m\e[33m\e[4mList of Commands\e[1m\e[24m$functionlist\e[0m"
+                while [ "$answer" != "return" ] ; do
+                    echo -e "\e[1mEnter 'return' to return to command selection, or type the name of a function you would like further information on:\e[0m "
+                    read answer
+                    for ans in $answer ; do
+                        if [ $ans = "filesizelist" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '&lt;filesizelist&gt;' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "fixme" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '&lt;fixme&gt;' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "filecount" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '&lt;filecount&gt;' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "backupDelRest" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '&lt;backupDelRest&gt;' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "switchEx" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '&lt;switchEx&gt;' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "filesort" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '&lt;filesort&gt;' "$heirarchy/README.md")\e[0m"
+                         elif [ $ans = "scriptfind" ] ; then
+                            echo -e "\e[1m\e[100m$(grep '&lt;scriptfind&gt;' "$heirarchy/README.md")\e[0m"
+                        elif [ $ans = "return" ] ; then
+                            answer="return"
+                        else
+                            echo "$ans is not a function"
+                        fi
+                    done
+                done
+
+            elif [ $ans = "fixme" ] ; then
+                fixme
+            elif [ $ans = "filecount" ] ; then
+                filecount
+            elif [ $ans = "filesizelist" ]  ; then
+                filesizelist
+            elif [ $ans = "backupDelRest" ] ; then
+                backupDelRest
+            elif [ $ans = "switchEx" ] ; then
+                switchEx
+            elif [ $ans = "filesort" ] ; then
+                filesort
+            elif [ $ans = "scriptfind" ] ; then
+                scriptfind
+            else
+                echo "$ans"" is not a function"
+            fi
+        done
+        echo -e "\e[1mWhich feature(s) would you like to execute? (Type 'help' for a list of commands, 'exit' to exit):\e[0m "
+        read answer
+    done
+    echo "Goodbye!"
+}
+
+fixme(){
+
+    searchterm='#FIXME'
+    outputfile="$heirarchy/fixme.log"
+    if [ -e "$outputfile" ] ; then
+        rm "$outputfile"
+    fi
+    touch "$outputfile"
+    find . -wholename "*/.git" -prune -o -type f -print0 | while IFS= read -d '' file
+    do
+        if tail -1 "$file" | grep -q "$searchterm" ; then
+            echo "$file" &gt;&gt; "$outputfile"
+        fi
+    done
+    unset IFS  
+    cat "$outputfile"
+
+}
+
+filecount(){
+
+    echo -e "\e[1mWhat file type would you like to count?:\e[0m "
+    read search
+    for sea in $search ; do
+        if [ $sea = "return" ] ; then
+            break
+        else
+            searchterm='.'$(echo "$sea" | cut -d "." -f 2)                                              #Takes the inputted string, removes a period if one is present, then adds a period,
+            echo 'Counting '$searchterm'...'                                                            #this ensures that the filetype is always in the form '.extention'
+            count=$(find -path "$heirarchy/.*" -prune -o -type f | grep -E "$searchterm$" | wc -l)      #Finds all files in folders that are not hidden 
+            echo "$count"                                                                               #and uses wc -l to count each new line with one file per line 
+        fi 
+    done                                                                                             
+}                                                                                                   
+
+filesizelist(){
+    IFS=$'\n'
+    ls -ashS $(find -type f | grep -v "/.git")                                                  #Finds all files in the directory and all subdirectories then, lists them all in human understood
+    unset IFS                                                                                   #sizing and sorts this list from greatest to smallest
+}
+
+switchEx() {
+
+    executables="$(find -type f | grep -E ".sh$")"
+
+    if ! [ -f "$heirarchy/permissions.log" ] ; then
+        touch "$heirarchy/permissions.log"
+    fi
+
+    echo -e "\e[1mEnter 'change' to allow users with write permissions to execute files, or 'restore' to revert back to original permissions.\e[0m" 
+    read response
+    for res in $response ; do
+        if [ $res = "change" ] || [ $res = "Change" ] ; then
+            IFS=$'\n'
+            ls -l $executables &gt; "$heirarchy/permissions.log"
+            for exec in $executables ; do
+                if [ "$(ls -l "$exec" | cut -c 3)" = "w" ] ; then
+                    chmod u+x "$exec"
+                    if [ $? -eq 0 ] ; then
+                        echo "Permission for "$exec" changed!"
+                    else
+                        echo "There was an ERROR changing permissions for $exec!"
+                    fi
+                fi
+            done
+            unset IFS
+            echo "Complete"
+        elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
+            if ! [ -f "$heirarchy/permissions.log" ] ; then
+                echo "ERROR! 'permissions.log' missing!"
+            fi
+            IFS=$'\n'
+            for file in $executables ; do
+                permissions="$(grep -E "$file$" "$heirarchy/permissions.log" | cut -c 2-4)"
+                chmod +"$permissons" "$file"
+                if [ $? -eq 0 ] ; then
+                        echo "Permissions for $file restored!"
+                else
+                    echo "There was an ERROR restoring permissions for $exec!"
+                fi    
+            done
+            unset IFS
+            echo "Complete"
+        elif [ $res = "return" ] ; then
+            break
+        else
+            echo "$res is not a command in this feature"
+        fi
+    done
+    unset IFS
+}
+
+backupDelRest(){
+
+    backupType=".tmp"
+    echo -e "\e[1mEnter 'backup' to create a backup log and directory, moving in all '.tmp' files, and/or 'restore' to reinstate files from the previous backup.\e[0m"
+    read response
+
+    for res in $response ; do
+        if [ $res = "backup" ] || [ $res = "Backup" ] ; then
+            if find -path "$heirarchy/backup" -prune -o -type f | grep -qE "$backupType$" ; then
+                if [ -d "$heirarchy/backup" ] ; then
+                    rm -r "$heirarchy/backup"
+                fi
+                mkdir "$heirarchy/backup"
+                touch "$heirarchy/backup/restore.log"
+                files="$(find -type f | grep -E "$backupType$" | grep -vE "*/.git/*")"
+                IFS=$'\n'
+                
+                for file in $files; do
+                    nameProp="$(echo $file | rev | cut -d "/" -f 1 | rev)"
+                    parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                    if ! [ -f "$heirarchy/backup/$nameProp" ] ; then
+                        cp "$file" "$heirarchy/backup"
+                        if [ $? -eq 0 ] ; then
+                            rm "$file"
+                            echo "$file backedup succesfully"
+                            echo "ORIGINAL&gt;$file&gt;ORIGINAL NEW&gt;$heirarchy/backup/$nameProp&gt;NEW" &gt;&gt; "$heirarchy/backup/restore.log"
+                        else
+                            echo "An ERROR occurred during backup, file was not deleted"
+                        fi
+                    else
+                        echo "$file already exists within $heirarchy/backup! Processing duplicate..."
+                        cp "$file" "$heirarchy/backup/$parentFolder-$nameProp"
+                        if [ $? -eq "0" ] ; then
+                            rm "$file"
+                            echo "$file backedup succesfully"
+                            echo "ORIGINAL&gt;$file&gt;ORIGINAL NEW&gt;$heirarchy/backup/$parentFolder-$nameProp&gt;NEW" &gt;&gt; "$heirarchy/backup/restore.log"
+                        else
+                            echo "An ERROR occurred during backup, file was not deleted"
+                        fi
+                    fi
+                done
+            else
+                echo "No new files to backup! Backup did not occur."
+            fi
+                unset IFS
+        elif [ $res = "restore" ] || [ $res = "Restore" ] ; then
+            IFS=$'\n'
+            if [ -f "$heirarchy/backup/restore.log" ] ; then
+                for fileInfo in $(cat "$heirarchy/backup/restore.log") ; do
+                    currentName="$(echo $fileInfo | rev | cut -d "&gt;" -f 2 | rev)"
+                    origName="$(echo $fileInfo | cut -d "&gt;" -f 2)"
+                    properName="$(echo $currentName | rev | cut -d "/" -f 1 | rev)"
+                    if ! [ -f "$heirarchy/backup/$properName" ] ; then
+                        echo "ERROR! $currentName does not exist in backup."
+                    else
+                        cp "$currentName" "$origName"
+                        echo "$origName restored succesfully"
+                    fi
+                done
+            else
+                echo "ERROR! restore.log does not exist!"
+            fi
+            unset IFS
+        elif [ $res = "return" ] ; then
+            break
+        else
+            echo "$res is not a command in this feature."
+        fi 
+    done
+    unset IFS
+}
+
+filesort() {
+
+    echo "How would you like to sort?"
+    read sorttype
+    if [ $sorttype = "return" ] || [ $sorttype = "Return" ] ; then
+        return
+    fi
+    echo "Which directories would you like to sort? Seperate directories with a ';'"
+    read directory
+    directory="$(sed 's/;/\n/g' &lt;&lt;&lt; $directory )"
+
+    IFS=$'\n'
+    for type in $sorttype ; do
+        for dir in $directory ; do
+            if ! [ -d "$dir" ] ; then
+                echo "$dir is not a directory!"
+                continue
+            fi
+
+            if ! [ -d "$dir/SORTEDlogs" ] ; then
+                mkdir "$dir/SORTEDlogs"
+            fi
+
+            echo "How far would you like to decend into the directory: $dir?"
+            read depth
+            
+            ###
+            intChk='^[0-9]+$'
+            while ! [[ "$depth" =~ $intChk ]] ; do
+                echo "ERROR: $depth is not a number. Please enter an integer."
+                echo "How far would you like to decend into the directory: $dir?"
+                read depth
+            done
+            ###
+            
+            echo "Sorting inside $heirarch/$dir ..."
+            
+            autoExtSort() {
+                extentions="$(find "$dir" -maxdepth $depth -type f | rev | cut -d "/" -f 1 | rev | grep "\. *"| rev | cut -d "." -f 1 | rev | grep -vE "log$" )"
+                while [ ${#extentions} -gt 0 ] ; do
+                    for ext in $extentions ; do
+                        searchterm='.'$(echo "$ext" | cut -d "." -f 2) 
+                        nameProp="$( echo "$searchterm" | cut -d "." -f 2- )"
+                        if [ $(find "$dir" -maxdepth "$depth" -not -path "$nameProp" -type f | grep -E "$searchterm$" | wc -l) -gt "1" ] ; then
+                            echo "Sorting: $searchterm ..."
+                            if [ -d "$dir/$nameProp" ] ; then
+                                rm -r "$dir/$nameProp"
+                            fi
+                            if [ -f "$dir/SORTEDlogs/$nameProp.log" ] ; then
+                                rm "$dir/SORTEDlogs/$nameProp.log"
+                            fi
+
+                            mkdir "$dir/$nameProp"
+                            touch "$dir/SORTEDlogs/$nameProp.log"
+                            files="$(find "$dir" -maxdepth "$depth" -type f | grep -E "$searchterm$")"
+                            for file in $files; do
+                                origName="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                if ! [ -f "$dir/$nameProp/$origName" ] ; then
+                                    cp "$file" "$dir/$nameProp"
+                                    if [ $? -eq "0" ] ; then
+                                    echo "$file was sorted succesfully into $dir/$nameProp"
+                                        echo "$file" &gt;&gt; "$dir/SORTEDlogs/$nameProp.log"
+                                    else
+                                        echo "There was an ERROR sorting $file"
+                                    fi
+                                else
+                                    echo "Processing file duplication for $file ..."
+                                    parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                                    cp "$file" "$dir/$nameProp/&lt;$parentFolder&gt;$origName"
+                                    if [ $? -eq "0" ] ; then
+                                        echo "$file:$dir/$nameProp/&lt;$parentFolder&gt;$origName" &gt;&gt; "$dir/SORTEDlogs/$nameProp.log"
+                                    else
+                                        echo "There was an ERROR sorting $file"   
+                                    fi
+                                fi
+                            done
+                            extentions="$(grep -vE "$ext$" &lt;&lt;&lt; "$extentions")"
+                            break
+                        else
+                            extentions="$(grep -vE "$ext$" &lt;&lt;&lt; "$extentions")"
+                            break
+                        fi
+                    done
+                done
+            }
+            tagSort() {
+                folderList="$(find "$dir" -not -path '*/\.*' -type d)"
+                if [ -f "$dir/SORTEDlogs/SORTEDtag.log" ] ; then
+                    rm "$dir/SORTEDlogs/SORTEDtag.log"
+                fi
+                
+                yesono=""
+                while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] ; do                         
+                    echo "Would you like to delete files from their original location? [y/n]"
+                    read yesono
+                    if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] ; then
+                        break
+                    else
+                        echo "ERROR: Please respond with 'y'(Yes) or 'n'(No)!"
+                    fi
+                done
+            
+                if [ "$yesono" = "y" ] ; then
+                    for folder in $folderList ; do
+                        fileList="$(find "$dir" -maxdepth "$depth" -type f | grep -vE "$folder/" | grep -vE ".log$" | grep $( echo "$folder" | rev | cut -d "/" -f 1 | rev))"
+                        folderName="$( echo "$folder" | rev | cut -d "/" -f 1 | rev)"
+                        for file in $fileList ; do
+                            if echo "$file" | rev | cut -d "/" -f 1 | rev | grep -qE "^$(echo $folder | rev | cut -d "/" -f 1 | rev)" ; then
+                                nameProp="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                if ! [ -f "$folder/$nameProp" ] ; then
+                                    cp "$file" "$folder"
+                                    if [ $? -eq 0 ] ; then
+                                        rm "$file"
+                                        echo "$file has been moved into $folder" &gt;&gt; "$dir/SORTEDlogs/SORTEDtag.log"
+                                        echo "File: $file succesfully sorted into: $folder !"
+                                    else
+                                        echo "There was an ERROR copying $file into $folder , your file was not deleted"
+                                    fi
+                                else
+                                    echo "$file already exists in $folder"
+                                    
+                                    yesono=""
+                                    while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] || ! [ "$yesono" = "d" ] ; do                               
+                                        echo "Would you like to replace $folder/$nameProp with $file ?[y/n] Or would you like to add a duplicate of $file ?[d]"       
+                                        read yesono     
+                                        if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] || [ "$yesono" = "d" ] ; then        
+                                            break       
+                                        else        
+                                            echo "ERROR: Please respond with 'y'(Yes) or 'n'(No) or 'd'(Duplicate)!"      
+                                        fi      
+                                    done
+
+                                    if [ "$yesono" = "y" ] ; then
+                                        rm "$folder/$nameProp"
+                                        cp "$file" "$folder"
+                                        if [ $? -eq "0" ] ; then
+                                            echo "$file succesfully copied into $folder"
+                                            echo "$file has been moved into $folder" &gt;&gt; "$dir/SORTEDlogs/SORTEDtag.log"
+                                            rm "$file"
+                                        else
+                                            echo "There was an ERROR copying $file into $folder , your file was not deleted"
+                                        fi
+                                    elif [ "$yesono" = "d" ] ; then
+                                        echo "Processing file duplication for $file ..."
+                                        origName="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                        parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                                        cp "$file" "$folder/&lt;$parentFolder&gt;$origName"
+                                        if [ $? -eq "0" ] ; then
+                                            echo "$file moved into $folder as: $folder/&lt;$parentFolder&gt;$origName" &gt;&gt; "$dir/SORTEDlogs/SORTEDtag.log"
+                                        else
+                                            echo "There was an ERROR sorting $file"
+                                        fi   
+                                    fi        
+                                fi
+                            fi
+                        done
+                    done
+                elif [ "$yesono" = "n" ] ; then
+                    for folder in $folderList ; do
+                        fileList="$(find "$dir" -maxdepth "$depth" -type f | grep -vE "$folder/" | grep -vE ".log$" | grep $( echo "$folder" | rev | cut -d "/" -f 1 | rev))"
+                        for file in $fileList ; do
+                            if echo "$file" | rev | cut -d "/" -f 1 | rev | grep -qE "^$(echo $folder | rev | cut -d "/" -f 1 | rev)" ; then
+                                nameProp="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                if ! [ -f "$folder/$nameProp" ] ; then
+                                    cp "$file" "$folder"
+                                    if [ $? -eq 0 ] ; then
+                                        echo "$file has been moved into $folder" &gt;&gt; "$dir/SORTEDlogs/SORTEDtag.log"
+                                        echo "File: $file succesfully sorted into: $folder !"
+                                    else
+                                        echo "There was an ERROR copying $file into $folder , your file was not deleted"
+                                    fi
+                                else
+                                    echo "$file already exists in $folder"
+                                    
+                                    yesono=""
+                                    while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] || ! [ "$yesono" = "d" ] ; do                               
+                                        echo "Would you like to replace $folder/$nameProp with $file ?[y/n] Or would you like to add a duplicate of $file ?[d]"       
+                                        read yesono     
+                                        if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] || [ "$yesono" = "d" ] ; then        
+                                            break       
+                                        else        
+                                            echo "ERROR: Please respond with 'y'(Yes) or 'n'(No) or 'd'(Duplicate)!"      
+                                        fi      
+                                    done
+
+                                    if [ "$yesono" = "y" ] ; then
+                                        rm "$folder/$nameProp"
+                                        cp "$file" "$folder"
+                                        if [ $? -eq "0" ] ; then
+                                            echo "$file succesfully copied into $folder"
+                                            echo "$file has been copied into $folder" &gt;&gt; "$dir/SORTEDlogs/SORTEDtag.log"
+                                        else
+                                            echo "There was an ERROR copying $file into $folder , your file was not deleted"
+                                        fi
+                                    elif [ "$yesono" = "d" ] ; then
+                                        echo "Processing file duplication for $file ..."
+                                        origName="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                                        parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                                        cp "$file" "$folder/&lt;$parentFolder&gt;$origName"
+                                        if [ $? -eq "0" ] ; then
+                                            echo "$file copied into $folder as: $folder/&lt;$parentFolder&gt;$origName" &gt;&gt; "$dir/SORTEDlogs/SORTEDtag.log"
+                                        else
+                                            echo "There was an ERROR sorting $file"
+                                        fi 
+                                    fi        
+                                fi
+                            fi
+                        done
+                    done
+                fi
+            }
+            extSort() {
+                echo "What extention/s would you like to sort? Seperate with ';'"
+                read extention
+                extention="$(sed 's/;/\n/g' &lt;&lt;&lt; $extention )"
+                for ext in $extention ; do
+                    searchterm='.'$(echo "$ext" | cut -d "." -f 2) 
+                    echo "Sorting: $searchterm ..."
+                    if find "$dir" -maxdepth "$depth" -type f | grep -qE "$searchterm$" ; then
+                        nameProp="$( echo "$searchterm" | cut -d "." -f 2- )"
+                        if [ -d "$dir/$nameProp" ] ; then
+                            rm -r "$dir/$nameProp"
+                        fi
+                        if [ -f "$dir/SORTEDlogs/$nameProp.log" ] ; then
+                            rm "$dir/SORTEDlogs/$nameProp.log"
+                        fi
+
+                        mkdir "$dir/$nameProp"
+                        touch "$dir/SORTEDlogs/$nameProp.log"
+                        files="$(find "$dir" -maxdepth "$depth" -type f | grep -E "$searchterm$")"
+                        for file in $files; do
+                            origName="$(echo "$file" | rev | cut -d "/" -f 1 | rev )"
+                            if ! [ -f "$dir/$nameProp/$origName" ] ; then
+                                cp "$file" "$dir/$nameProp"
+                                if [ $? -eq "0" ] ; then
+                                    echo "$file" &gt;&gt; "$dir/SORTEDlogs/$nameProp.log"
+                                    echo "$file succesfully coppied into $nameProp"
+                                else
+                                    echo "There was an ERROR sorting $file"
+                                fi
+                            else
+                                echo "$file already exists in $folder"
+                                    
+                                yesono=""
+                                while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] || ! [ "$yesono" = "d" ] ; do                               
+                                    echo "Would you like to replace $folder/$nameProp with $file ?[y/n] Or would you like to add a duplicate of $file ?[d]"       
+                                    read yesono     
+                                    if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] || [ "$yesono" = "d" ] ; then        
+                                        break       
+                                    else        
+                                        echo "ERROR: Please respond with 'y'(Yes) or 'n'(No)!"      
+                                    fi     
+                                done
+                                if [ "$yesono" = "y" ] ; then
+                                    rm "$folder/$nameProp"
+                                    cp "$file" "$folder"
+                                    if [ $? -eq "0" ] ; then
+                                        echo "$file succesfully copied into $folder"
+                                    else
+                                        echo "There was an ERROR copying $file into $folder , your file was not deleted"
+                                    fi
+                                elif [ "$yesono" = "d" ] ; then
+                                    echo "Processing file duplication for $file ..."
+                                    parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                                    cp "$file" "$dir/$nameProp/&lt;$parentFolder&gt;$origName"
+                                    if [ $? -eq "0" ] ; then
+                                        echo "$file:$dir/$nameProp/&lt;$parentFolder&gt;$origName" &gt;&gt; "$dir/SORTEDlogs/$nameProp.log"
+                                    else
+                                        echo "There was an ERROR sorting $file"   
+                                    fi
+                                fi
+                            fi
+                        done
+                    else
+                        echo "No files of type $ext found!"
+                    fi
+                done
+                echo "Extention sort complete!"        
+            }
+            if [ $type = "all" ] || [ $type = "All" ] ; then
+                echo "Extention sorting..."
+                autoExtSort
+                echo "Extention sorting complete!"
+                echo "Tag sorting..."
+                tagSort
+                echo "Tag sorting complete!"
+            elif [ $type = "tag" ] || [ $type = "Tag" ] ; then
+                tagSort
+            elif [ $type = "ext" ] || [ $type = "Ext" ] ; then
+                extSort
+            else
+                echo "$type is not a command in this feature"             
+            fi
+        done
+    done
+
+    unset IFS
+}
+
+scriptfind() {
+    echo "Please enter 'find' to find scripts and/or 'change' to change permissions"
+    read response
+    if [ "$response" = "return" ] ; then
+        return
+    fi
+    
+    for res in $response ; do
+        if [ "$res" = "find" ] || [ "$res" = "Find" ] ; then
+            if [ -d "$heirarchy/Scripts" ] ; then
+                rm -r "$heirarchy/Scripts"
+            fi
+            mkdir "$heirarchy/Scripts"
+            IFS=$'\n'
+            fileList="$( grep -l "#!" $(find -path "$heirarchy/Scripts" -prune -o -type f | grep -v "/Scripts" ))"
+            for file in $fileList ; do
+                interpreter="$( head -1 $file | rev | cut -d "/" -f 1 | rev )"
+                interpreter="$(sed 's/\r$//' &lt;&lt;&lt; "$interpreter")" #Removes DOS characters
+                fileName="$(echo $file | rev | cut -d "/" -f 1 | rev)"
+                if ! [ -d "$heirarchy/Scripts/$interpreter" ] ; then
+                    mkdir "$heirarchy/Scripts/$interpreter"
+                fi
+                if ! [ -f "$heirarchy/Scripts/$interpreter/$fileName" ] ; then
+                    cp "$file" "$heirarchy/Scripts/$interpreter"
+                    if [ $? -eq "0" ] ; then
+                    echo "Script: $fileName found and copied into $heirarchy/Scripts/$interpreter"
+                    fi
+                else
+                    echo "$fileName already exists in $heirarchy/Scripts/$interpreter"
+                    yesono=""
+                    while ! [ "$yesono" = "y" ] || ! [ "$yesono" = "n" ] || ! [ "$yesono" = "d" ] ; do                         
+                        echo "Would you like to replace the file in: $heirarchy/Scripts/$interpreter ?[y/n] Or would you like create a duplicate?[d]"
+                        read yesono
+                        if [ "$yesono" = "y" ] || [ "$yesono" = "n" ] || [ "$yesono" = "d" ] ; then
+                            break
+                        else
+                            echo "ERROR: Please respond with 'y'(Yes) or 'n'(No) or 'd'(Duplicate)!"
+                        fi
+                    done
+
+                    if [ "$yesono" = "y" ] ; then
+                        rm "$heirarchy/Scripts/$interpreter/$fileName"
+                        cp "$file" "$heirarchy/Scripts/$interpreter"
+                        if [ $? -eq "0" ] ; then
+                        echo "Script: $fileName succesfully copied into $heirarchy/Scripts/$interpreter"
+                        fi
+                    elif [ "$yesono" = "d" ] ; then
+                        echo "Processing file duplication for $file ..."
+                        parentFolder="$( echo "$file" | rev | cut -d "/" -f 2 | rev )"
+                        cp "$file" "$heirarchy/Scripts/$interpreter/&lt;$parentFolder&gt;$fileName"
+                        if [ $? -eq "0" ] ; then
+                            echo "Script: $fileName succesfully copied into $heirarchy/Scripts/$interpreter as &lt;$parentFolder&gt;$fileName "
+                        else
+                            echo "There was an ERROR copying $file"   
+                        fi
+                    fi
+                fi
+            done
+        elif [ "$res" = "change" ] || [ "$res" = "Change" ] ; then
+            echo "Which scripts would you like to change the permissions of? *Case sensitive"
+            read directories
+            for dir in $directories ; do
+                if ! [ -d "$heirarchy/Scripts/$dir" ] ; then
+                    echo "ERROR: There are no $dir scripts to change!"
+                else
+                    files=$(find "$heirarchy/Scripts/$dir" -type f)
+                    echo "How would you like to change the permissions of ALL $dir files?"
+                    read permChange
+                    for file in $files ; do
+                        chmod "$permChange" $file
+                        if [ $? -eq "0" ] ; then
+                            echo "Permissions for $file change succesfully. New permissions: $(ls -l $file | cut -c -10 | grep -v total)"
+                        else
+                            echo "There was an error changing permissions for $file"
+                        fi
+                    done
+                fi
+            done
+        else
+            echo "$res is not a command in this feature"
+        fi
+    done
+    unset IFS
+}
+main(){
+    if [ $# -gt 0 ] ; then
+        for arg in $arguments ; do
+            if [ $arg = "fixme" ] ; then
+                fixme
+            elif [ $arg = "filecount" ] ; then
+                filecount
+            elif [ $arg = "filesizelist" ]  ; then
+                filesizelist
+            elif [ $arg = "input" ]  ; then
+                input
+            elif [ $arg = "backupDelRest" ] ; then
+                backupDelRest
+            elif [ $arg = "switchEx" ] ; then
+                switchEx
+            elif [ $arg = "filesort" ] ; then
+                filesort
+            elif [ $arg = "scriptfind" ] ; then
+                scriptfind
+            else
+                echo "$arg is not a function"
+            fi
+        done
+    else
+        input
+    fi
+}
+
+main $arguments
+</pre></body>
+</div>
+</div>
