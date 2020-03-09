@@ -1,64 +1,114 @@
 $(document).ready(function () {
     //savedstuff: headerpic" src="https://avatars1.githubusercontent.com/u/47985359?s=460&v=4
-    //----projects
-    $("div.scrollTop").hide();
-    $("#projects").css("height", "0");
-    var files = ['projects/twittersent.html', 'projects/test2.html', 'projects/test3.html','projects/test4.html','projects/bashproject1.html', 'projects/test3.html', 'projects/test3.html', 'projects/test3.html', 'projects/test3.html'];
-    function cardMaker(){
-    files.forEach(function (item) {
-        $.get(item, null, function (data) {
-            var result = $(data);
-            var type = ((result.filter("div.type"))[0].innerText)
-            var title = ((result.filter("div.title"))[0].innerText)
-            var pic = ((result.filter("div.pic"))[0].innerText)
-            var card = $('<div id="' + type + item + '" class="postBox"> <div class="title">' + title + '</div><div class="content" style="background-image: url(' + pic + ')" ></div><div data-link="' + item + '" class="btnView">View me!</div></div>');
-            var overlay = $('<div id="' + item + '" class="overlay" style="opacity: 0"><div class="window"><div class="close">X</div><div class="popHeader"><h1>' + title +'</h1></div><div class="popContent"></div></div></div>')
-            $("body").prepend(overlay);
-            $("div.overlay").hide();
-            $("#projects").append(card);
-            $("div.btnView").on('click', overlayShow)
-            $("#projects").css("height", $("div.postBox").height() * (($("div.postBox").length / 4) + 2));
-        });
-    })
+
+    //----projects card generator
+    var files = ['projects/twittersent.html', 'projects/bashproject1.html', 'projects/test2.html', 'projects/test3.html', 'projects/test4.html', 'projects/test5.html', 'projects/test6.html', 'projects/test2.html', 'projects/test3.html', 'projects/test4.html', 'projects/test5.html', 'projects/test6.html'];
+
+    function cardMaker() {
+        files.forEach(function (item) {
+            $.get(item, null, function (data) {
+                var result = $(data);
+                var type = ((result.filter("div.type"))[0].innerText)
+                var title = ((result.filter("div.title"))[0].innerText)
+                var pic = ((result.filter("div.pic"))[0].innerText)
+                var card = $('<div id="' + type + item + '" class="postBox"> <div class="title">' + title + '</div><div class="content" style="background-image: url(' + pic + ')" ></div><div data-link="' + item + '" class="btnView">View me!</div></div>');
+                var overlay = $('<div id="' + item + '" class="overlay" style="opacity: 0"><div class="window"><div class="close">X</div><div class="popHeader"><h1>' + title + '</h1></div><div class="popContent"></div></div></div>')
+                $("body").prepend(overlay);
+                $("div.overlay").hide();
+                $("#projectItems").append(card);
+                $("div.btnView").on('click', overlayShow)
+            });
+        })
     }
-    cardMaker()
-    setTimeout(function(){
-        window.scrollTo(0, 0);
-        loadRemove()
-    }, 2000);
-    //$("#python1 div.title").load("projects/twittersent.html div.title");
-    //$("body").load()
-    //----
-    
-    var totalH = $(document).height();
-    var topH = $("div.header_container").height();
-    var menH = $("div.menu_container").height();
-    $(".fakeBackground").css("height", totalH - topH - menH);
-    $("div.overlay").css("opacity", "100");
-    var p = $("div.menu").last();
-    var origOffset = p.offset().top;
-    
+    //----------------------
+
+    //----auto slideshow
+    var pics = []
+    var x = -1;
+
+    function slideShow() {
+        if (x < (pics.length)) {
+            $("div.imagCont").toggle("slide", {
+                direction: "left"
+            }, 1000)
+            setTimeout(function () {
+                x++;
+                $("div.imagCont").css("background-image", 'url(' + pics[x] + ')');
+                $("div.imagCont").toggle("slide", {
+                    direction: "right"
+                }, 1000)
+            }, 2000)
+
+        } else {
+            x = -1;
+        }
+        setTimeout(function () {
+            slideShow();
+        }, 6000)
+    }
+    //----------------------
+
+    //----This rescales a bunch of elements and font sizes if the screen width is greater than 2000px
+    function winSizeCheck() {
+        if ($(window).width() > 2000) {
+            $("div.contentBox").css("max-width", "1500px")
+            $("div.contentBox").css("font-size", "50px")
+            $("div.popContent").css("font-size", "50px")
+            $("div.header").css("height", "90px")
+            $("#inqName").css("width", "1000px")
+            $("#inqMsg").css("width", "1000px")
+            $("#inqName").css("height", "70px")
+            $("#inqEmail").css("height", "70px")
+            $("#inqEmail").css("width", "1000px")
+            $("#inqName").css("font-size", "35px")
+            $("#inqMsg").css("font-size", "35px")
+            $("#inqEmail").css("font-size", "35px")
+            $("div.postBox").css("width", "300px")
+            $("div.postBox").css("max-width", "350px")
+            $("div.postBox").css("height", "300px")
+            $("div.postBox").css("max-width", "350px")
+            $("#projectitems").css("max-width", "2500px")
+            $("#projectitems").css("width", "2500px")
+        } else{
+            $("div.contentBox").css("max-width", "")
+            $("div.contentBox").css("font-size", "")
+            $("div.popContent").css("font-size", "")
+            $("div.header").css("height", "")
+            $("#inqName").css("width", "")
+            $("#inqMsg").css("width", "")
+            $("#inqName").css("height", "")
+            $("#inqEmail").css("height", "")
+            $("#inqEmail").css("width", "")
+            $("#inqName").css("font-size", "")
+            $("#inqMsg").css("font-size", "")
+            $("#inqEmail").css("font-size", "")
+            $("div.postBox").css("width", "")
+            $("div.postBox").css("max-width", "")
+            $("div.postBox").css("height", "")
+            $("div.postBox").css("max-width", "")
+            $("#projectitems").css("max-width", "")
+            $("#projectitems").css("width", "")
+        }
+    }
+    //----------------------
+
     function loadRemove() {
-        
         $("div.loadingScreen").fadeOut(2000);
-        setTimeout(function(){
-        $("div.loadingScreen").remove();
-    }, 2000);
+        setTimeout(function () {
+            $("div.loadingScreen").remove();
+        }, 2000);
     }
 
     function expander() {
         $("div.menu").animate({
-                width: '90%'
-            }, 1000,
-            buttonShower);
+            width: '90%'
+        }, 1000, buttonShower);
     }
 
     function menuHider() {
         $("div.menu").animate({
-                width: '0'
-            }, 1000,
-            buttonHider);
-
+            width: '0'
+        }, 1000, buttonHider);
     }
 
     function menuToggle() {
@@ -70,136 +120,50 @@ $(document).ready(function () {
     }
 
     function buttonHider() {
-        $("button.item").hide()
+        $("button.item").hide();
     }
 
     function buttonShower() {
-        $("button.item").show()
+        $("button.item").show();
     }
 
     function topCheck() {
         if ($(window).scrollTop() == 0) {
             $("div.blackbox").fadeIn(200);
+            $("#left").show("slide", {
+                direction: "left"
+            }, 2000);
+            $("#right").show("slide", {
+                direction: "right"
+            }, 2000);
+            //setTimeout(function () {$("div.slideShow").css("opacity","100%")}, 2000);
             $("div.scrollTop").fadeOut(200);
             expander();
             $(window).one("scroll", menuToggle);
             $(window).one("scroll", fader);
+            $("div.gearBox").contents().css("animation", "");
         }
     }
 
     function wordFade() {
         if ($(window).scrollTop() == 0) {
-            $("#quote").fadeIn(2000)
+            $("#quote").fadeIn(2000);
         } else {
-            $("#quote").fadeOut(500)
+            $("#quote").fadeOut(500);
         }
     }
 
     function fader() {
-        $("div.blackbox").fadeOut(2000)
+        $("div.blackbox").fadeOut(2000);
+        $("#left").hide("slide", {
+            direction: "left"
+        }, 1000);
+        $("#right").hide("slide", {
+            direction: "right"
+        }, 1000);
+        $("div.gearBox").contents().css("animation", "none");
         $("div.scrollTop").fadeIn(2000);
-    }
-
-    function pythonHider() {
-        $("#btnAll").css("background-color", "transparent")
-        $("#btnPython").css("background-color", "lightblue")
-        $("#btnJava").css("background-color", "transparent")
-        $("#btnBash").css("background-color", "transparent")
-        $("#btnHaskell").css("background-color", "transparent")
-        $("#btnHTML").css("background-color", "transparent")
-        $('div[id^="java"]').fadeOut(500);
-        $('div[id^="python"]').fadeIn(500);
-        $('div[id^="html"]').fadeOut(500);
-        $('div[id^="bash"]').fadeOut(500);
-        $('div[id^="haskell"]').fadeOut(500);
-    }
-
-    function javaHider() {
-        $("#btnAll").css("background-color", "transparent")
-        $("#btnPython").css("background-color", "transparent")
-        $("#btnJava").css("background-color", "lightblue")
-        $("#btnBash").css("background-color", "transparent")
-        $("#btnHaskell").css("background-color", "transparent")
-        $("#btnHTML").css("background-color", "transparent")
-        $('div[id^="java"]').fadeIn(500);
-        $('div[id^="python"]').fadeOut(500);
-        $('div[id^="html"]').fadeOut(500);
-        $('div[id^="bash"]').fadeOut(500);
-        $('div[id^="haskell"]').fadeOut(500);
-    }
-
-    function htmlHider() {
-        $("#btnAll").css("background-color", "transparent")
-        $("#btnPython").css("background-color", "transparent")
-        $("#btnJava").css("background-color", "transparent")
-        $("#btnBash").css("background-color", "transparent")
-        $("#btnHaskell").css("background-color", "transparent")
-        $("#btnHTML").css("background-color", "lightblue")
-        $('div[id^="java"]').fadeOut(500);
-        $('div[id^="python"]').fadeOut(500);
-        $('div[id^="html"]').fadeIn(500);
-        $('div[id^="bash"]').fadeOut(500);
-        $('div[id^="haskell"]').fadeOut(500);
-    }
-
-    function bashHider() {
-        $("#btnAll").css("background-color", "transparent")
-        $("#btnPython").css("background-color", "transparent")
-        $("#btnJava").css("background-color", "transparent")
-        $("#btnBash").css("background-color", "lightblue")
-        $("#btnHaskell").css("background-color", "transparent")
-        $("#btnHTML").css("background-color", "transparent")
-        $('div[id^="java"]').fadeOut(500);
-        $('div[id^="python"]').fadeOut(500);
-        $('div[id^="html"]').fadeOut(500);
-        $('div[id^="bash"]').fadeIn(500);
-        $('div[id^="haskell"]').fadeOut(500);
-    }
-
-    function haskellHider() {
-        $("#btnAll").css("background-color", "transparent")
-        $("#btnPython").css("background-color", "transparent")
-        $("#btnJava").css("background-color", "transparent")
-        $("#btnBash").css("background-color", "transparent")
-        $("#btnHaskell").css("background-color", "lightblue")
-        $("#btnHTML").css("background-color", "transparent")
-        $('div[id^="java"]').fadeOut(500);
-        $('div[id^="python"]').fadeOut(500);
-        $('div[id^="html"]').fadeOut(500);
-        $('div[id^="bash"]').fadeOut(500);
-        $('div[id^="haskell"]').fadeIn(500);
-    }
-
-    function allShower() {
-        $("#btnAll").css("background-color", "lightblue")
-        $("#btnPython").css("background-color", "transparent")
-        $("#btnJava").css("background-color", "transparent")
-        $("#btnBash").css("background-color", "transparent")
-        $("#btnHaskell").css("background-color", "transparent")
-        $("#btnHTML").css("background-color", "transparent")
-        $('div[id^="java"]').fadeIn(500);
-        $('div[id^="python"]').fadeIn(500);
-        $('div[id^="html"]').fadeIn(500);
-        $('div[id^="bash"]').fadeIn(500);
-        $('div[id^="haskell"]').fadeIn(500);
-    }
-
-    function projectsScroller() {
-        $('html, body').animate({
-            scrollTop: ($('#projectsHeader').offset().top)
-        }, 500);
-    }
-
-    function aboutScroller() {
-        $('html, body').animate({
-            scrollTop: ($('#aboutme').offset().top)
-        }, 500);
-    }
-
-    function contactScroller() {
-        $('html, body').animate({
-            scrollTop: ($('#contactHeader').offset().top)
-        }, 500);
+        $("div.slideShow").css("opacity", "0");
     }
 
     function overlayClose() {
@@ -209,21 +173,18 @@ $(document).ready(function () {
 
     function backgroundResize() {
         $(".fakeBackground").css("height", "0");
-        var totalH = $(document).height();
-        var topH = $("div.header_container").height();
-        var menH = $("div.menu_container").height();
-        $(".fakeBackground").css("height", totalH - topH - menH);
+        var mainH = $("div.main_container").height();
+        $("div.fakeBackground").css("height", mainH);
     }
 
     function minimizer() {
         if ($(this).parent().height() == 50) {
             $(this).parent().css("min-height", "50%");
             $(this).parent().css("height", "auto");
-            $(this).css("transform", "rotate(0deg)")
-            if ($(this).parent().is("#projects")) {
-                $(this).parent().css("height", $("div.postBox").height() * (($("div.postBox").length / 4) + 2));
-            }
-            $(this).parent().contents().not("div.minimizer").show()
+            $(this).css("transform", "rotate(0deg)");
+            $(this).parent().contents().not("div.minimizer").show();
+            $(this).parent().find("div.miniTitle").hide();
+            $("div.fakeBackground").show();
             backgroundResize();
         } else {
             var origH = $(this).parent().height();
@@ -231,51 +192,150 @@ $(document).ready(function () {
             $(this).parent().animate({
                 height: '50'
             }, 1000);
-            $(this).parent().contents().not("div.minimizer").hide();
-            $(this).css("transform", "rotate(180deg)")
+            $(this).parent().contents().not("div.minimizer, div.miniTitle").hide();
+            $(this).parent().find("div.miniTitle").fadeIn(500);
+            $(this).css("transform", "rotate(180deg)");
             $(".fakeBackground").css("height", $(".fakeBackground").height() - origH);
         }
-
     }
-    
+
     function overlayShow() {
         var file = $(this).attr("data-link");
         $("div.overlay").fadeIn();
         $("div.popHeader").load(file + " div.title");
         $("div.popContent").load(file + " div.starthere");
     }
-    function topScroll(){
+
+    function topScroll() {
         $('html, body').animate({
             scrollTop: ($('body').offset().top)
         }, 500);
     }
-    
-    function msgSent(){
+
+    function msgSent() {
         var name = $("#inqName").val();
         alert(name + ", your message has been sent!");
         $("#inqMsg").val("");
         $("#inqEmail").val("");
         $("#inqName").val("");
-        
     }
+
+    function projectSorter() {
+        var toKeep = $(this).attr("data-actsOn");
+        $("btn.blockOptionsbtn").css("background-color", "transparent");
+        $(this).css("background-color", "lightblue")
+        if (toKeep == "All") {
+            $("div.postBox").fadeIn(500);
+        } else {
+            $("div.postBox").fadeOut(500);
+            setTimeout(function () {
+                $('div[id^="' + toKeep + '"]').fadeIn(500);
+            }, 500);
+        }
+    }
+
+    function menuScroller() {
+        var toScrollTo = $(this).attr("data-actsOn");
+        $('html, body').animate({
+            scrollTop: ($("#" + toScrollTo).offset().top)
+        }, 500);
+    }
+
+    function minimizerALL() {
+        if ($(this).is("#minimize")) {
+            $("div.pageBlock").each(function () {
+                if ($(this).height() != 50) {
+                    $(this).css("min-height", "0");
+                    $(this).animate({
+                        height: '50'
+                    }, 1000);
+                    $(this).contents().not("div.minimizer, div.miniTitle").hide();
+                    $(this).find("div.miniTitle").fadeIn(500);
+                    $(this).find("div.minimizer").css("transform", "rotate(180deg)")
+                    $("div.fakeBackground").hide()
+                }
+            })
+        } else if ($(this).is("#maximize")) {
+            $("div.pageBlock").each(function () {
+                if ($(this).height() == 50) {
+                    $(this).css("min-height", "50%");
+                    $(this).css("height", "auto");
+                    $(this).find("div.minimizer").css("transform", "rotate(0deg)");
+                    $(this).contents().not("div.minimizer").show();
+                    $(this).find("div.miniTitle").hide();
+                    $("div.fakeBackground").show()
+                }
+            })
+            backgroundResize()
+        }
+    }
+
+    function randShift() {
+        var rand = Math.random() * 100;
+        var rand2 = (Math.random() * 10) * (Math.random() * 10);
+        var time1 = 250 + rand
+        var time2 = time1
+        if (rand < 25) {
+            $(this).animate({
+                left: "+=" + (rand - rand2) + "%"
+            }, time1)
+            $(this).animate({
+                width: "-=" + (rand - (rand2))
+            }, time2)
+        } else if (rand < 50) {
+            $(this).animate({
+                top: "+=" + (rand - rand2) + "%"
+            }, time1)
+            $(this).animate({
+                height: "-=" + (rand - (rand2))
+            }, time2)
+        } else if (rand < 75) {
+            $(this).animate({
+                right: "+=" + (rand - rand2) + "%"
+            }, time1)
+            $(this).animate({
+                width: "+=" + (rand - (rand2))
+            }, time2)
+        } else {
+            $(this).animate({
+                height: "+=" + (rand - (rand2))
+            }, time2)
+            $(this).animate({
+                bottom: "+=" + (rand - rand2) + "%"
+            }, time1)
+        }
+
+    }
+    //---------------------------------------------------------------------End of function declarations
     
-    $("div.menubtn").click(menuToggle)
+    cardMaker()
+    $("div.overlay").css("opacity", "100");
+    $("div.scrollTop").hide();
+    $("div.miniTitle").hide();
+    
+    //----This runs after 2s giving page elements time to load and set
+    setTimeout(function () {
+        window.scrollTo(0, 0);
+        backgroundResize();
+        winSizeCheck();
+        loadRemove();
+    }, 2000);
+    //----------------------
+    
+    //---Actions
     $(window).one("scroll", menuToggle)
     $(window).scroll(topCheck)
     $(window).scroll(wordFade)
+    $(window).resize(backgroundResize, winSizeCheck)
     $(window).one("scroll", fader)
-    $("#btnAll").click(allShower)
-    $("#btnPython").click(pythonHider)
-    $("#btnJava").click(javaHider)
-    $("#btnBash").click(bashHider)
-    $("#btnHaskell").click(haskellHider)
-    $("#btnHTML").click(htmlHider)
-    $("#btnProjects").click(projectsScroller)
-    $("#btnAbout").click(aboutScroller)
-    $("#btnContact").click(contactScroller)
+    $("btn.blockOptionsbtn").click(projectSorter)
+    $("button.item").click(menuScroller)
     $("div.close").click(overlayClose)
-    $(window).resize(backgroundResize)
     $("div.minimizer").click(minimizer)
     $("div.scrollTop").click(topScroll)
     $("#inq").click(msgSent)
+    $("div.exminbtn").click(minimizerALL)
+    $("div.gear").click(randShift)
+    $("div.menubtn").click(menuToggle)
+
 })

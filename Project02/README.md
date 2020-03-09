@@ -4,7 +4,6 @@
 - [Overview](#overview)
 - [Webpage Sections](#webpage-sections)
   - [About Me](#about-me)
-  
   - [Projects](#projects)
   - [Contact Me](#contact-me)
 - [Custom Javascript Code](#custom-javascript-code)

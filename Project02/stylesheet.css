@@ -8,6 +8,7 @@ body {
 }
 
 .header_container {
+    overflow: hidden;
     position: absolute;
     top: 0;
     width: 100%;
@@ -30,11 +31,13 @@ body {
 
 }
 
-#projects{
+#projects {
     min-height: 300px;
 }
+
 #quote {
-    font-family: 'Calligraffitti';
+    color: white;
+    font-family: 'Bubbler One';
     font-size: 130%;
 }
 
@@ -45,11 +48,10 @@ body {
     margin: 0;
     float: none;
 }
- 
+
 #aboutme {
     overflow: visible;
     background-color: transparent;
-    color: white;
     height: auto;
     max-height: none
 }
@@ -69,16 +71,24 @@ body {
     text-align: center;
 }
 
-.aboutBox .contentBox{
+.contentBox {
+    font-size: 19px;
+    font-family: 'Sen', sans-serif;
     max-width: 800px;
     display: inline-block
 }
 
 .aboutBox h1 {
+    color: white;
+    background-image: linear-gradient(transparent, rgb(255,0,0,0.5),transparent);
     margin: 0;
     margin-bottom: 10px;
     padding: 0;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 5%;
 }
+
 .contentBox h3 {
     position: relative;
     left: -350px;
@@ -91,27 +101,24 @@ body {
 
 .contentBox p {
     margin: 0;
-    max-width: 800px;
+    max-width: inherit;
     text-align: justify
 }
 
-.contentBox ul{
+.contentBox ul {
     text-align: justify
 }
 
-.contentBox itemBox{
-    width: 100%;
-    height: 100%;
+.itemBox .header {
+    height: 40px;
 }
 
-.itemBox .header{
-    height: 40px
-}
-.itemBox .year{
+.itemBox .year {
     position: relative;
     text-align: end;
     top: -40;
 }
+
 .backgroundimg {
     background-image: url("images/header.jfif");
     background-repeat: no-repeat;
@@ -126,10 +133,11 @@ body {
 .menu_container {
     z-index: 1;
     position: sticky;
-    top: 5%;
+    top: 4%;
     width: 100%;
     height: 7%;
     text-align: center;
+    pointer-events: none;
 }
 
 .menubtn {
@@ -143,19 +151,22 @@ body {
     position: absolute;
     cursor: pointer;
     left: 0%;
+    pointer-events: all;
 }
 
 .menu {
-    background-color: rgba(126, 124, 124, 0.342);
+    background-color: rgb(255,0,0,0.3);
     position: relative;
     padding-left: 10%;
     left: 0%;
     height: 100%;
     max-height: auto;
     text-align: center;
+    pointer-events: none;
 }
 
 .item {
+    color: white;
     display: inline-block;
     position: relative;
     top: 0%;
@@ -172,6 +183,7 @@ body {
     font-style: oblique;
     font-weight: bolder;
     font-size: 7vmin;
+    pointer-events: all;
 }
 
 .item:hover {
@@ -180,7 +192,7 @@ body {
 }
 
 .main_container {
-    background-color: white;
+    background-color: rgb(56, 50, 50);
     width: 100%;
     height: auto;
     opacity: 95%;
@@ -196,16 +208,17 @@ body {
 }
 
 .blockOptions {
+    background-color: rgb(255,0,0,0.5);
     z-index: 1;
     position: sticky;
-    top: 12%;
+    top: 11%;
     width: 90%;
-    background-color: rgba(126, 124, 124, 0.342);
     opacity: 50%;
     min-height: 5%;
 }
 
 .blockOptionsbtn {
+    color: white;
     position: relative;
     height: 100%;
     font-weight: bold;
@@ -221,17 +234,22 @@ body {
     transform: scale(1.01, 1.01);
 }
 
+#projectItems{
+    width: 90%;
+    display: grid;
+    grid-template-areas: 'postBox postBox postBox postBox postBox';
+    padding-bottom: 10px;
+}
 .postBox {
-    background-color: darkgray;
+    background-color: rgb(255,0,0,0.5);
     box-shadow: white;
     border-radius: 5%;
     opacity: 80%;
-    width: 20%;
-    max-width: 200px;
+    min-width: 100px;
+    max-width: 150px;
     min-height: 200px;
     height: 10%;
     color: black;
-    float: left;
     margin: 10px;
 }
 
@@ -262,7 +280,7 @@ body {
 
 .postBox .btnView {
     position: relative;
-    background-color: lightgray;
+    background-color: white;
     top: 5%;
     width: 100%;
     border-bottom-left-radius: 20%;
@@ -274,7 +292,7 @@ body {
 }
 
 .postBox .btnView:hover {
-    background-color: white;
+    background-color: rgb(255,0,0,0.5);
     transform: scale(1.01);
 }
 
@@ -294,7 +312,7 @@ body {
     transform: rotate(45deg);
     border-bottom: 5px solid;
     border-right: 5px solid;
-    border-color: white;
+    border-color: red;
     animation: arrow 2s infinite;
 }
 
@@ -352,6 +370,7 @@ body {
 }
 
 .headerBlock {
+    color: white;
     background-color: transparent;
     position: relative;
     width: 100%;
@@ -361,7 +380,6 @@ body {
 }
 
 .hTitle {
-    color: white;
     height: 10%;
     font-size: 50px;
     margin-left: 5%
@@ -398,24 +416,24 @@ body {
     resize: horizontal;
 }
 
-.window .popHeader{
+.window .popHeader {
     text-align: center;
     position: relative;
     width: 100%;
     height: auto;
-    background-color:darkslategray;
+    background-color: darkslategray;
     font-size: 4vw;
     font-family: Arial;
     padding-top: 2%;
     padding-bottom: 2%;
 }
 
-.popHeader h1{
+.popHeader h1 {
     font-size: 120%;
     margin: 0;
 }
 
-.window .popContent{
+.window .popContent {
     height: auto;
     width: auto;
     font-size: 50%;
@@ -461,12 +479,31 @@ body {
     height: 45px;
     margin-left: 1%;
     margin-right: 1%;
-    margin-top: 1px;
+    margin-top: 2px;
     border-radius: 50%;
+}
+
+.socialIcon a{
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .footer .socialIcon:hover {
     transform: scale(1.05)
+}
+
+.footer .attribution{
+    background-color: white;
+    top: -20px;
+    position: relative;
+    font-size: 10px;
+    width: 260px;
+    font-family: Arial;
+    margin-left: -15px;
 }
 
 
@@ -487,13 +524,15 @@ body {
 }
 
 .graphPanel p {
+    text-align: center;
     margin-top: 5px;
     padding: 0;
+    
 }
 
 .skillGraph .fill {
     height: 100%;
-    background-color: darkslategray;
+    background-color: rgb(255,0,0,0.9);
     margin: 0;
     padding: 0;
 }
@@ -504,6 +543,13 @@ body {
     background-color: transparent;
 }
 
+.miniTitle{
+    padding: 15px;
+    position: absolute;
+    right: 10%;
+    color: white;
+}
+
 .pageBlock .minimizer {
     z-index: 1;
     width: 50px;
@@ -511,7 +557,7 @@ body {
     position: absolute;
     right: 2%;
     cursor: pointer;
-    background-image: url(images/arrowdown.png);
+    background-image: url(images/arrowdownRED.png);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -522,7 +568,7 @@ body {
     transform: scale(1.05);
 }
 
-.loadingScreen{
+.loadingScreen {
     z-index: 15;
     width: 100%;
     height: 100%;
@@ -532,7 +578,7 @@ body {
     text-align: center;
 }
 
-.loadingScreen .animationBox{
+.loadingScreen .animationBox {
     position: absolute;
     top: 50%;
     width: 100%;
@@ -543,7 +589,7 @@ body {
     height: 200px;
 }
 
-.codeBlock{
+.codeBlock {
     background-color: black;
     color: white;
     overflow: scroll;
@@ -555,12 +601,12 @@ body {
     margin-top: 30px;
 }
 
-.scrollTop{
+.scrollTop {
     z-index: 5;
     width: 50px;
     height: 50px;
     background-color: transparent;
-    background-image: url(images/arrowdown.png);
+    background-image: url(images/arrowdownRED.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -572,27 +618,336 @@ body {
     opacity: 70%;
 }
 
-.scrollTop:hover{
+.scrollTop:hover {
     opacity: 100%;
     transform: rotate(180deg);
 }
 
-.button {
-    cursor: pointer;
+#inqueries{
+    display: grid;
+    justify-content: center;
+    
+}
+
+.qrBox{
     position: absolute;
-    left: 50%;
-    top: 65%;
-    color: black;
+    left: 80%;
+    width: 15%;
+    height: 15%;
+    border-color: rgb(255,0,0,0.5);
+    border-style: solid;
+    text-align: center;
+}
+.contactQR{
+    width: 100%;
+    height: 100%;
+    background-image: url("images/frameRED.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+}
+
+.qrBox p{
+    font-family: Arial;
     font-weight: bolder;
-    background-color: lightgray;
-    margin-left: -25%;
-    width: 49%;
+    font-variant: small-caps;
+    font-size: 20px;
+    background-color: rgb(255,0,0,0.5);
+    color: white;
     padding: 5px;
+    border-radius: 5%;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    left: -5px;
+    
+}
+.itemBox input{
+    width: 100%;
+    height: 30px;
+    min-width: 400px;
+    font-family: Arial;
+    font-size: 19px;
+}
+
+.itemBox textarea{
+    width: 100%;
+    min-width: 400px;
+    height: 200px;
+    font-family: Arial;
+    font-size: 19px;
+}
+.itemBox .sbmBtn {
+    width: 100%;
+    min-width: 400px;
+    cursor: pointer;
+    color: white;
+    font-weight: bolder;
+    background-color: rgb(255,0,0,0.5);
     border-radius: 5%;
     opacity: 90%;
 }
 
-.button:hover{
+.itemBox .sbmBtn:hover {
     opacity: 100%;
     transform: scale(1.05)
+}
+
+.expandORmin{
+    z-index: 2;
+    width: 200px;
+    height: 30px;
+    position: sticky;
+    top: 1%;
+    left: 100%;
+}
+
+.exminbtn{
+    float: left;
+    color: white;
+    background-color: rgb(255,0,0,0.5);
+    width: 50%;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bolder;
+    cursor: pointer;
+    opacity: 50%;
+}
+
+.exminbtn:hover{
+    transform: scale(1.05);
+    opacity: 100%;
+    
+}
+
+.door{
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.door img{
+    width: 100%;
+    min-width: 600px;
+    height: 100%;
+}
+
+#left{
+    background-position: right;
+    left: 0;
+}
+
+#right{
+    background-position: left;
+    right: 0;
+}
+
+.slideShow{
+    z-index: 1;
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    top: 0%;
+    overflow: hidden;
+}
+
+.slideShow .imagCont{
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.gearBox{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    opacity: 30%;
+    
+}
+
+#gearR1{
+    background-image: url(images/gears/gear2.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 250px;
+    animation: gear 6s infinite linear;
+    position: absolute;
+    left: 75px;
+    top: 4.5%;
+    
+    
+}
+
+.gear{
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#gearL1{
+    background-image: url(images/gears/gear2.png);
+    
+    width: 200px;
+    height: 250px;
+    animation: gear 6s infinite linear;
+    position: absolute;
+    left: 75px;
+    top: 4.5%;
+    
+    
+}
+#gearR2{
+    background-image: url(images/gears/gear2.png);
+    width: 100px;
+    height: 100px;
+    animation: gear2 4s infinite linear;
+    position: absolute;
+    left: 60px;
+    top: 1%;
+    
+}
+#gearL2{
+    background-image: url(images/gears/gear2.png);
+    width: 100px;
+    height: 100px;
+    animation: gear2 4s infinite linear;
+    position: absolute;
+    left: 60px;
+    top: 1%;
+    
+}
+#gearR3{
+    background-image: url(images/gears/gear3.png);
+    width: 50px;
+    height: 50px;
+    animation: gear 1s infinite linear;
+    position: absolute;
+    left: 20px;
+    top: 4%;
+}
+
+#gearL3{
+    background-image: url(images/gears/gear3.png);
+    width: 50px;
+    height: 50px;
+    animation: gear 1s infinite linear;
+    position: absolute;
+    left: 20px;
+    top: 4%;
+}
+
+#gearR4{
+    background-image: url(images/gears/gear4.png);
+    animation: gear2 6s infinite linear;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 0px;
+    top: 25%;
+    
+}
+
+#gearL4{
+    background-image: url(images/gears/gear4.png);
+    animation: gear2 6s infinite linear;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 0px;
+    top: 25%;
+    
+}
+#gearR5{
+    background-image: url(images/gears/gear5.png);
+    width: 170px;
+    height: 170px;
+    position: absolute;
+    left: 110px;
+    top: 48%;
+    animation: gear 4s infinite linear;
+    
+}
+
+#gearL5{
+    background-image: url(images/gears/gear5.png);
+    width: 170px;
+    height: 170px;
+    position: absolute;
+    left: 110px;
+    top: 48%;
+    animation: gear 4s infinite linear;
+    
+}
+#gearR6{
+    background-image: url(images/gears/gear6.png);
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 0px;
+    top: 62%;
+    animation: gear2 7s infinite linear;
+    
+}
+
+#gearL6{
+    background-image: url(images/gears/gear6.png);
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 0px;
+    top: 62%;
+    animation: gear2 7s infinite linear;
+    
+}
+
+#gearR7{
+    background-image: url(images/gears/gear7.png);
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 150px;
+    top: 80%;
+    animation: gear 4.5s infinite linear;
+}
+
+#gearL7{
+    background-image: url(images/gears/gear7.png);
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 150px;
+    top: 80%;
+    animation: gear 4.5s infinite linear;
+}
+@keyframes gear {
+    00% {
+        transform: rotate(360deg);
+    }
+    
+    100% {
+
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes gear2 {
+    00% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+
+        transform: rotate(360deg);
+    }
 }
