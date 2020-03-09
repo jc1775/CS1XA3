@@ -1,20 +1,17 @@
-$(document).ready(function () {
+$(document).ready(function() {
     //savedstuff: headerpic" src="https://avatars1.githubusercontent.com/u/47985359?s=460&v=4
 
     //----projects card generator
     var files = ['projects/twittersent.html', 'projects/bashproject1.html', 'projects/test2.html', 'projects/test3.html', 'projects/test4.html', 'projects/test5.html', 'projects/test6.html', 'projects/test2.html', 'projects/test3.html', 'projects/test4.html', 'projects/test5.html', 'projects/test6.html'];
 
     function cardMaker() {
-        files.forEach(function (item) {
-            $.get(item, null, function (data) {
+        files.forEach(function(item) {
+            $.get(item, null, function(data) {
                 var result = $(data);
                 var type = ((result.filter("div.type"))[0].innerText)
                 var title = ((result.filter("div.title"))[0].innerText)
                 var pic = ((result.filter("div.pic"))[0].innerText)
                 var card = $('<div id="' + type + item + '" class="postBox"> <div class="title">' + title + '</div><div class="content" style="background-image: url(' + pic + ')" ></div><div data-link="' + item + '" class="btnView">View me!</div></div>');
-                var overlay = $('<div id="' + item + '" class="overlay" style="opacity: 0"><div class="window"><div class="close">X</div><div class="popHeader"><h1>' + title + '</h1></div><div class="popContent"></div></div></div>')
-                $("body").prepend(overlay);
-                $("div.overlay").hide();
                 $("#projectItems").append(card);
                 $("div.btnView").on('click', overlayShow)
             });
@@ -31,7 +28,7 @@ $(document).ready(function () {
             $("div.imagCont").toggle("slide", {
                 direction: "left"
             }, 1000)
-            setTimeout(function () {
+            setTimeout(function() {
                 x++;
                 $("div.imagCont").css("background-image", 'url(' + pics[x] + ')');
                 $("div.imagCont").toggle("slide", {
@@ -42,7 +39,7 @@ $(document).ready(function () {
         } else {
             x = -1;
         }
-        setTimeout(function () {
+        setTimeout(function() {
             slideShow();
         }, 6000)
     }
@@ -69,7 +66,7 @@ $(document).ready(function () {
             $("div.postBox").css("max-width", "350px")
             $("#projectitems").css("max-width", "2500px")
             $("#projectitems").css("width", "2500px")
-        } else{
+        } else {
             $("div.contentBox").css("max-width", "")
             $("div.contentBox").css("font-size", "")
             $("div.popContent").css("font-size", "")
@@ -94,7 +91,7 @@ $(document).ready(function () {
 
     function loadRemove() {
         $("div.loadingScreen").fadeOut(2000);
-        setTimeout(function () {
+        setTimeout(function() {
             $("div.loadingScreen").remove();
         }, 2000);
     }
@@ -207,7 +204,7 @@ $(document).ready(function () {
     }
 
     function topScroll() {
-        $('html, body').animate({
+        $('body').animate({
             scrollTop: ($('body').offset().top)
         }, 500);
     }
@@ -228,7 +225,7 @@ $(document).ready(function () {
             $("div.postBox").fadeIn(500);
         } else {
             $("div.postBox").fadeOut(500);
-            setTimeout(function () {
+            setTimeout(function() {
                 $('div[id^="' + toKeep + '"]').fadeIn(500);
             }, 500);
         }
@@ -236,14 +233,14 @@ $(document).ready(function () {
 
     function menuScroller() {
         var toScrollTo = $(this).attr("data-actsOn");
-        $('html, body').animate({
+        $('body').animate({
             scrollTop: ($("#" + toScrollTo).offset().top)
         }, 500);
     }
 
     function minimizerALL() {
         if ($(this).is("#minimize")) {
-            $("div.pageBlock").each(function () {
+            $("div.pageBlock").each(function() {
                 if ($(this).height() != 50) {
                     $(this).css("min-height", "0");
                     $(this).animate({
@@ -256,7 +253,7 @@ $(document).ready(function () {
                 }
             })
         } else if ($(this).is("#maximize")) {
-            $("div.pageBlock").each(function () {
+            $("div.pageBlock").each(function() {
                 if ($(this).height() == 50) {
                     $(this).css("min-height", "50%");
                     $(this).css("height", "auto");
@@ -307,21 +304,22 @@ $(document).ready(function () {
 
     }
     //---------------------------------------------------------------------End of function declarations
-    
+
     cardMaker()
+    $("div.overlay").hide();
     $("div.overlay").css("opacity", "100");
     $("div.scrollTop").hide();
     $("div.miniTitle").hide();
-    
+
     //----This runs after 2s giving page elements time to load and set
-    setTimeout(function () {
+    setTimeout(function() {
         window.scrollTo(0, 0);
         backgroundResize();
         winSizeCheck();
         loadRemove();
     }, 2000);
     //----------------------
-    
+
     //---Actions
     $(window).one("scroll", menuToggle)
     $(window).scroll(topCheck)
