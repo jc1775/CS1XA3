@@ -89,7 +89,7 @@ $(document).ready(function() {
             backgroundResize()
         }
     }
-    //----------------------
+    //-----------------------
 
     function loadRemove() {
         $("div.loadingScreen").fadeOut(2000);
