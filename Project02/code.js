@@ -66,6 +66,7 @@ $(document).ready(function() {
             $("div.postBox").css("max-width", "350px")
             $("#projectitems").css("max-width", "2500px")
             $("#projectitems").css("width", "2500px")
+            backgroundResize()
         } else {
             $("div.contentBox").css("max-width", "")
             $("div.contentBox").css("font-size", "")
@@ -85,6 +86,7 @@ $(document).ready(function() {
             $("div.postBox").css("max-width", "")
             $("#projectitems").css("max-width", "")
             $("#projectitems").css("width", "")
+            backgroundResize()
         }
     }
     //----------------------
