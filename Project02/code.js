@@ -139,14 +139,7 @@ $(document).ready(function() {
             $(window).one("scroll", menuToggle);
             $(window).one("scroll", fader);
             $("div.gearBox").contents().css("animation", "");
-        }
-    }
-
-    function wordFade() {
-        if ($(window).scrollTop() == 0) {
             $("#quote").fadeIn(2000);
-        } else {
-            $("#quote").fadeOut(500);
         }
     }
 
@@ -160,7 +153,8 @@ $(document).ready(function() {
         }, 1000);
         $("div.gearBox").contents().css("animation", "none");
         $("div.scrollTop").fadeIn(2000);
-        $("div.slideShow").css("opacity", "0");
+        //$("div.slideShow").css("opacity", "0");
+        $("#quote").fadeOut(500);
     }
 
     function overlayClose() {
@@ -268,38 +262,77 @@ $(document).ready(function() {
     }
 
     function randShift() {
-        var rand = Math.random() * 100;
-        var rand2 = (Math.random() * 10) * (Math.random() * 10);
-        var time1 = 250 + rand
-        var time2 = time1
-        if (rand < 25) {
+        var rand = Math.random() * 70;
+        var rand2 = Math.random() * 2
+        var time = 250 + rand
+        var shift = 25 * rand2
+        var scaler = Math.random() * 100
+
+        var newGear = $(this).clone()
+        $(this).parent().append(newGear)
+        $(this).parent().find("div.gear:last-of-type").on("click", randShift)
+        var newEleWidth = $("div.gear:last-of-type").width()
+        $(this).parent().find("div.gear:last-of-type").animate({
+            right: "+=" + newEleWidth,
+            left: "+=" + newEleWidth,
+            top: "-=" + newEleWidth,
+            bottom: "-=" + newEleWidth,
+            width: "-=" + scaler,
+            height: "-=" + scaler
+        }, time)
+        if (rand < 10) {
             $(this).animate({
-                left: "+=" + (rand - rand2) + "%"
-            }, time1)
+                left: "+=" + shift + "%",
+                width: "+=" + scaler,
+                right: "+=" + shift + "%"
+            }, time)
+        } else if (rand < 20) {
             $(this).animate({
-                width: "-=" + (rand - (rand2))
-            }, time2)
+                left: "-=" + shift + "%",
+                right: "-=" + shift + "%",
+                height: "+=" + scaler
+            }, time)
+        } else if (rand < 30) {
+            $(this).animate({
+                top: "+=" + shift + "%",
+                width: "-=" + scaler
+            }, time)
+        } else if (rand < 40) {
+            $(this).animate({
+                top: "-=" + shift + "%",
+                height: "-=" + scaler
+            }, time)
         } else if (rand < 50) {
             $(this).animate({
-                top: "+=" + (rand - rand2) + "%"
-            }, time1)
+                top: "+=" + shift + "%",
+                width: "+=" + scaler,
+                right: "+=" + shift + "%",
+                left: "+=" + shift + "%"
+            }, time)
+        } else if (rand < 60) {
             $(this).animate({
-                height: "-=" + (rand - (rand2))
-            }, time2)
-        } else if (rand < 75) {
+                top: "-=" + shift + "%",
+                height: "+=" + scaler,
+                right: "+=" + shift + "%",
+                left: "+=" + shift + "%"
+            }, time)
+        } else if (rand < 70) {
             $(this).animate({
-                right: "+=" + (rand - rand2) + "%"
-            }, time1)
-            $(this).animate({
-                width: "+=" + (rand - (rand2))
-            }, time2)
-        } else {
-            $(this).animate({
-                height: "+=" + (rand - (rand2))
-            }, time2)
-            $(this).animate({
-                bottom: "+=" + (rand - rand2) + "%"
-            }, time1)
+                top: "-=" + shift + "%",
+                left: "-=" + shift + "%",
+                right: "+=" + shift + "%",
+                width: "-=" + scaler
+            }, time)
+
+        }
+
+        if ($(this).parent().find("*").length > 25) {
+            $("#gearL7").nextAll().fadeOut(500)
+            $("#gearR7").nextAll().fadeOut(500)
+            setTimeout(function() {
+                $("#gearL7").nextAll().remove()
+                $("#gearR7").nextAll().remove()
+            }, 700)
         }
 
     }
@@ -323,7 +356,6 @@ $(document).ready(function() {
     //---Actions
     $(window).one("scroll", menuToggle)
     $(window).scroll(topCheck)
-    $(window).scroll(wordFade)
     $(window).resize(backgroundResize, winSizeCheck)
     $(window).one("scroll", fader)
     $("btn.blockOptionsbtn").click(projectSorter)

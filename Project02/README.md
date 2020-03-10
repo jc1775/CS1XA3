@@ -13,6 +13,7 @@
   - [Minimizer/Maximizer](#minimizer/maximizer)
   - [Minimizer/Maximizer ALL](#minimizer/maximizer-all)
   - [General Animations and Features](#general-animations-and-Features)
+  - [Random Gear Shifter](#random-gear-shifter)
     - [Background Resizer](#background-resizer)
     - [Page Scrollers](#page-scrollers)
     - [Elements Hide/Fade](#elements-hide/fade)
@@ -86,6 +87,9 @@ This feature generates 'project cards' based on an array of project files. This 
             });
         })
     }
+
+***Trigger:*** Page load
+
 ___
 
 ### Project Card Sorter
@@ -115,6 +119,9 @@ This feature gets the custom attribute of the selected button called 'data-actsO
             }, 500);
         }
     }
+
+***Trigger:*** ".blockOptionsbtn" click (Top of Projects section)
+
 ___
 
 ### Popup Handlers
@@ -147,6 +154,9 @@ The second feature is simply to close the popup. This feature simply fades out t
         $("div.overlay").fadeOut();
         $("div.popContent").empty();
     }
+
+***Trigger:*** overlayShow: ".btnView" click ("View Me!" button in project card) overlayClose: ".close" click (Red X top right of popup)
+
 ___
 
 ### Minimizer/Maximizer
@@ -184,6 +194,7 @@ This feature is done using a simple if and else statement where the height of th
             $(".fakeBackground").css("height", $(".fakeBackground").height() - origH);
         }
     }
+***Trigger:*** ".minimizer" click (Double red arrows at top right of each section header)
 
 ___
 
@@ -230,6 +241,100 @@ The implementation of this feature is quite similar to - [Minimizer/Maximizer](#
             backgroundResize()
         }
     }
+
+***Trigger:*** ".exminbtn" click (Minimize/Maximize buttons sticky to top right of window when scrolling down)
+
+___
+### Random Gear Shifter
+
+***Purpose:***
+
+This is just a fun little feature that spawns new gears in the header and shifts/scales the gears in a direction based on a randomly generated number.
+
+***Implmentation:***
+
+This feature makes use of multiple else if statements that check the range of the randomly generated number which can be between 1 and 70. A different set of animations are set to each interval of 10. The function also clones the selected gear, and shifts it based on the width of the clonsed element, and shrinks the cloned element by a randomized amount between 1-100 pixels. Upon reaching a total of 25 gears on one side of the screen all clones fade out, and are subsequently removed. All of this is triggered upon pressing a gear in the header
+
+
+***Code:***
+
+    function randShift() {
+        var rand = Math.random() * 70;
+        var rand2 = Math.random() * 2
+        var time = 250 + rand
+        var shift = 25 * rand2
+        var scaler = Math.random() * 100
+
+        var newGear = $(this).clone()
+        $(this).parent().append(newGear)
+        $(this).parent().find("div.gear:last-of-type").on("click", randShift)
+        var newEleWidth = $("div.gear:last-of-type").width()
+        $(this).parent().find("div.gear:last-of-type").animate({
+            right: "+=" + newEleWidth,
+            left: "+=" + newEleWidth,
+            top: "-=" + newEleWidth,
+            bottom: "-=" + newEleWidth,
+            width: "-=" + scaler,
+            height: "-=" + scaler
+        }, time)
+        if (rand < 10) {
+            $(this).animate({
+                left: "+=" + shift + "%",
+                width: "+=" + scaler,
+                right: "+=" + shift + "%"
+            }, time)
+        } else if (rand < 20) {
+            $(this).animate({
+                left: "-=" + shift + "%",
+                right: "-=" + shift + "%",
+                height: "+=" + scaler
+            }, time)
+        } else if (rand < 30) {
+            $(this).animate({
+                top: "+=" + shift + "%",
+                width: "-=" + scaler
+            }, time)
+        } else if (rand < 40) {
+            $(this).animate({
+                top: "-=" + shift + "%",
+                height: "-=" + scaler
+            }, time)
+        } else if (rand < 50) {
+            $(this).animate({
+                top: "+=" + shift + "%",
+                width: "+=" + scaler,
+                right: "+=" + shift + "%",
+                left: "+=" + shift + "%"
+            }, time)
+        } else if (rand < 60) {
+            $(this).animate({
+                top: "-=" + shift + "%",
+                height: "+=" + scaler,
+                right: "+=" + shift + "%",
+                left: "+=" + shift + "%"
+            }, time)
+        } else if (rand < 70) {
+            $(this).animate({
+                top: "-=" + shift + "%",
+                left: "-=" + shift + "%",
+                right: "+=" + shift + "%",
+                width: "-=" + scaler
+            }, time)
+
+        }
+
+        if ($(this).parent().find("*").length > 25) {
+            $("#gearL7").nextAll().fadeOut(500)
+            $("#gearR7").nextAll().fadeOut(500)
+            setTimeout(function() {
+                $("#gearL7").nextAll().remove()
+                $("#gearR7").nextAll().remove()
+            }, 700)
+        }
+
+    }
+    
+***Trigger:*** ".gear" click (Any gear within the site header)
 
 ___
 
@@ -409,11 +514,12 @@ ___
 
 ## References
 
+___
+
+
 ### Github Calendar
 
-***What does it do?:***
-
-This feature simple embeds a github activity chart onto the webpage
+This feature simple embeds a github activity chart onto the webpage. Included in this references is "github-calendar-responsive.css" and github-calendar.min.js"
 
 ***Link:***
 

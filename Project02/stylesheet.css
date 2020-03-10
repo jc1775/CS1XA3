@@ -28,7 +28,6 @@ body {
     font-style: unset;
     top: 10%;
     position: relative;
-
 }
 
 #projects {
@@ -60,7 +59,6 @@ body {
     color: white;
 }
 
-
 .aboutBox {
     position: relative;
     background-color: darkgray;
@@ -80,7 +78,7 @@ body {
 
 .aboutBox h1 {
     color: white;
-    background-image: linear-gradient(transparent, rgb(255,0,0,0.5),transparent);
+    background-image: linear-gradient(transparent, rgb(255, 0, 0, 0.5), transparent);
     margin: 0;
     margin-bottom: 10px;
     padding: 0;
@@ -96,7 +94,6 @@ body {
     margin-bottom: 10px;
     margin-top: 10px;
     padding: 0;
-
 }
 
 .contentBox p {
@@ -155,7 +152,7 @@ body {
 }
 
 .menu {
-    background-color: rgb(255,0,0,0.3);
+    background-color: rgb(255, 0, 0, 0.3);
     position: relative;
     padding-left: 10%;
     left: 0%;
@@ -208,7 +205,7 @@ body {
 }
 
 .blockOptions {
-    background-color: rgb(255,0,0,0.5);
+    background-color: rgb(255, 0, 0, 0.5);
     z-index: 1;
     position: sticky;
     top: 11%;
@@ -234,14 +231,15 @@ body {
     transform: scale(1.01, 1.01);
 }
 
-#projectItems{
+#projectItems {
     width: 90%;
     display: grid;
     grid-template-areas: 'postBox postBox postBox postBox postBox';
     padding-bottom: 10px;
 }
+
 .postBox {
-    background-color: rgb(255,0,0,0.5);
+    background-color: rgb(255, 0, 0, 0.5);
     box-shadow: white;
     border-radius: 5%;
     opacity: 80%;
@@ -269,7 +267,6 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 .postBox:hover {
@@ -288,11 +285,10 @@ body {
     cursor: pointer;
     font-family: Arial;
     font-size: 20px;
-
 }
 
 .postBox .btnView:hover {
-    background-color: rgb(255,0,0,0.5);
+    background-color: rgb(255, 0, 0, 0.5);
     transform: scale(1.01);
 }
 
@@ -301,9 +297,7 @@ body {
     left: 50%;
     top: 90%;
     transform: translate(-50%, -50%);
-
 }
-
 
 .arrow span {
     display: block;
@@ -329,11 +323,9 @@ body {
         opacity: 0;
         transform: rotate(45deg) translate(-5%, -5%);
     }
-
     50% {
         opacity: 1;
     }
-
     100% {
         opacity: 0;
         transform: rotate(45deg) translate(120%, 120%);
@@ -366,7 +358,6 @@ body {
     position: relative;
     border-color: transparent;
     float: left;
-
 }
 
 .headerBlock {
@@ -376,7 +367,6 @@ body {
     width: 100%;
     height: 15%;
     min-height: 100px;
-
 }
 
 .hTitle {
@@ -483,7 +473,7 @@ body {
     border-radius: 50%;
 }
 
-.socialIcon a{
+.socialIcon a {
     display: block;
     position: relative;
     left: 0;
@@ -496,7 +486,7 @@ body {
     transform: scale(1.05)
 }
 
-.footer .attribution{
+.footer .attribution {
     background-color: white;
     top: -20px;
     position: relative;
@@ -506,12 +496,10 @@ body {
     margin-left: -15px;
 }
 
-
 .graphPanel {
     width: 100%;
     height: auto;
     text-align: center;
-
 }
 
 .graphPanel .skillGraph {
@@ -527,12 +515,11 @@ body {
     text-align: center;
     margin-top: 5px;
     padding: 0;
-    
 }
 
 .skillGraph .fill {
     height: 100%;
-    background-color: rgb(255,0,0,0.9);
+    background-color: rgb(255, 0, 0, 0.9);
     margin: 0;
     padding: 0;
 }
@@ -543,7 +530,7 @@ body {
     background-color: transparent;
 }
 
-.miniTitle{
+.miniTitle {
     padding: 15px;
     position: absolute;
     right: 10%;
@@ -561,7 +548,6 @@ body {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-
 }
 
 .minimizer:hover {
@@ -623,37 +609,45 @@ body {
     transform: rotate(180deg);
 }
 
-#inqueries{
+#inqueries {
     display: grid;
     justify-content: center;
-    
 }
 
-.qrBox{
+.qrBox {
     position: absolute;
     left: 80%;
     width: 15%;
     height: 15%;
-    border-color: rgb(255,0,0,0.5);
+    border-color: rgb(255, 0, 0, 0.5);
     border-style: solid;
     text-align: center;
 }
-.contactQR{
+
+.contactQR {
     width: 100%;
     height: 100%;
     background-image: url("images/frameRED.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    
 }
 
-.qrBox p{
+.contactQR a {
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.qrBox p {
     font-family: Arial;
     font-weight: bolder;
     font-variant: small-caps;
     font-size: 20px;
-    background-color: rgb(255,0,0,0.5);
+    background-color: rgb(255, 0, 0, 0.5);
     color: white;
     padding: 5px;
     border-radius: 5%;
@@ -661,9 +655,9 @@ body {
     width: 100%;
     position: relative;
     left: -5px;
-    
 }
-.itemBox input{
+
+.itemBox input {
     width: 100%;
     height: 30px;
     min-width: 400px;
@@ -671,20 +665,21 @@ body {
     font-size: 19px;
 }
 
-.itemBox textarea{
+.itemBox textarea {
     width: 100%;
     min-width: 400px;
     height: 200px;
     font-family: Arial;
     font-size: 19px;
 }
+
 .itemBox .sbmBtn {
     width: 100%;
     min-width: 400px;
     cursor: pointer;
     color: white;
     font-weight: bolder;
-    background-color: rgb(255,0,0,0.5);
+    background-color: rgb(255, 0, 0, 0.5);
     border-radius: 5%;
     opacity: 90%;
 }
@@ -694,7 +689,7 @@ body {
     transform: scale(1.05)
 }
 
-.expandORmin{
+.expandORmin {
     z-index: 2;
     width: 200px;
     height: 30px;
@@ -703,10 +698,10 @@ body {
     left: 100%;
 }
 
-.exminbtn{
+.exminbtn {
     float: left;
     color: white;
-    background-color: rgb(255,0,0,0.5);
+    background-color: rgb(255, 0, 0, 0.5);
     width: 50%;
     height: 30px;
     font-size: 20px;
@@ -715,40 +710,34 @@ body {
     opacity: 50%;
 }
 
-.exminbtn:hover{
+.exminbtn:hover {
     transform: scale(1.05);
     opacity: 100%;
-    
 }
 
-.door{
+.door {
     z-index: 2;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    width: 50%;
+    width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
+    pointer-events: none;
 }
 
-.door img{
-    width: 100%;
-    min-width: 600px;
-    height: 100%;
-}
-
-#left{
+#left {
     background-position: right;
     left: 0;
 }
 
-#right{
+#right {
     background-position: left;
     right: 0;
 }
 
-.slideShow{
+.slideShow {
     z-index: 1;
     width: 100%;
     height: 30%;
@@ -757,24 +746,29 @@ body {
     overflow: hidden;
 }
 
-.slideShow .imagCont{
+.slideShow .imagCont {
     background-position: center;
     background-size: cover;
     width: 100%;
     height: 100%;
 }
 
-.gearBox{
-    width: 100%;
+.gearBox {
+    width: 50%;
     height: 100%;
     position: absolute;
     top: 0;
-    overflow: hidden;
     opacity: 30%;
-    
 }
 
-#gearR1{
+.gear {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: all;
+}
+
+#gearR1 {
     background-image: url(images/gears/gear2.png);
     background-position: center;
     background-size: contain;
@@ -785,29 +779,19 @@ body {
     position: absolute;
     left: 75px;
     top: 4.5%;
-    
-    
 }
 
-.gear{
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-#gearL1{
+#gearL1 {
     background-image: url(images/gears/gear2.png);
-    
     width: 200px;
     height: 250px;
     animation: gear 6s infinite linear;
     position: absolute;
     left: 75px;
     top: 4.5%;
-    
-    
 }
-#gearR2{
+
+#gearR2 {
     background-image: url(images/gears/gear2.png);
     width: 100px;
     height: 100px;
@@ -815,9 +799,9 @@ body {
     position: absolute;
     left: 60px;
     top: 1%;
-    
 }
-#gearL2{
+
+#gearL2 {
     background-image: url(images/gears/gear2.png);
     width: 100px;
     height: 100px;
@@ -825,9 +809,9 @@ body {
     position: absolute;
     left: 60px;
     top: 1%;
-    
 }
-#gearR3{
+
+#gearR3 {
     background-image: url(images/gears/gear3.png);
     width: 50px;
     height: 50px;
@@ -837,7 +821,7 @@ body {
     top: 4%;
 }
 
-#gearL3{
+#gearL3 {
     background-image: url(images/gears/gear3.png);
     width: 50px;
     height: 50px;
@@ -847,7 +831,7 @@ body {
     top: 4%;
 }
 
-#gearR4{
+#gearR4 {
     background-image: url(images/gears/gear4.png);
     animation: gear2 6s infinite linear;
     width: 250px;
@@ -855,10 +839,9 @@ body {
     position: absolute;
     left: 0px;
     top: 25%;
-    
 }
 
-#gearL4{
+#gearL4 {
     background-image: url(images/gears/gear4.png);
     animation: gear2 6s infinite linear;
     width: 250px;
@@ -866,9 +849,9 @@ body {
     position: absolute;
     left: 0px;
     top: 25%;
-    
 }
-#gearR5{
+
+#gearR5 {
     background-image: url(images/gears/gear5.png);
     width: 170px;
     height: 170px;
@@ -876,10 +859,9 @@ body {
     left: 110px;
     top: 48%;
     animation: gear 4s infinite linear;
-    
 }
 
-#gearL5{
+#gearL5 {
     background-image: url(images/gears/gear5.png);
     width: 170px;
     height: 170px;
@@ -887,9 +869,9 @@ body {
     left: 110px;
     top: 48%;
     animation: gear 4s infinite linear;
-    
 }
-#gearR6{
+
+#gearR6 {
     background-image: url(images/gears/gear6.png);
     width: 250px;
     height: 250px;
@@ -897,10 +879,9 @@ body {
     left: 0px;
     top: 62%;
     animation: gear2 7s infinite linear;
-    
 }
 
-#gearL6{
+#gearL6 {
     background-image: url(images/gears/gear6.png);
     width: 250px;
     height: 250px;
@@ -908,10 +889,9 @@ body {
     left: 0px;
     top: 62%;
     animation: gear2 7s infinite linear;
-    
 }
 
-#gearR7{
+#gearR7 {
     background-image: url(images/gears/gear7.png);
     width: 250px;
     height: 250px;
@@ -921,7 +901,7 @@ body {
     animation: gear 4.5s infinite linear;
 }
 
-#gearL7{
+#gearL7 {
     background-image: url(images/gears/gear7.png);
     width: 250px;
     height: 250px;
@@ -930,13 +910,12 @@ body {
     top: 80%;
     animation: gear 4.5s infinite linear;
 }
+
 @keyframes gear {
     00% {
         transform: rotate(360deg);
     }
-    
     100% {
-
         transform: rotate(0deg);
     }
 }
@@ -945,9 +924,7 @@ body {
     00% {
         transform: rotate(0deg);
     }
-
     100% {
-
         transform: rotate(360deg);
     }
 }
