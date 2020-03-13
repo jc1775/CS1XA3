@@ -23,21 +23,64 @@ body {
     color: white;
 }
 
-#title {
+.titleBox {
     z-index: 1;
-    font-style: unset;
-    top: 10%;
-    position: relative;
+    pointer-events: none;
+    width: 100%;
+    position: absolute;
+    top: 20%;
+    height: auto;
+    display: grid;
+    grid-template-areas: '. .';
 }
 
-#projects {
-    min-height: 300px;
+.titleBox p {
+    font-size: 4vw;
+    width: auto;
+    margin: 0;
+    margin-right: 0%;
+    padding: 0;
+    text-align: end;
+}
+
+.cursor {
+    background-image: url(images/cursor.png);
+    background-size: cover;
+    background-position: center;
+    filter: invert(1);
+    position: relative;
+    width: 17px;
+    height: 85%;
+    top: 7%;
+    animation: cursor 0.5s infinite linear;
+}
+
+@keyframes cursor {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
 }
 
 #quote {
     color: white;
     font-family: 'Bubbler One';
     font-size: 130%;
+    pointer-events: none;
+}
+
+#myName {
+    font-size: 200%;
+    font-weight: bolder;
+    text-align: center;
+    width: 100%;
+    margin-left: -5%;
+    position: relative;
+    top: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 #photoofme {
@@ -50,9 +93,12 @@ body {
 
 #aboutme {
     overflow: visible;
-    background-color: transparent;
     height: auto;
     max-height: none
+}
+
+#projects {
+    min-height: 300px;
 }
 
 #aboutBlock {
@@ -72,8 +118,15 @@ body {
 .contentBox {
     font-size: 19px;
     font-family: 'Sen', sans-serif;
+    width: 95%;
     max-width: 800px;
     display: inline-block
+}
+
+.sepLine {
+    width: 100%;
+    background-color: rgb(255, 0, 0, 0.3);
+    height: 0.3%;
 }
 
 .aboutBox h1 {
@@ -85,21 +138,39 @@ body {
     margin-left: 25%;
     margin-right: 25%;
     border-radius: 5%;
+    cursor: pointer;
 }
 
 .contentBox h3 {
-    position: relative;
-    left: -350px;
+    position: absolute;
+    left: 0;
     margin: 0;
     margin-bottom: 10px;
     margin-top: 10px;
     padding: 0;
+    font-weight: bolder;
+    font-size: 150%;
+}
+
+.itemBox {
+    position: relative;
+}
+
+.contentBox h4 {
+    font-size: 90%;
+    position: relative;
+    text-align: justify;
+    margin: 0;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    font-weight: bold;
 }
 
 .contentBox p {
     margin: 0;
     max-width: inherit;
-    text-align: justify
+    text-align: justify;
+    line-height: 150%;
 }
 
 .contentBox ul {
@@ -107,13 +178,14 @@ body {
 }
 
 .itemBox .header {
+    position: relative;
     height: 40px;
 }
 
-.itemBox .year {
-    position: relative;
-    text-align: end;
-    top: -40;
+.header .year {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .backgroundimg {
@@ -189,17 +261,20 @@ body {
 }
 
 .main_container {
-    background-color: rgb(56, 50, 50);
+    background-color: rgb(50, 50, 50, 0.6);
     width: 100%;
     height: auto;
     opacity: 95%;
-    text-align: center;
     text-align: center;
 }
 
 .pageBlock {
     background-color: rgb(56, 50, 50);
-    width: 100%;
+    box-shadow: 0 5px 15px black;
+    width: 96%;
+    margin-bottom: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
     min-height: 50%;
     height: auto;
 }
@@ -234,7 +309,7 @@ body {
 #projectItems {
     width: 90%;
     display: grid;
-    grid-template-areas: 'postBox postBox postBox postBox postBox';
+    grid-template-areas: 'postBox postBox postBox postBox';
     padding-bottom: 10px;
 }
 
@@ -243,8 +318,7 @@ body {
     box-shadow: white;
     border-radius: 5%;
     opacity: 80%;
-    min-width: 100px;
-    max-width: 150px;
+    width: 150px;
     min-height: 200px;
     height: 10%;
     color: black;
@@ -343,7 +417,7 @@ body {
 .fakeBackground {
     position: absolute;
     top: 100%;
-    opacity: 5%;
+    opacity: 10%;
     background-image: url(images/repeater.jpg);
     background-repeat: repeat;
     width: 100%;
@@ -362,7 +436,6 @@ body {
 
 .headerBlock {
     color: white;
-    background-color: transparent;
     position: relative;
     width: 100%;
     height: 15%;
@@ -395,13 +468,14 @@ body {
 .overlay .window {
     position: absolute;
     z-index: 10;
-    top: 5%;
+    top: 6%;
     margin-left: 15%;
     margin-right: 15%;
     border-radius: 1%;
     background-color: lightgray;
     width: 70%;
-    height: 90%;
+    height: auto;
+    max-height: 90%;
     overflow: scroll;
     resize: horizontal;
 }
@@ -411,8 +485,9 @@ body {
     position: relative;
     width: 100%;
     height: auto;
-    background-color: darkslategray;
+    background-color: rgb(56, 50, 50);
     font-size: 4vw;
+    color: white;
     font-family: Arial;
     padding-top: 2%;
     padding-bottom: 2%;
@@ -502,12 +577,20 @@ body {
     text-align: center;
 }
 
+.graphPanel h4 {
+    width: 400px;
+    text-align: justify;
+    position: relative;
+    left: 50px;
+}
+
 .graphPanel .skillGraph {
     background-color: white;
     width: 60%;
     height: 15px;
     margin-left: 20%;
     margin-top: 2px;
+    margin-bottom: 20px;
     border-radius: 5%;
 }
 
@@ -616,17 +699,17 @@ body {
 
 .qrBox {
     position: absolute;
-    left: 80%;
-    width: 15%;
-    height: 15%;
-    border-color: rgb(255, 0, 0, 0.5);
-    border-style: solid;
+    right: 0;
+    top: 30%;
+    width: 150px;
+    height: 50px;
     text-align: center;
 }
 
 .contactQR {
-    width: 100%;
-    height: 100%;
+    width: 150px;
+    height: 150px;
+    ;
     background-image: url("images/frameRED.png");
     background-position: center;
     background-size: contain;
@@ -652,9 +735,9 @@ body {
     padding: 5px;
     border-radius: 5%;
     text-align: center;
-    width: 100%;
-    position: relative;
-    left: -5px;
+    width: 70%;
+    display: inline-block;
+    line-height: normal;
 }
 
 .itemBox input {
@@ -927,4 +1010,130 @@ body {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.projcontent {
+    position: relative;
+    background-color: transparent;
+    width: 100%;
+    height: auto;
+    font-family: 'Sen', sans-serif;
+    font-size: 150%;
+}
+
+.sideWindow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 29%;
+    background-color: red;
+    text-align: center;
+    overflow: hidden;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+}
+
+.infoWindow {
+    position: relative;
+    right: -29%;
+    top: 0;
+    height: auto;
+    width: 70%;
+    background-color: white;
+    color: black;
+    padding-left: 1%;
+    border-left: 5px;
+    border-left-color: rgb(250, 0, 0, 0.5);
+    border-left-style: inset;
+    border-bottom-color: rgb(250, 0, 0, 0.5);
+    border-bottom-style: inset;
+    box-shadow: 0 5px 15px black;
+}
+
+.projPic {
+    display: inline-block;
+    margin-top: 5%;
+    width: auto;
+    height: 50%;
+    transition-duration: 5s;
+}
+
+.projPic img {
+    width: auto;
+    height: 100%;
+    min-height: 350px;
+    border-radius: 5%;
+}
+
+.btnLive {
+    position: absolute;
+    filter: invert();
+    top: 0%;
+    left: 0%;
+    background-image: url(images/live.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 50px;
+    height: 10%;
+    cursor: pointer;
+    opacity: 50%;
+}
+
+.btnLive:hover {
+    opacity: 100%;
+    transform: scale(1.05);
+}
+
+.btnLive a {
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.projPic:hover {
+    transition-duration: 5s;
+    transform: rotate(25deg) scale(1.05) translateX(-50px)
+}
+
+.projBtnCont {
+    display: inline-block;
+    width: 50%;
+    height: 10%;
+    margin-top: 20%;
+}
+
+.projBtn {
+    position: relative;
+    float: left;
+    width: 50%;
+    height: 100%;
+    cursor: pointer;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 60%;
+}
+
+.projBtn a {
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.projBtn:hover {
+    transition-duration: 1s;
+    opacity: 100%;
+    transform: scale(1.05)
+}
+
+.projList {
+    column-count: 2;
 }

@@ -1,5 +1,6 @@
 <html>
 <title>Joseph's eCV</title>
+<link rel="shortcut icon" type="image/ico" href="images/gearico.png" />
 <meta meta name="viewport" content="user-scalable=no" />
 
 <head>
@@ -57,7 +58,11 @@
             </div>
 
         </div>
-        <p id="title"></p>
+        <div class="titleBox">
+            <p id="title"></p>
+            <div class="cursor"></div>
+        </div>
+
         <div class="blackbox"></div>
         <div class="arrow">
             <span></span>
@@ -84,57 +89,21 @@
             <div id="aboutme" class="headerBlock">
                 <p class="hTitle">ABOUT ME:</p>
                 <img id="photoofme" class="headerpic" src="https://avatars1.githubusercontent.com/u/47985359?s=460&v=4">
-                <p style="font-size: 200%; font-weight: bolder; text-align: center; width: 100%;margin-left: -5%; position: relative; top: 100%; margin-bottom: 0;margin-top: 0">Joseph Calarco</p>
+                <p id="myName">Joseph Calarco</p>
             </div>
 
             <div class="aboutBox">
-                <h1>Highlights</h1>
-                <div class="contentBox">
-                    <h3>Stuff</h3>
-                    <p>Lorem ipsum dolor sit amet, ad erant fabulas mentitum mea. Ne feugait adolescens mel, ea nec vitae fuisset, praesent forensibus qui cu. Graeci sadipscing vituperatoribus nam ut, fugit alienum ut quo, vix id iusto eirmod discere. Ea
-                        has mazim salutandi percipitur. Veri expetenda pri an, ea pri homero fabellas. Per aperiam molestiae conceptam ne, in purto epicuri epicurei mea. Eum error causae similique cu, luptatum apeirian in his, nec no munere alienum. Sit
-                        at sint ubique habemus. Per unum appellantur intellegebat at, cu quod sonet sea.</p>
-                </div>
-            </div>
-            <div class="aboutBox">
-                <h1>Experience</h1>
+                <h1>Summary</h1>
                 <div class="contentBox">
                     <div class="itemBox">
                         <div class="header">
-                            <h3>Thing 1</h3>
-                            <div class="year">2017</div>
+                            <h3></h3>
                         </div>
-
-                        <ul>
-                            <li>Apple</li>
-                            <li>Banana</li>
-                            <li> ipsum dolor sit amet, ad erant fabulas mentitum mea. Ne feugait adolescens mel, ea nec vitae fuisset, praesent forensibus qui cu. Graeci sadipscing vituperatoribus nam ut, fugit alienum ut quo, vix id iusto eirmod discere.
-                                Ea has mazim salutandi percipitur. Veri expetenda pri an, ea pri homero</li>
-                        </ul>
+                        <p>Welcome to my online CV! My name is Joseph Calarco and I am a first year student at McMaster University. I have a strong interest in data science, with the exponential growth of data available to the general populace the possibilities
+                            of this field are immense. I once wrote a program which accessed the live twitter stream in order to see if sentiment analysis could accurately predict the critical ratings of films. I am pursuing a second major in psychology
+                            as I am a strong believer that there is much to learn from the human mind that can be applied to computer science. I strive to learn as much as I can about programming, design, and how we interact with the digital world. </p>
                     </div>
-                    <div class="itemBox">
-                        <div class="header">
-                            <h3>Thing 2</h3>
-                            <div class="year">2020</div>
-                        </div>
-
-                        <ul>
-                            <li>Apple</li>
-                            <li>Banana</li>
-                            <li> ipsum dolor sit amet, ad erant fabulas mentitum mea. Ne feugait adolescens mel, ea nec vitae fuisset, praesent forensibus qui cu. Graeci sadipscing vituperatoribus nam ut, fugit alienum ut quo, vix id iusto eirmod discere.
-                                Ea has mazim salutandi percipitur. Veri expetenda pri an, ea pri homero</li>
-                        </ul>
-                    </div>
-                    <div class="itemBox">
-                        <div class="header">
-                            <h3>Thing 3</h3>
-                            <div class="year">100 AD</div>
-                        </div>
-
-                        <p>Lorem ipsum dolor sit amet, ad erant fabulas mentitum mea. Ne feugait adolescens mel, ea nec vitae fuisset, praesent forensibus qui cu. Graeci sadipscing vituperatoribus nam ut, fugit alienum ut quo, vix id iusto eirmod discere.
-                            Ea has mazim salutandi percipitur. Veri expetenda pri an, ea pri homero fabellas. Per aperiam molestiae conceptam ne, in purto epicuri epicurei mea. Eum error causae similique cu, luptatum apeirian in his, nec no munere alienum.
-                            Sit at sint ubique habemus. Per unum appellantur intellegebat at, cu quod sonet sea.</p>
-                    </div>
+                    <div class="blankdiv"></div>
                 </div>
             </div>
             <div class="aboutBox">
@@ -142,36 +111,116 @@
                 <div class="contentBox">
                     <div class="itemBox">
                         <div class="header">
-                            <h3>Thing 3</h3>
-                            <div class="year">10,000 BC</div>
+                            <h3>Bachelor of Applied Science</h3>
+                            <div class="year">2019-2023</div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, ad erant fabulas mentitum mea. Ne feugait adolescens mel, ea nec vitae fuisset, praesent forensibus qui cu. Graeci sadipscing vituperatoribus nam ut, fugit alienum ut quo, vix id iusto eirmod discere.
-                            Ea has mazim salutandi percipitur. Veri expetenda pri an, ea pri homero fabellas. Per aperiam molestiae conceptam ne, in purto epicuri epicurei mea. Eum error causae similique cu, luptatum apeirian in his, nec no munere alienum.
-                            Sit at sint ubique habemus. Per unum appellantur intellegebat at, cu quod sonet sea.</p>
+                        <p>Computer Science</p>
+                        <p>@ Faculty of Engineering - McMaster University</p>
+                        <h4>CourseWork</h4>
+                        <ul>
+                            <li>Introduction to Computational Thinking</li>
+                            <li>Computer Science Practice and Experience: Basic Concepts</li>
+                            <li>Introduction to Programming</li>
+                            <li>Engineering Mathematics: Calculus I</li>
+                            <li>Engineering Mathematics: Calculus II</li>
+                            <li>Engineering Mathematics: Linear Algebra</li>
+                        </ul>
+                        <h4>Awards</h4>
+                        <ul>
+                            <li>Entrance Scholarship for Applying with an Average of 95%+</li>
+                        </ul>
+                        <div class="sepLine"></div>
                     </div>
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Ontario Secondary School Diploma</h3>
+                            <div class="year">2015-2019</div>
+                        </div>
+                        <p>@ Burnhamthorpe Collegiate</p>
+                        <h4>Awards</h4>
+                        <ul>
+                            <li>Ontario Scholar</li>
+                            <li>Academic Proficiency (Graduating with highest average in class)</li>
+                            <li>Student Appreciation Award in Biology</li>
+                            <li>Student Appreciation Award in Advanced Functions</li>
+                        </ul>
+                        <p>@ Bishop Allen Academy</p>
+                        <h4>Awards</h4>
+                        <ul>
+                            <li>Honour Roll x2</li>
+                            <li>Freshman 40</li>
+
+                        </ul>
+                        <div class="sepLine"></div>
+                    </div>
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Certificate of Completion</h3>
+                            <div class="year">Feb 2019 - May 2019</div>
+                        </div>
+                        <p>Python Programming</p>
+                        <p>@ Bitmaker/General Assembly</p>
+
+                    </div>
+                    <div class="blankdiv"></div>
                 </div>
-                <div class="aboutBox">
-                    <h1>Proficiencies</h1>
-                    <div class="contentBox" style="width: 70%;">
-                        <div class="itemBox">
-                            <div class="graphPanel">
-                                <p>Skill 1</p>
-                                <div class="skillGraph">
-                                    <div class="fill" style="width: 70%"></div>
-                                </div>
-                                <p>Skill 2</p>
-                                <div class="skillGraph">
-                                    <div class="fill" style="width: 45%"></div>
-                                </div>
-                                <p>Skill 3</p>
-                                <div class="skillGraph">
-                                    <div class="fill" style="width: 15%"></div>
-                                </div>
+            </div>
+            <div class="aboutBox">
+                <h1>Proficiencies</h1>
+                <div class="contentBox" style="width: 70%;">
+                    <div class="itemBox">
+                        <div class="graphPanel">
+                            <h4>Programming</h4>
+                            <p>Python</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 75%"></div>
+                            </div>
+                            <p>Java</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 65%"></div>
+                            </div>
+                            <p>Javascript</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 55%"></div>
+                            </div>
+                            <p>HTML/CSS</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 65%"></div>
+                            </div>
+                            <p>Haskell</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 55%"></div>
+                            </div>
+                            <p>Bash</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 55%"></div>
+                            </div>
+                            <h4>Computer Skills</h4>
+                            <p>Photoshop</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 80%"></div>
+                            </div>
+                            <p>MS Word/Excel</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 99%"></div>
+                            </div>
+                            <h4>Languages</h4>
+                            <p>English</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 100%"></div>
+                            </div>
+                            <p>Italian</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 55%"></div>
+                            </div>
+                            <p>French</p>
+                            <div class="skillGraph">
+                                <div class="fill" style="width: 45%"></div>
                             </div>
                         </div>
-
-                        <div class="blankdiv"></div>
                     </div>
+
+                    <div class="blankdiv"></div>
                 </div>
             </div>
             <div class="aboutBox">
@@ -179,19 +228,102 @@
                 <div class="contentBox">
                     <div class="itemBox">
                         <div class="header">
-                            <h3>Stuff</h3>
-                            <div class="year">10,000 BC</div>
+                            <h3>Royal Canadian Air Cadets</h3>
+                            <div class="year">2013-2017</div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, ad erant fabulas mentitum mea. Ne feugait adolescens mel, ea nec vitae fuisset, praesent forensibus qui cu. Graeci sadipscing vituperatoribus nam ut, fugit alienum ut quo, vix id iusto eirmod discere.
-                            Ea has mazim salutandi percipitur. Veri expetenda pri an, ea pri homero fabellas. Per aperiam molestiae conceptam ne, in purto epicuri epicurei mea. Eum error causae similique cu, luptatum apeirian in his, nec no munere alienum.
-                            Sit at sint ubique habemus. Per unum appellantur intellegebat at, cu quod sonet sea.</p>
+                        <h4>Awards</h4>
+                        <ul>
+                            <li>Top Cadet in Flight</li>
+                            <li>Top Drill Team</li>
+                            <li>Top Drill in Flight</li>
+                        </ul>
+                        <div class="sepLine"></div>
                     </div>
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Debate Club</h3>
+                            <div class="year">2014-2016</div>
+                        </div>
+                        <h4>Awards</h4>
+                        <ul>
+                            <li>3rd Place Debate Team at the TDCSB Debate Tournament</li>
+                        </ul>
+                        <div class="sepLine"></div>
+                    </div>
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Robotics Club</h3>
+                            <div class="year">2014-2016</div>
+                        </div>
+                        <ul>
+                            <li>Founding member @Bishop Allen Academy</li>
+                        </ul>
+                        <div class="sepLine"></div>
+                    </div>
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Track and Field</h3>
+                            <div class="year">2014-2016</div>
+                        </div>
+                        <ul>
+                            <li>Silver Medal at TDCAA Track and Field Tournament</li>
+                        </ul>
+                        <div class="sepLine"></div>
+                    </div>
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Band</h3>
+                            <div class="year">2014-2016</div>
+                        </div>
+                        <ul>
+                            <li>Gold Medal at Kiwanis Music Festival x2</li>
+                        </ul>
+                    </div>
+                    <div class="blankdiv"></div>
                 </div>
-                <div class="blankdiv"></div>
+
             </div>
+            <div class="aboutBox">
+                <h1>Experience</h1>
+                <div class="contentBox">
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Math Tutor</h3>
+                            <div class="year">Sep 2017 - Jun 2019</div>
+                        </div>
+                        <p>@ Toronto District School Board</p>
+                        <ul>
+                            <li>Tutored Highschool level mathematics</li>
+                            <li>Recognized for my dedication to helping others learn and improve</li>
+                            <li>Developed ability to break down complicated concepts into easily understandable segments</li>
+                        </ul>
+                        <div class="sepLine"></div>
+                    </div>
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Student Volunteer</h3>
+                            <div class="year">Jul-Aug 2014</div>
+                        </div>
+                        <p> @ Bloor West Physiotherapy</p>
+                        <ul>
+                            <li>Used knowledge of graphic design and photoshop to redesign logo for the clinic's 50th anniversary</li>
+                            <li>Assisted in organizing patient statistics into well formated documents</li>
+                        </ul>
+                        <div class="sepLine"></div>
+                    </div>
+                    <div class="itemBox">
+                        <div class="header">
+                            <h3>Stage Crew Volunteer</h3>
+                            <div class="year">Jun 2015</div>
+                        </div>
+                        <p> @ Rotary Club of Etobicoke</p>
+                        <ul>
+                        </ul>
+                    </div>
+                    <div class="blankdiv"></div>
+                </div>
 
-
-
+            </div>
         </div>
 
         <div id="projects" class="pageBlock">
@@ -215,6 +347,7 @@
 
                 </div>
             </div>
+            <div class="blankdiv"></div>
         </div>
         <div id="contactBlock" class="pageBlock">
             <div class="miniTitle">CONTACT ME:</div>
@@ -224,31 +357,24 @@
                 <p class="hTitle">CONTACT ME:</p>
             </div>
             <div class="aboutBox">
-                <h1>Lorem ipsum dolor</h1>
+                <h1>Actively Seeking CO-OP Opportunities</h1>
                 <div class="contentBox">
 
                     <div class="itemBox">
                         <div class="header">
-                            <h3>BlaBlaBla</h3>
-                            <div class="year">100,000 BC</div>
+                            <h3></h3>
+                            <div class="year"></div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, ad erant fabulas mentitum mea. Ne feugait adolescens mel, ea nec vitae fuisset, praesent forensibus qui cu. Graeci sadipscing vituperatoribus nam ut, fugit alienum ut quo, vix id iusto eirmod discere.
-                            Ea has mazim salutandi percipitur. Veri expetenda pri an, ea pri homero fabellas. Per aperiam molestiae conceptam ne, in purto epicuri epicurei mea. Eum error causae similique cu, luptatum apeirian in his, nec no munere alienum.
-                            Sit at sint ubique habemus. Per unum appellantur intellegebat at, cu quod sonet sea.</p>
+                        <p>I am available for Co-Op positions ranging from 4-months to as long as 16-months. If you are interested in discovering what I have to offer your company, and would like to help me develop as a computer scientist please contact
+                            me below!</p>
                     </div>
 
                     <div class="blankdiv"></div>
 
-                    <div id="inqueries" class="itemBox">
+                    <div id="inqueries" class="itemBox" style="height:auto;max-height: none; overflow: ">
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf_3kEaUGapBB2rAmGY5JkslYJaJ4xQeL8ymAfoExY6G0Zi3g/viewform?embedded=true" scrolling="no" seamless="seamless" width="500" height="720" frameborder="0" style="overflow: hidden;">Loading…</iframe>
 
-                        <input id="inqName" type="text" placeholder="Name">
-                        <br />
-                        <br />
-                        <input id="inqEmail" type="email" placeholder="Email">
-                        <br />
-                        <br />
-                        <textarea id="inqMsg" type="text" placeholder="Message"></textarea>
-                        <a id="inq" class="sbmBtn">Submit</a>
+
                         <div class="qrBox">
                             <div class="contactQR">
                                 <a target="_blank" href="https://qrco.de/bbStXN"></a>

@@ -1,8 +1,10 @@
 $(document).ready(function() {
-    //savedstuff: headerpic" src="https://avatars1.githubusercontent.com/u/47985359?s=460&v=4
+    //savedstuff: headerpic" src="https://avatars1.githubusercontent.com/u/47985359?s=460&v=4 color: rgb(56, 50, 50)
+    //something interesting for later $("div.popContent").load('https://cors-anywhere.herokuapp.com/https://github.com/jc1775/python-programming/blob/master/Twitter%20Sentiment%20Analysis.ipynb iframe.render-viewer')
+
 
     //----projects card generator
-    var files = ['projects/twittersent.html', 'projects/bashproject1.html', 'projects/test2.html', 'projects/test3.html', 'projects/test4.html', 'projects/test5.html', 'projects/test6.html', 'projects/test2.html', 'projects/test3.html', 'projects/test4.html', 'projects/test5.html', 'projects/test6.html'];
+    var files = ['projects/twittersent.html', 'projects/bashproject1.html', 'projects/webcv.html', 'projects/learningsite.html', 'projects/projecttemplate.html', 'projects/projecttemplate.html', 'projects/projecttemplate.html', 'projects/projecttemplate.html', 'projects/projecttemplate.html', 'projects/projecttemplate.html'];
 
     function cardMaker() {
         files.forEach(function(item) {
@@ -11,7 +13,8 @@ $(document).ready(function() {
                 var type = ((result.filter("div.type"))[0].innerText)
                 var title = ((result.filter("div.title"))[0].innerText)
                 var pic = ((result.filter("div.pic"))[0].innerText)
-                var card = $('<div id="' + type + item + '" class="postBox"> <div class="title">' + title + '</div><div class="content" style="background-image: url(' + pic + ')" ></div><div data-link="' + item + '" class="btnView">View me!</div></div>');
+                var datalink = ((result.filter("div.link"))[0].innerText)
+                var card = $('<div id="' + type + item + '" class="postBox"> <div class="title">' + title + '</div><div class="content" style="background-image: url(' + pic + ')" ></div><div data-link="' + datalink + '" class="btnView">View me!</div></div>');
                 $("#projectItems").append(card);
                 $("div.btnView").on('click', overlayShow)
             });
@@ -45,12 +48,13 @@ $(document).ready(function() {
     }
     //----------------------
 
-    //----This rescales a bunch of elements and font sizes if the screen width is greater than 2000px
+    //----This rescales a bunch of elements and font sizes if the screen width is greater than 3840px
     function winSizeCheck() {
-        if ($(window).width() > 2000) {
+        if ($(window).width() >= 3460) {
             $("div.contentBox").css("max-width", "1500px")
-            $("div.contentBox").css("font-size", "50px")
-            $("div.popContent").css("font-size", "50px")
+            $("div.contentBox").css("font-size", "200%")
+            $("div.popContent").css("font-size", "200%")
+            $("div.aboutBox h1").css("font-size", "400%")
             $("div.header").css("height", "90px")
             $("#inqName").css("width", "1000px")
             $("#inqMsg").css("width", "1000px")
@@ -68,6 +72,7 @@ $(document).ready(function() {
             $("#projectitems").css("width", "2500px")
             backgroundResize()
         } else {
+            $("div.aboutBox h1").css("font-size", "")
             $("div.contentBox").css("max-width", "")
             $("div.contentBox").css("font-size", "")
             $("div.popContent").css("font-size", "")
@@ -89,12 +94,13 @@ $(document).ready(function() {
             backgroundResize()
         }
     }
-    //-----------------------
+    //----------------------
 
     function loadRemove() {
         $("div.loadingScreen").fadeOut(2000);
         setTimeout(function() {
             $("div.loadingScreen").remove();
+            titleTyper()
         }, 2000);
     }
 
@@ -142,6 +148,7 @@ $(document).ready(function() {
             $(window).one("scroll", fader);
             $("div.gearBox").contents().css("animation", "");
             $("#quote").fadeIn(2000);
+            $("#title").fadeIn(2000);
         }
     }
 
@@ -157,6 +164,7 @@ $(document).ready(function() {
         $("div.scrollTop").fadeIn(2000);
         //$("div.slideShow").css("opacity", "0");
         $("#quote").fadeOut(500);
+        $("#title").fadeOut(500);
     }
 
     function overlayClose() {
@@ -194,9 +202,10 @@ $(document).ready(function() {
 
     function overlayShow() {
         var file = $(this).attr("data-link");
+        var title = $(this).parent().find("div.title").text()
         $("div.overlay").fadeIn();
-        $("div.popHeader").load(file + " div.title");
-        $("div.popContent").load(file + " div.starthere");
+        $("div.popHeader").text(title);
+        $("div.popContent").load(file);
     }
 
     function topScroll() {
@@ -216,7 +225,7 @@ $(document).ready(function() {
     function projectSorter() {
         var toKeep = $(this).attr("data-actsOn");
         $("btn.blockOptionsbtn").css("background-color", "transparent");
-        $(this).css("background-color", "lightblue")
+        $(this).css("background-color", "orange")
         if (toKeep == "All") {
             $("div.postBox").fadeIn(500);
         } else {
@@ -225,6 +234,9 @@ $(document).ready(function() {
                 $('div[id^="' + toKeep + '"]').fadeIn(500);
             }, 500);
         }
+        setTimeout(function() {
+            backgroundResize()
+        }, 1010)
     }
 
     function menuScroller() {
@@ -249,6 +261,8 @@ $(document).ready(function() {
                 }
             })
         } else if ($(this).is("#maximize")) {
+            $("div.contentBox").css("height", "auto")
+            $("div.contentBox").contents().fadeIn(200)
             $("div.pageBlock").each(function() {
                 if ($(this).height() == 50) {
                     $(this).css("min-height", "50%");
@@ -338,6 +352,67 @@ $(document).ready(function() {
         }
 
     }
+    var title1 = ["<", "h", "1", " ", "i", "d", "=", "\"", "g", "r", "e", "e", "t", "i", "n", "g", "\"", ">", " ", "H", "e", "y", "!", " "]
+    var title2 = ["<", "h", "1", " ", "i", "d", "=", "\"", "g", "r", "e", "e", "t", "i", "n", "g", "\"", ">", " ", "W", "a", "a", "z", "z", "z", "z", " ", "U", "p", "p", "!", "!", "!", ".", ".", "."]
+    var title3 = ["<", "h", "1", " ", "i", "d", "=", "\"", "g", "r", "e", "e", "t", "i", "n", "g", "\"", ">", " ", "W", "e", "l", "c", "o", "m", "e", " ", "t", "o", " ", "J", "o", "s", "e", "p", "h", "'", "s", " ", "W", "e", "b", " ", "C", "V", "!", " ", "<", "/", "h", "1", ">"]
+    var words = [title1, title2, title3]
+    var o = 0
+    var y = 0
+
+    function titleTyper() {
+        var title = words[o]
+        if (y < (title.length)) {
+            var currentState = $("#title").text()
+            $("#title").text(currentState + title[y])
+            y++;
+        } else {
+            if (o == words.length - 1) {
+
+            } else {
+                titleRemover(title)
+            }
+
+        }
+        setTimeout(function() {
+            titleTyper()
+        }, 100)
+    }
+
+    function titleRemover(title) {
+        var z = $("#title").text().length
+        if (z > 0) {
+            var currentState = $("#title").text()
+            var newString = currentState.slice(0, -1)
+            $("#title").text(newString)
+            z--;
+        } else {
+            z = 0
+            y = 0
+            if (o < words.length - 1) {
+                o++;
+            } else {
+                o = 0;
+            }
+        }
+
+    }
+
+    function smallMinimizer() {
+        if ($(this).parent().find("div.contentBox").height() == 0) {
+            $(this).parent().find("div.contentBox").css("height", "auto")
+            $(this).parent().find("div.contentBox").contents().fadeIn(200)
+            backgroundResize()
+        } else {
+            var origH = $(this).parent().find("div.contentBox").height()
+            $(this).parent().find("div.contentBox").animate({
+                height: 0
+            }, 300);
+            $(this).parent().find("div.contentBox").contents().hide()
+            $(".fakeBackground").css("height", $(".fakeBackground").height() - origH);
+
+        }
+
+    }
     //---------------------------------------------------------------------End of function declarations
 
     cardMaker()
@@ -369,5 +444,6 @@ $(document).ready(function() {
     $("div.exminbtn").click(minimizerALL)
     $("div.gear").click(randShift)
     $("div.menubtn").click(menuToggle)
+    $("div.aboutBox h1").click(smallMinimizer)
 
 })
