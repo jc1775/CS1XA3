@@ -13,6 +13,7 @@
   - [Minimizer/Maximizer](#minimizer/maximizer)
   - [Minimizer/Maximizer ALL](#minimizer/maximizer-all)
   - [Random Gear Shifter](#random-gear-shifter)
+  - [Title Typewriter](#title-typewriter)
   - [General Animations and Features](#general-animations-and-Features)
     - [Background Resizer](#background-resizer)
     - [Page Scrollers](#page-scrollers)
@@ -134,7 +135,7 @@ These are two features that were created to handle the use of popup boxes contai
 
 overlayShow:
 
-The first feature displays the correct popup information upon clicking the 'View Me!' button within each project card. This is done by getting the text from the custome attribute 'data-link' which is the path to the project file and saving it as a variable. The feature then fades in the project popup, and using .load() loads the title from the project files 'div.title' into the header of the popup, and the loads the content of the project into the content area of the popup (div.popContent), the information to be displayed as content must be within a element named div.starthere in the projects HTML file.
+The first feature displays the correct popup information upon clicking the 'View Me!' button within each project card. This is done by getting the text from the custom attribute 'data-link' which is the path to the project file and saving it as a variable. The feature then fades in the project popup, and using .load() loads the title from the project files 'div.title' into the header of the popup, and the loads the content of the project into the content area of the popup (div.popContent), the information to be displayed as content must be within a element named div.projcontent in the projects HTML file.
 
 overlayClose:
 
@@ -144,9 +145,10 @@ The second feature is simply to close the popup. This feature simply fades out t
 
     function overlayShow() {
         var file = $(this).attr("data-link");
+        var title = $(this).parent().find("div.title").text()
         $("div.overlay").fadeIn();
-        $("div.popHeader").load(file + " div.title");
-        $("div.popContent").load(file + " div.starthere");
+        $("div.popHeader").text(title);
+        $("div.popContent").load(file);
     }
 
 
@@ -194,7 +196,7 @@ This feature is done using a simple if and else statement where the height of th
             $(".fakeBackground").css("height", $(".fakeBackground").height() - origH);
         }
     }
-***Trigger:*** ".minimizer" click (Double red arrows at top right of each section header)
+***Trigger:*** ".minimizer" click (Double red arrows at top right of each section header) "div.aboutBox h1" click (Any header with a red background makes use of a very similar function)
 
 ___
 
@@ -335,6 +337,66 @@ This feature makes use of multiple else if statements that check the range of th
     }
     
 ***Trigger:*** ".gear" click (Any gear within the site header)
+
+___
+
+### Title Typewriter
+
+***Purpose:***
+
+This is just a cool animation that simulates someone typing out a title for the page multiple times until finally deciding on a single title.
+
+***Implmentation:***
+
+titleTyper:
+
+This feature simply iterates over an array of arrays, where each subarray contains the characters making up each title. It compares the length of each subarray to a varriable and adds the array at said variable each iteration, then increments the variable by 1, upon filling in the complete array, it runs a helper function called titleRemover() which iterates over the current set title, slicing 1 off of the end each time, upon completion of removing the title the feature moves onto the next array until arriving at the last and stopping.
+
+***Code:***
+
+    var o = 0
+    var y = 0
+
+    function titleTyper() {
+        var title = words[o]
+        if (y < (title.length)) {
+            var currentState = $("#title").text()
+            $("#title").text(currentState + title[y])
+            y++;
+        } else {
+            if (o == words.length - 1) {
+
+            } else {
+                titleRemover(title)
+            }
+
+        }
+        setTimeout(function() {
+            titleTyper()
+        }, 100)
+    }
+
+    function titleRemover(title) {
+        var z = $("#title").text().length
+        if (z > 0) {
+            var currentState = $("#title").text()
+            var newString = currentState.slice(0, -1)
+            $("#title").text(newString)
+            z--;
+        } else {
+            z = 0
+            y = 0
+            if (o < words.length - 1) {
+                o++;
+            } else {
+                o = 0;
+            }
+        }
+
+    }
+
+
+***Trigger:*** Page load
 
 ___
 
