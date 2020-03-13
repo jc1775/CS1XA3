@@ -1,6 +1,5 @@
 $(document).ready(function() {
     //savedstuff: headerpic" src="https://avatars1.githubusercontent.com/u/47985359?s=460&v=4 color: rgb(56, 50, 50)
-    //something interesting for later $("div.popContent").load('https://cors-anywhere.herokuapp.com/https://github.com/jc1775/python-programming/blob/master/Twitter%20Sentiment%20Analysis.ipynb iframe.render-viewer')
 
 
     //----projects card generator
@@ -22,7 +21,7 @@ $(document).ready(function() {
     }
     //----------------------
 
-    //----auto slideshow
+    /*----auto slideshow--Not Currently in use
     var pics = []
     var x = -1;
 
@@ -46,7 +45,7 @@ $(document).ready(function() {
             slideShow();
         }, 6000)
     }
-    //----------------------
+    //----------------------*/
 
     //----This rescales a bunch of elements and font sizes if the screen width is greater than 3840px
     function winSizeCheck() {
@@ -132,6 +131,7 @@ $(document).ready(function() {
         $("button.item").show();
     }
 
+    //----This function checks the scroll position for being at the top of the page and runs other functions if true
     function topCheck() {
         if ($(window).scrollTop() == 0) {
             $("div.blackbox").fadeIn(200);
@@ -151,6 +151,8 @@ $(document).ready(function() {
             $("#title").fadeIn(2000);
         }
     }
+    //-------------------
+
 
     function fader() {
         $("div.blackbox").fadeOut(2000);
@@ -214,6 +216,7 @@ $(document).ready(function() {
         }, 500);
     }
 
+    /*----This is not currently in use
     function msgSent() {
         var name = $("#inqName").val();
         alert(name + ", your message has been sent!");
@@ -221,6 +224,7 @@ $(document).ready(function() {
         $("#inqEmail").val("");
         $("#inqName").val("");
     }
+    //---------------------*/
 
     function projectSorter() {
         var toKeep = $(this).attr("data-actsOn");
@@ -276,7 +280,7 @@ $(document).ready(function() {
             backgroundResize()
         }
     }
-
+    //----Gear animation
     function randShift() {
         var rand = Math.random() * 70;
         var rand2 = Math.random() * 2
@@ -352,6 +356,10 @@ $(document).ready(function() {
         }
 
     }
+
+    //----------------------
+
+    //----Title animation arrays and functions
     var title1 = ["<", "h", "1", " ", "i", "d", "=", "\"", "g", "r", "e", "e", "t", "i", "n", "g", "\"", ">", " ", "H", "e", "y", "!", " "]
     var title2 = ["<", "h", "1", " ", "i", "d", "=", "\"", "g", "r", "e", "e", "t", "i", "n", "g", "\"", ">", " ", "W", "a", "a", "z", "z", "z", "z", " ", "U", "p", "p", "!", "!", "!", ".", ".", "."]
     var title3 = ["<", "h", "1", " ", "i", "d", "=", "\"", "g", "r", "e", "e", "t", "i", "n", "g", "\"", ">", " ", "W", "e", "l", "c", "o", "m", "e", " ", "t", "o", " ", "J", "o", "s", "e", "p", "h", "'", "s", " ", "W", "e", "b", " ", "C", "V", "!", " ", "<", "/", "h", "1", ">"]
@@ -394,9 +402,10 @@ $(document).ready(function() {
                 o = 0;
             }
         }
-
     }
+    //------------------------------
 
+    //----This function minimizes the small red background headers
     function smallMinimizer() {
         if ($(this).parent().find("div.contentBox").height() == 0) {
             $(this).parent().find("div.contentBox").css("height", "auto")
@@ -440,7 +449,7 @@ $(document).ready(function() {
     $("div.close").click(overlayClose)
     $("div.minimizer").click(minimizer)
     $("div.scrollTop").click(topScroll)
-    $("#inq").click(msgSent)
+        //$("#inq").click(msgSent)
     $("div.exminbtn").click(minimizerALL)
     $("div.gear").click(randShift)
     $("div.menubtn").click(menuToggle)
