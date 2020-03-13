@@ -19,7 +19,7 @@ $(document).ready(function() {
             });
         })
     }
-    //----------------------
+    //-----------------------
 
     /*----auto slideshow--Not Currently in use
     var pics = []
