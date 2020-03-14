@@ -20,6 +20,7 @@
     - [Elements Hide/Fade](#elements-hide/fade)
     - [Top Checker](#top-checker)
     - [Menu Toggler](#menu-toggler)
+    - [Scaler](#scaler)
 - [References](#references)
   - [Github Calendar](#github-calendar)
 ___ 
@@ -570,6 +571,37 @@ This feature is a simple if/else statement which checks if the width of the menu
             menuHider();
         }
     }
+
+___
+
+#### Scaler
+
+***Purpose:***
+
+This feature is for the purpose of scaling elements on the page to fit certain screen sizes, currently it only scales up in the event that the width of a page is greater than 3460px (400 pixels under that of 4k).
+
+***Elements Effected***
+
+The majority of elements that hold important information, as well as fonts, are scaled accordingly.
+
+***Implmentation:***
+
+winSizeCheck
+
+This feature uses simple if and else/if statements to check the current width of the window and scales different elements on the page according to defined style changes using .css(). The function runs the background resize function in order to match the background to newly scaled elements. This function is triggered whenever the window is resized.
+
+***Example Code:***
+
+    function winSizeCheck() {
+        if ($(window).width() >= 3460) {
+            $("div.contentBox").css("max-width", "1500px")
+            $("div.contentBox").css("font-size", "200%")
+            $("div.popContent").css("font-size", "200%")
+            $("div.aboutBox h1").css("font-size", "400%")
+            ...etc
+            ...
+            ...
+            backgroundResize()
 
 ___
 ___
