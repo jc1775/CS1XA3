@@ -416,7 +416,8 @@ $(document).ready(function() {
 
     function autoSplit() {
         var randInterval = Math.random() * 5000
-        var gearNum = Math.floor(Math.random() * ("div.gear").length);
+        var gearNum = Math.floor(Math.random() * $("div.gear").length);
+        console.log(gearNum)
         var gearSelect = $("div.gear").eq(gearNum);
         randShift.call(gearSelect);
         setTimeout(function() { autoSplit() }, randInterval)
@@ -428,6 +429,13 @@ $(document).ready(function() {
     $("div.overlay").css("opacity", "100");
     $("div.scrollTop").hide();
     $("div.miniTitle").hide();
+    //var randInterval = Math.random()*5000
+    //setInterval( function() {
+    //    var gearNum = Math.floor(Math.random()*14);
+    //    var gearSelect = $("div.gear").eq(gearNum);
+    //    randShift.call(gearSelect)
+    //}, randInterval)
+
 
     //----This runs after 2s giving page elements time to load and set
     setTimeout(function() {
