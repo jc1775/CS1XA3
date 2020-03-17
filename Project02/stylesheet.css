@@ -592,6 +592,7 @@ body {
     margin-top: 2px;
     margin-bottom: 20px;
     border-radius: 5%;
+    overflow: hidden;
 }
 
 .graphPanel p {
@@ -605,6 +606,8 @@ body {
     background-color: rgb(255, 0, 0, 0.9);
     margin: 0;
     padding: 0;
+    transition-duration: 5s;
+    transform: translateX(-99%);
 }
 
 .blankdiv {

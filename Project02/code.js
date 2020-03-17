@@ -417,10 +417,27 @@ $(document).ready(function() {
     function autoSplit() {
         var randInterval = Math.random() * 5000
         var gearNum = Math.floor(Math.random() * $("div.gear").length);
-        console.log(gearNum)
         var gearSelect = $("div.gear").eq(gearNum);
         randShift.call(gearSelect);
         setTimeout(function() { autoSplit() }, randInterval)
+    }
+
+    var focusedEle = document.querySelector("div.skillGraph")
+    var barAmount = $("div.graphPanel").children().length - 2
+    var counterz = 0
+    console.log(barAmount)
+
+    function graphFill() {
+        if (counterz < barAmount) {
+            var viewHeight = window.innerHeight;
+            var focusedDim = focusedEle.getBoundingClientRect()
+            $(window).one("scroll", graphFill);
+            if (focusedDim.bottom <= viewHeight) {
+                $(focusedEle).children().css("transform", "translateX(0)")
+                focusedEle = $(focusedEle).next()[0];
+                counterz++;
+            }
+        }
     }
     //---------------------------------------------------------------------End of function declarations
 
@@ -429,12 +446,6 @@ $(document).ready(function() {
     $("div.overlay").css("opacity", "100");
     $("div.scrollTop").hide();
     $("div.miniTitle").hide();
-    //var randInterval = Math.random()*5000
-    //setInterval( function() {
-    //    var gearNum = Math.floor(Math.random()*14);
-    //    var gearSelect = $("div.gear").eq(gearNum);
-    //    randShift.call(gearSelect)
-    //}, randInterval)
 
 
     //----This runs after 2s giving page elements time to load and set
@@ -448,6 +459,7 @@ $(document).ready(function() {
     //----------------------
 
     //---Actions
+    $(window).one("scroll", graphFill);
     $(window).one("scroll", menuToggle)
     $(window).scroll(topCheck)
     $(window).resize(backgroundResize, winSizeCheck)
