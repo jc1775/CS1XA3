@@ -2,6 +2,23 @@
 
 {% block title %}Signup Page{% endblock %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'w3login.css' %}">
+{% endblock %}
+    
 {% block middle_column %}
-    <!-- TODO Objective 1: implement signup form -->
+<form method="post">
+    {% csrf_token %}
+<div>
+    {{ signup_form }}
+    <button type="submit">Create Account</button>
+</div>
+<div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="window.location.href = '{% url 'login:login_view' %}'" ; class="cancelbtn">Cancel</button>
+
+    </div>
+</form>
+
+    
 {% endblock %}

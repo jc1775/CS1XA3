@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib import messages
 
 from social import models
-
+ 
 def login_view(request):
     """Serves lagin.djhtml from /e/macid/ (url name: login_view)
     Parameters
@@ -60,9 +60,21 @@ def signup_view(request):
     -------
       out : (HttpRepsonse) - renders signup.djhtml
     """
-    form = None
 
-    # TODO Objective 1: implement signup view
+    form = UserCreationForm(request.POST)    
+    if request.method == 'POST':
+          if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            models.UserInfo.objects.create_user_info(username=username,password=password)
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('social:messages_view')
+          #else:
+            #print(form.errors)
+
+    request.session['create_failed'] = True
+    
 
     context = { 'signup_form' : form }
 

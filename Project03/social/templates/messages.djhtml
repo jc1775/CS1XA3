@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-
+ 
       <!-- TODO Objective 9: Display Posts using posts list -->
         <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
             {% load static %}

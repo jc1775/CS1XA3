@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
+from datetime import date
+
+
 
 class Interest(models.Model):
     label = models.CharField(max_length=30,primary_key=True)
@@ -37,3 +41,18 @@ class FriendRequest(models.Model):
     from_user = models.ForeignKey(UserInfo,
                                   on_delete=models.CASCADE,
                                   related_name='from_users')
+
+class UserInfoChange(models.Model):
+    employment = models.CharField(max_length=30,blank=True)
+    location = models.CharField(max_length=50,blank=True)
+    birthday = models.DateField(null=True,blank=True)
+    newInterest = models.CharField(max_length=30,blank=True)
+
+class UserInfoChangeForm(forms.ModelForm):
+
+    class Meta:
+        model = UserInfoChange
+        labels = { 'birthday': "Birthday (YYYY-MM-DD)", 'newInterest': 'New Interest'}
+        fields = ['employment','location', 'newInterest', 'birthday']
+        widgets = { 'birthday': forms.SelectDateWidget(empty_label=('', '', ''), years=(range( date.today().year - 115 , date.today().year))) }
+ 

@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib import messages
 
 from . import models
-
+ 
 def messages_view(request):
     """Private Page Only an Authorized User Can View, renders messages page
        Displays all posts and friends, also allows user to make new posts and like posts
@@ -18,7 +18,17 @@ def messages_view(request):
     """
     if request.user.is_authenticated:
         user_info = models.UserInfo.objects.get(user=request.user)
-
+        skydiving = models.Interest(label = "SkyDiving")
+        skydiving.save()
+        rowing = models.Interest(label = "Rowing")
+        rowing.save()
+        user_info.interests.add(skydiving)
+        user_info.interests.add(rowing)
+        ##print('TESTING',user_info.interests.values())
+    
+        interestList = []
+        for interest in user_info.interests.values():
+            interestList.append(interest['label'])
 
         # TODO Objective 9: query for posts (HINT only return posts needed to be displayed)
         posts = []
@@ -26,12 +36,23 @@ def messages_view(request):
         # TODO Objective 10: check if user has like post, attach as a new attribute to each post
 
         context = { 'user_info' : user_info
-                  , 'posts' : posts }
+                  , 'posts' : posts 
+                  , 'username' : request.user.username
+                  , 'employment' : user_info.employment
+                  , 'location' : user_info.location
+                  , 'birthday' : user_info.birthday
+                  , 'interests' : interestList
+                  , 'friends' : user_info.friends}
         return render(request,'messages.djhtml',context)
 
     request.session['failed'] = True
     return redirect('login:login_view')
 
+    '''user_info = models.UserInfo.objects.get(user=request.user)
+    posts = []
+    context = { 'user_info' : user_info
+                  , 'posts' : posts}
+    return render(request,'messages.djhtml',context)'''
 def account_view(request):
     """Private Page Only an Authorized User Can View, allows user to update
        their account information (i.e UserInfo fields), including changing
@@ -46,18 +67,82 @@ def account_view(request):
                  POST - handle form submissions for changing password, or User Info
                         (if handled in this view)
     """
+    
     if request.user.is_authenticated:
-        form = None
-
-        # TODO Objective 3: Create Forms and Handle POST to Update UserInfo / Password
-
         user_info = models.UserInfo.objects.get(user=request.user)
-        context = { 'user_info' : user_info,
-                    'form' : form }
-        return render(request,'account.djhtml',context)
+        form1 = PasswordChangeForm(request.POST)
+        form2 = models.UserInfoChangeForm()
+        interestList = []
+        for interest in user_info.interests.values():
+            interestList.append(interest['label'])
+        if request.method == 'GET':
+            context = { 'user_info' : user_info
+                        ,'passwordchangeform' : form1
+                        ,'userinfochangeform' : form2
+                        , 'username' : request.user.username
+                        , 'employment' : user_info.employment
+                        , 'location' : user_info.location
+                        , 'birthday' : user_info.birthday
+                        , 'interests' : interestList
+                        , 'friends' : user_info.friends
+                        }
+            return render(request,'account.djhtml',context)
+    else:
+        request.session['failed'] = True
+        return redirect('login:login_view')
 
-    request.session['failed'] = True
-    return redirect('login:login_view')
+def passchange_view(request):
+    form1 = PasswordChangeForm(request.POST)
+    if request.user.is_authenticated:
+        if request.method == 'POST': 
+            if request.user.check_password(request.POST['old_password']):
+                if request.POST['old_password'] != request.POST['new_password1'] and request.POST['new_password2'] == request.POST['new_password1'] and len(request.POST['new_password1']) >= 8:
+                    try:
+                        int(request.POST['new_password1'])
+                        print('Password is entirely numeric')
+                        return redirect('social:account_view')
+                    except:
+                        print("IS VALID")
+                        request.user.set_password(request.POST['new_password1'])
+                        request.user.save()
+                        return redirect('login:login_view')
+                else:
+                    print('Errors',form1.errors)
+                    print("Password parameters not met")
+                    return redirect('social:account_view')
+            else:
+                print('Errors:',form1.errors)
+                print("Old Password not matched")
+                return redirect('social:account_view')
+
+def userchange_view(request):
+    user_info = models.UserInfo.objects.get(user=request.user)
+    form2 = models.UserInfoChangeForm()
+    interestList = []
+    for interest in user_info.interests.values():
+        interestList.append(interest['label'])
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST['employment'] != user_info.employment and request.POST['employment'] != '' :
+                user_info.employment = request.POST['employment']
+            if request.POST['location'] != user_info.location and request.POST['location'] != '':
+                user_info.location = request.POST['location']
+            if request.POST['newInterest'] not in interestList and request.POST['newInterest'] != '':
+                interestName = request.POST['newInterest']
+                cleanName = interestName.replace(" ", "")
+                exec(cleanName + " = models.Interest(label='" + interestName + "')")
+                exec(cleanName + ".save()")
+                exec("user_info.interests.add(" + cleanName + ")")
+
+            birthday = request.POST['birthday_year'] + "-" + request.POST['birthday_month'] + "-" +  request.POST['birthday_day']
+            if birthday != user_info.birthday and birthday != '' and len(birthday) in [8,9,10]:
+                try:
+                    user_info.birthday = birthday
+                except:
+                    print("Invalid Format")
+            user_info.save()
+            return redirect('social:account_view')
+    
 
 def people_view(request):
     """Private Page Only an Authorized User Can View, renders people page

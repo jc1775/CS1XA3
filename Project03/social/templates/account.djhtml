@@ -1,14 +1,25 @@
 {% extends 'social_base.djhtml' %}
 
 {% block title %}Account Page{% endblock %}
-
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'w3login.css' %}">
+{% endblock %}
 {% block middle_column %}
     <div class="w3-row-padding">
         <div class="w3-col m12">
             <div class="w3-card w3-round w3-white">
+            <!-- <button type="button" onclick="document.getElementById('passwordchange').style.display='inline'">Change Password</button> -->
                 <div class="w3-container w3-padding">
                     <h6 class="w3-opacity">Change Password</h6>
-                    <!--                     TODO Objective 3: Add Password Change Form -->
+                    <form id='passwordchange' method="post" action="{% url 'social:passchange_view' %}">
+                        {% csrf_token %}
+                    <div>
+                        {{ passwordchangeform }}
+                        <button type="submit">Update Password</button>
+                    </div>
+                    </form>
+                    <!-- <button type="button" onclick="document.getElementById('userinfo').style.display='inline'">Change User Information</button> -->
                 </div>
             </div>
         </div>
@@ -18,9 +29,14 @@
             <div class="w3-card w3-round w3-white">
                 <div class="w3-container w3-padding">
                     <h6 class="w3-opacity">Update Info</h6>
-                    <!--                     TODO Objective 3: Add User Info Update Forms -->
+                    <form id='userinfo' method="post" action="{% url 'social:userchange_view' %}">
+                        {% csrf_token %}
+                    <div>
+                        {{ userinfochangeform }}
+                        <button type="submit">Update User Info</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock %} 
