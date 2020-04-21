@@ -2,17 +2,39 @@
    | Handle Submitting Posts - called by $('#post-button').click(submitPost)
    ********************************************************************************************
    */
-function submitPost(event) {
-    alert('Post Button Pressed');
-    // TODO Objective 8: send contents of post-text via AJAX Post to post_submit_view (reload page upon success)
+  function postSubmitResponse(data,status) {
+    if (status == 'success') {
+        location.reload();
+    }
+    else {
+        alert('failed to create post ' + status);
+    }
 }
 
+function submitPost(event) {
+    let post_text = document.getElementById('post-text').innerText
+    let json_data = { 'post_text' : post_text };
+    let url_path = post_submit_url;
+    if ( post_text != '' && post_text.trim() != '' ) {
+        $.post(url_path,
+            json_data,
+            postSubmitResponse);
+    }  
+}
+    // TODO Objective 8: send contents of post-text via AJAX Post to post_submit_view (reload page upon success)
+ 
 /* ********************************************************************************************
    | Handle Liking Posts - called by $('.like-button').click(submitLike)
    ********************************************************************************************
    */
+
 function submitLike(event) {
-    alert('Like Button Pressed');
+    let postID = event.target.id;
+    let json_data = { 'postID' : postID };
+    let url_path = '../like/';
+    $.post(url_path,
+        json_data,
+        postSubmitResponse);
     // TODO Objective 10: send post-n id via AJAX POST to like_view (reload page upon success)
 }
 

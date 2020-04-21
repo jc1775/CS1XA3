@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib import messages
 
 from social import models
- 
+
 def login_view(request):
     """Serves lagin.djhtml from /e/macid/ (url name: login_view)
     Parameters
@@ -23,6 +23,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
+            #test()
             request.session['failed'] = False
             return redirect('social:messages_view')
         else:
