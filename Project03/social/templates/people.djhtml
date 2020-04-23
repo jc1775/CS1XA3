@@ -3,9 +3,7 @@
 {% block title %}People Page{% endblock %}
 
 {% block middle_column %}
-    <!-- TODO Objective 4: Use all_people list to render actual people -->
     {% for person in all_people %}
-
         {% if forloop.counter > num_ppl  %}
             {#...#}
         {% else %}
@@ -17,8 +15,6 @@
                 <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ person.employment }} </p>
                 <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{ person.location }} </p>
                 <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{ person.birthday }} </p>
-                    <!-- TODO Objective 5: make id unique to username and disable button if friend request already sent -->
-                
                 {% if person.user.get_username in friend_requests %}
                 <button type="button" id={{ "fr-"|add:person.user.get_username }} class="w3-button w3-theme-d1 w3-margin-bottom fr-button" disabled style="pointer-events:none">Friend Request</button>
                 {% else %}
@@ -37,7 +33,6 @@
 {% block right_column %}
 
     {% for name in friend_requests_to %}
-    <!-- TODO Objective 5: Use friend_requests list to render friend requests to user -->
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
           <p>Friend Request</p>
@@ -46,14 +41,12 @@
           <span> {{ name }} </span>
           <div class="w3-row w3-opacity">
             <div class="w3-half">
-                <!-- TODO Objective 6: make id specific to user who sent request -->
                 <button id={{ "acc-"|add:name }} class="w3-button w3-block w3-green w3-section acceptdecline-button" title="Accept">
-                    <i class="fa fa-check"></i></button>
+                    <i class="fa fa-check" style="pointer-events:none"></i></button>
             </div>
             <div class="w3-half">
-                <!-- TODO Objective 6: make id specific to user who sent request -->
                 <button id={{ "dec-"|add:name }} class="w3-button w3-block w3-red w3-section acceptdecline-button" title="Decline">
-                    <i class="fa fa-remove"></i></button>
+                    <i class="fa fa-remove" style="pointer-events:none"></i></button>
             </div>
           </div>
         </div>

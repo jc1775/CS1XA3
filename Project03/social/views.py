@@ -33,7 +33,7 @@ def likedPostsPopulate(userinfo):
     for post in models.Post.objects.all():
         if userinfo in post.likes.all() and post.id not in list:
             list.append(post.id)
-    print(list)
+    #print(list)
     return list
 
 
@@ -126,23 +126,25 @@ def passchange_view(request):
                 if request.POST['old_password'] != request.POST['new_password1'] and request.POST['new_password2'] == request.POST['new_password1'] and len(request.POST['new_password1']) >= 8:
                     try:
                         int(request.POST['new_password1'])
-                        print('Password is entirely numeric')
+                        #print('Password is entirely numeric')
                         return redirect('social:account_view')
                     except:
-                        print("IS VALID")
+                        #print("IS VALID")
                         request.user.set_password(request.POST['new_password1'])
                         request.user.save()
                         return redirect('login:login_view')
                 else:
-                    print('Errors',form1.errors)
-                    print("Password parameters not met")
+                    #print('Errors',form1.errors)
+                    #print("Password parameters not met")
                     return redirect('social:account_view')
             else:
-                print('Errors:',form1.errors)
-                print("Old Password not matched")
+                #print('Errors:',form1.errors)
+                #print("Old Password not matched")
                 return redirect('social:account_view')
 
 def userchange_view(request):
+    from string import punctuation
+
     user_info = models.UserInfo.objects.get(user=request.user)
     form2 = models.UserInfoChangeForm()
     interestList = []
@@ -155,8 +157,12 @@ def userchange_view(request):
             if request.POST['location'] != user_info.location and request.POST['location'] != '':
                 user_info.location = request.POST['location']
             if request.POST['newInterest'] not in interestList and request.POST['newInterest'] != '':
-                interestName = request.POST['newInterest']
-                cleanName = interestName.replace(" ", "")
+                interestName = str(request.POST['newInterest'])
+                cleanName = ''
+                for char in interestName.replace(" ", ""):
+                    if char not in punctuation:
+                        cleanName += char
+                
                 exec(cleanName + " = models.Interest(label='" + interestName + "')")
                 exec(cleanName + ".save()")
                 exec("user_info.interests.add(" + cleanName + ")")
@@ -387,7 +393,7 @@ def accept_decline_view(request):
         # TODO Objective 6: parse decision from data
         decision = data[:3]
         username = data[4:]
-        print(username)
+        #print(username)
         if request.user.is_authenticated:
             for reqs in models.FriendRequest.objects.all():
                 if reqs.to_user == user_info and reqs.from_user.user.get_username() == username:
@@ -397,7 +403,6 @@ def accept_decline_view(request):
                         reqs.delete()
                     elif decision == 'dec':
                         reqs.delete()
-            # TODO Objective 6: delete FriendRequest entry and update friends in both Users
 
             # return status='success'
             return HttpResponse()

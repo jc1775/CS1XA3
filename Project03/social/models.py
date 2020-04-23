@@ -52,7 +52,7 @@ class UserInfoChangeForm(forms.ModelForm):
 
     class Meta:
         model = UserInfoChange
-        labels = { 'birthday': "Birthday (YYYY-MM-DD)", 'newInterest': 'New Interest'}
+        labels = { 'birthday': "Birthday", 'newInterest': 'New Interest'}
         fields = ['employment','location', 'newInterest', 'birthday']
         widgets = { 'birthday': forms.SelectDateWidget(empty_label=('', '', ''), years=(range( date.today().year - 115 , date.today().year))) }
  
