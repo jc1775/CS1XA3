@@ -14,12 +14,8 @@ function frResponse(data,status) {
 
 
 function friendRequest(event) {
-    // the id of the current button, should be fr-name where name is valid username
     let frID = event.target.id;
-    console.log("truth")
-    console.log(frID)
     let json_data = { 'frID' : frID };
-    // globally defined in messages.djhtml using i{% url 'social:like_view' %}
     let url_path = friend_request_url;
 
     // AJAX post
@@ -61,7 +57,6 @@ function submitMorePpl(event) {
    */
  
 function acceptDeclineRequest(event) {
-    // TODO Objective 6: perform AJAX POST to accept or decline Friend Request
     let ID = event.target.id;
     let json_data = { 'ID' : ID };
     let url_path = accept_decline_url;

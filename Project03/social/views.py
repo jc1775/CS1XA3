@@ -36,7 +36,6 @@ def likedPostsPopulate(userinfo):
     #print(list)
     return list
 
-
 def messages_view(request):
     """Private Page Only an Authorized User Can View, renders messages page
        Displays all posts and friends, also allows user to make new posts and like posts
@@ -53,12 +52,8 @@ def messages_view(request):
         user_info = models.UserInfo.objects.get(user=request.user)
         if request.session.get('num_posts') == None:
             request.session['num_posts'] = 1
-        # TODO Objective 9: query for posts (HINT only return posts needed to be displayed)
         posts = models.Post.objects.all().order_by('-timestamp')
- 
-
-        # TODO Objective 10: check if user has like post, attach as a new attribute to each post
-
+        #test()
         request.session['likedPosts'] = likedPostsPopulate(user_info)
         request.session['interestList'] = interstPopulate(user_info)
         request.session['friend_requests'] = friendreqPopulate(user_info)
@@ -177,15 +172,44 @@ def userchange_view(request):
             return redirect('social:account_view')
     
 def test():
-    usernames = ['a','b','c','d']
-    for username in usernames:
-        models.UserInfo.objects.create_user_info(username=username,password='1234')
-    for person in models.UserInfo.objects.all():
-            if person.user.get_username() != 'calarcoj':
-                person.location = "ELSEWHERE"
-                person.employment = "Tesla"
-                person.birthday = '1900-01-05'
-                person.save()
+    import csv
+    import random
+    TestUsers = ['MrRoboto','TestUser1','TestUser2','TestUser3','TestUser4','TestUser5','TestUser6']
+    testPassword = '1234'
+    num = 4
+    for user in TestUsers:
+        models.UserInfo.objects.create_user_info(username=user,password=testPassword)
+        num += 1
+        testPassword = testPassword + str(num)
+    with open('heroes.csv','r') as infile:
+        read_info = csv.reader(infile)
+        header = next(read_info)
+        heroes = []
+        for line in read_info:
+            heroes.append(line)
+        heroNames = {}
+        count = 0
+        for line in heroes:
+            heroNames[line[1]] = 0
+        #print(heroNames.keys())
+        heroJobs = []
+        for line in heroes:
+            heroJobs.append(line[7])
+        #print(heroJobs)
+        counter = 0
+        passList = []
+        for name in heroNames.keys():
+            #print(name)
+            password = random.randint(1,10000)
+            try:
+                models.UserInfo.objects.create_user_info(username=name,password=password)
+            except:
+                password = random.randint(11000,20000)
+                models.UserInfo.objects.create_user_info(username=name,password=password)
+            person = models.UserInfo.objects.get(user=(models.User.objects.get(username=name)))
+            person.employment = heroJobs[counter]
+            person.save()
+            counter += 1           
 
 def people_view(request):
     """Private Page Only an Authorized User Can View, renders people page
@@ -200,18 +224,13 @@ def people_view(request):
     
     if request.user.is_authenticated:
         user_info = models.UserInfo.objects.get(user=request.user)
-        
-        # TODO Objective 4: create a list of all users who aren't friends to the current user (and limit size)
-        
         friend_people =[]
         for person in user_info.friends.all():
             friend_people.append(person)
         all_people = []
-
         for person in models.UserInfo.objects.all():
             if person not in friend_people and person != user_info:
                 all_people.append(person)
-                #person.delete()
         if request.session.get('num_ppl') == None:
             request.session['num_ppl'] = 1
         request.session['interestList'] = interstPopulate(user_info)
@@ -254,7 +273,6 @@ def like_view(request):
         postID = postIDReq[5:]
         if request.user.is_authenticated:
             user_info = models.UserInfo.objects.get(user=request.user)
-            # TODO Objective 10: update Post model entry to add user to likes field
             post = models.Post.objects.get(id=postID)
             post.likes.add(user_info)
             # return status='success'
@@ -278,7 +296,6 @@ def post_submit_view(request):
     '''
     postContent = request.POST.get('post_text')
     if postContent is not None:
-
         if request.user.is_authenticated:
             user_info = models.UserInfo.objects.get(user=request.user)
             newEntry = models.Post(owner=user_info,content=postContent)
@@ -309,7 +326,6 @@ def more_post_view(request):
 
     return redirect('login:login_view')
 
-
 def more_ppl_view(request):
     '''Handles POST Request requesting to increase the amount of People displayed in people.djhtml
     Parameters
@@ -337,7 +353,6 @@ def more_ppl_view(request):
 
     return redirect('login:login_view')
 
-
 def friend_request_view(request):
     '''Handles POST Request recieved from clicking Friend Request button in people.djhtml,
        sent by people.js, by adding an entry to the FriendRequest Model
@@ -353,19 +368,15 @@ def friend_request_view(request):
     '''
     frID = request.POST.get('frID')
     if frID is not None:
-        # remove 'fr-' from frID
         username = frID[3:]
         user_info = models.UserInfo.objects.get(user=request.user)
         if request.user.is_authenticated:
-            # TODO Objective 5: add new entry to FriendRequest
             for person in models.UserInfo.objects.all():
                 if person.user.get_username() == username:
-                    #friend_requests.append(username)
                     newRequest = models.FriendRequest(to_user=person, from_user=user_info)
                     newRequest.save()
                     
             # return status='success'
-            #newRequest = models.FriendRequest(fromuser=username)
             return HttpResponse(username)
         else:
             return redirect('login:login_view')
@@ -390,10 +401,8 @@ def accept_decline_view(request):
     user_info = models.UserInfo.objects.get(user=request.user)
     data = request.POST.get('ID')
     if data is not None:
-        # TODO Objective 6: parse decision from data
         decision = data[:3]
         username = data[4:]
-        #print(username)
         if request.user.is_authenticated:
             for reqs in models.FriendRequest.objects.all():
                 if reqs.to_user == user_info and reqs.from_user.user.get_username() == username:

@@ -21,7 +21,6 @@ function submitPost(event) {
             postSubmitResponse);
     }  
 }
-    // TODO Objective 8: send contents of post-text via AJAX Post to post_submit_view (reload page upon success)
  
 /* ********************************************************************************************
    | Handle Liking Posts - called by $('.like-button').click(submitLike)
@@ -35,7 +34,6 @@ function submitLike(event) {
     $.post(url_path,
         json_data,
         postSubmitResponse);
-    // TODO Objective 10: send post-n id via AJAX POST to like_view (reload page upon success)
 }
 
 /* ********************************************************************************************

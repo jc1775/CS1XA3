@@ -28,7 +28,7 @@ def login_view(request):
             return redirect('social:messages_view')
         else:
             request.session['failed'] = True
-
+ 
     form = AuthenticationForm(request.POST)
     failed = request.session.get('failed',False)
     context = { 'login_form' : form,

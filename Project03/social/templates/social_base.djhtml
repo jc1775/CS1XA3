@@ -14,7 +14,7 @@
         <a href="{% url 'social:account_view' %}" class="w3-bar-item w3-button w3-padding-large">Account Settings</a>
     </div>
 {% endblock %}
- 
+  
 {% block left_column %}
     <!-- Profile -->
     <div class="w3-card w3-round w3-white">
