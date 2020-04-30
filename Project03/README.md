@@ -35,7 +35,7 @@ From Project03 root folder run on mac1xa3.ca with -- When the server is ran from
 A test user is setup with login information
 
     username: MrRoboto
-    password: toaster123
+    password: 1234
 
 
 
