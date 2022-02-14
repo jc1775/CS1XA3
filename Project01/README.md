@@ -13,7 +13,7 @@
   - [File Type Sort](#1-file-type-sort)
   - [Script Finder](#2-script-finder)
 
-___ 
+--- 
 
 ## Usage
 Execute this script from project root with:
