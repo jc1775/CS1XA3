@@ -18,7 +18,7 @@
 
 ## Technology
 
--BASH
+- BASH
 
 ---
 
