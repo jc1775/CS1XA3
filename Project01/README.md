@@ -1,6 +1,7 @@
 # CS 1XA3 Project01 - calarcoj
 
 ## Index:
+- [Technoogy](#technology)
 - [Usage](#usage)
   - [Script Input](#script-input)
 - [Features](#features)
@@ -14,6 +15,12 @@
   - [Script Finder](#2-script-finder)
 
 --- 
+
+## Technology
+
+-BASH
+
+---
 
 ## Usage
 Execute this script from project root with:
